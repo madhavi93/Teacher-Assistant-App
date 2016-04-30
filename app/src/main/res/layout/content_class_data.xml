@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:id="@+id/drawer_Layout"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity"
+    tools:showIn="@layout/activity_class_data"
+    android:background="#eefcfb">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="     Add Syllabus     "
+        android:id="@+id/btnAddSyl"
+        android:layout_marginTop="78dp"
+        android:background="#8dd9f9"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/btnAddStd"
+        android:layout_alignEnd="@+id/btnAddStd" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="     Add Student     "
+        android:id="@+id/btnAddStd"
+        android:layout_marginTop="41dp"
+        android:background="#25b7f5"
+        android:layout_below="@+id/btnAddSyl"
+        android:layout_alignStart="@+id/btnAddClass"
+        android:layout_alignEnd="@+id/btnAddClass" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="     Add Class     "
+        android:id="@+id/btnAddClass"
+        android:background="#057bad"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/btnAddStd"
+        android:layout_alignEnd="@+id/btnAddEXCls"
+        android:layout_alignStart="@+id/btnAddEXCls" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="     Add Extra Class     "
+        android:id="@+id/btnAddEXCls"
+        android:background="#295e74"
+        android:layout_below="@+id/btnAddClass"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:id="@+id/drawer_list"
+        android:layout_gravity = "start"
+        android:background="@color/colorDraver"
+        android:choiceMode="singleChoice"
+        android:textAlignment="center" />
+
+</android.support.v4.widget.DrawerLayout>

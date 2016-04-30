@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.AddMainTopicFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|top">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/Class"
+            android:background="#d6f8f9"
+            android:text="                                           "
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="46dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="     Topic: "
+            android:id="@+id/textView19"
+            android:layout_below="@+id/Class"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="58dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="     Time Limit :"
+            android:id="@+id/textView20"
+            android:layout_below="@+id/textView19"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="46dp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText"
+            android:layout_alignBottom="@+id/textView19"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textView19" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText2"
+            android:layout_alignBottom="@+id/textView20"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textView20" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:id="@+id/btnAddMainT"
+            android:layout_below="@+id/textView20"
+            android:layout_toEndOf="@+id/textView20"
+            android:layout_marginTop="79dp" />
+    </RelativeLayout>
+</FrameLayout>

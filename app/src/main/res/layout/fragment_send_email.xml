@@ -1,0 +1,83 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendEmailFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal|bottom">
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Group"
+            android:id="@+id/checkBoxGroupSMS"
+            android:checked="false"
+            android:layout_below="@+id/textView16"
+            android:layout_toEndOf="@+id/textView16" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Recipient :"
+            android:id="@+id/textView15"
+            android:layout_marginStart="50dp"
+            android:layout_below="@+id/checkBoxGroupSMS"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="46dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Class"
+            android:id="@+id/textView16"
+            android:layout_marginTop="48dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/textView15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Message :"
+            android:id="@+id/textView14"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/textView15" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:id="@+id/btnSend"
+            android:layout_marginEnd="40dp"
+            android:layout_alignTop="@+id/btnAddReport"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Perfomance Report"
+            android:id="@+id/btnAddReport"
+            android:layout_marginBottom="65dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/editTextEmail" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editTextEmail"
+            android:layout_below="@+id/textView14"
+            android:layout_alignStart="@+id/textView14"
+            android:layout_alignEnd="@+id/btnSend" />
+
+
+    </RelativeLayout>
+
+</FrameLayout>
