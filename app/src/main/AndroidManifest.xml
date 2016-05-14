@@ -2,6 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.madhaviruwandika.teacher_assistant">
 
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/app_icon"
@@ -101,17 +108,13 @@
         <activity
             android:name=".Activity.SyllabusTrackerActivity.MyWorkActivity"
             android:label="@string/title_activity_my_work"
-            android:theme="@style/AppTheme.NoActionBar" >
-
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyWorkActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
-
         <activity
             android:name=".Activity.classActivity.TodaysClassActivity"
             android:label="@string/title_activity_todays_class"
@@ -126,13 +129,102 @@
             android:name=".Activity.classActivity.manegeClassActivity"
             android:label="@string/title_activity_manege_class"
             android:theme="@style/AppTheme.NoActionBar">
-
             <intent-filter>
                 <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.manegeClassActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.StudentActivity.PerformanceReportActivity"
+            android:label="@string/title_activity_performance_report"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.PerformanceReportActivity" />
 
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.StudentActivity.AddPerformanceActivity"
+            android:label="@string/title_activity_add_performance"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.AddPerformanceActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.StudentActivity.SeePerfomanceActivity"
+            android:label="@string/title_activity_see_perfomance"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.SeePerfomanceActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.parentCommunicatorActivity.SetEmailAccountActivity"
+            android:label="@string/title_activity_set_email_account"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.parentCommunicatorActivity.SetSMSConnectionActivity"
+            android:label="@string/title_activity_set_smsconnection"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.Util.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.Util.SettingsActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.SyllabusTrackerActivity.SyllabusActivity"
+            android:label="@string/title_activity_syllabus"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.SyllabusTrackerActivity.ViewSylActivity"
+            android:label="@string/title_activity_view_syl"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name=".Activity.SyllabusTrackerActivity.ViewSylActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+
+
+        <activity
+            android:name=".Activity.parentCommunicatorActivity.SendSMSActivity"
+            android:label="@string/title_activity_send_sms"
+            android:theme="@style/AppTheme.NoActionBar" >
+
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendSMSActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+
+
+        <activity
+            android:name=".Activity.parentCommunicatorActivity.SendEmailActivity"
+            android:label="@string/title_activity_send_email"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendEmailActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
 
         </activity>
     </application>

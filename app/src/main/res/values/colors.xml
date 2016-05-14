@@ -4,5 +4,6 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#8998a3</color>
     <color name="colorDraver">#dedede</color>
+    <color name="tableRow">#88FF</color>
 
 </resources>

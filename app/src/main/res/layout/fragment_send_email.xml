@@ -54,7 +54,6 @@
             android:layout_height="wrap_content"
             android:text="Send"
             android:id="@+id/btnSend"
-            android:layout_marginEnd="40dp"
             android:layout_alignTop="@+id/btnAddReport"
             android:layout_alignParentEnd="true" />
 
@@ -63,7 +62,7 @@
             android:layout_height="wrap_content"
             android:text="Add Perfomance Report"
             android:id="@+id/btnAddReport"
-            android:layout_marginBottom="65dp"
+            android:layout_marginBottom="54dp"
             android:layout_alignParentBottom="true"
             android:layout_alignStart="@+id/editTextEmail" />
 

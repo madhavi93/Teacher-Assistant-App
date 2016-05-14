@@ -23,6 +23,8 @@ public class DBConstant {
     public static final String tutionClass_col4 = "EndDate";
     public static final String tutionClass_col5 = "Day";
     public static final String tutionClass_col6 = "Time";
+    public static final String tutionClass_col7 = "Fee";
+
 
     public static final String behaviour_col1 = "Payment_id";
     public static final String behaviour_col2 = "S_id";
@@ -78,6 +80,12 @@ public class DBConstant {
     public static final String exam_col4 = "DateOfExam";
     public static final String exam_col5 = "Lesson";
 
+
+    public static final String ExtraClass_col1 = "ExClassID";
+    public static final String ExtraClass_col2 = "Class_Id";
+    public static final String ExtraClass_col3 = "DateOfClass";
+    public static final String ExtraClass_col4 = "time";
+    public static final String ExtraClass_col5 = "ClassType";
 
 
 }

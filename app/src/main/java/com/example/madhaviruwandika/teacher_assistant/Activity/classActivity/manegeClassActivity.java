@@ -118,20 +118,38 @@ public class manegeClassActivity extends BaseActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            markAttendenceFragment mAFragment = new markAttendenceFragment();
+            addPaymentFragment aPFragment = new addPaymentFragment();
+
+
+            Bundle bundle = getIntent().getExtras();
+
+            Bundle fragmentBundel = new Bundle();
+            fragmentBundel.putInt("ClassID",bundle.getInt("ClassID"));
+
             switch (position) {
                 case 0:
-                    return new markAttendenceFragment();
+
+                    mAFragment.setArguments(fragmentBundel);
+                    return mAFragment;
+
                 case 1:
-                    return new addPaymentFragment();
+
+
+                    aPFragment.setArguments(fragmentBundel);
+                    return aPFragment;
+
                 default:
-                    return new markAttendenceFragment();
+
+                    mAFragment.setArguments(fragmentBundel);
+                    return mAFragment;
             }
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
@@ -142,7 +160,7 @@ public class manegeClassActivity extends BaseActivity {
                 case 1:
                     return "Mark Payments";
                 default:
-                    return "Tab 1";
+                    return "mark Attendence";
             }
         }
     }

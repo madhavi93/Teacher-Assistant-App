@@ -51,9 +51,9 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
 
         sdc = new StudentController(this);
 
-        OnHomeButtonClickListner();
-        OnmsgButtonClickListner();
-        OnsylButtonClickListner();
+        //OnHomeButtonClickListner();
+        //OnmsgButtonClickListner();
+        //OnsylButtonClickListner();
 
         LoadSelection(0);
 
@@ -92,7 +92,7 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
     }
 
 
-
+/*
      public void OnHomeButtonClickListner(){
 
         btnhome = (Button) findViewById(R.id.btn_home);
@@ -145,9 +145,7 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
 
     }
 
-
-
-
+*/
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

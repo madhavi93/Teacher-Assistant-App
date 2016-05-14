@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView;
 
+import com.example.madhaviruwandika.teacher_assistant.Adapter.Util.SlidingMenuAdapter;
 import com.example.madhaviruwandika.teacher_assistant.Model.Util.ItemSlideMenu;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
@@ -37,8 +38,8 @@ public class BaseActivity extends AppCompatActivity  {
     private ActionBarDrawerToggle drawerToggle;
     private ListView newList;
     private List<ItemSlideMenu> list;
-    private ArrayAdapter<ItemSlideMenu> adapter;
-
+    private SlidingMenuAdapter adapter;
+    //private ListAdapter la ;
 
 
 
@@ -56,10 +57,9 @@ public class BaseActivity extends AppCompatActivity  {
         list.add(new ItemSlideMenu("  Student performance"));
         list.add(new ItemSlideMenu("  Send message"));
         list.add(new ItemSlideMenu("  Manage class"));
+        list.add(new ItemSlideMenu("  Settings"));
 
-        adapter = new ArrayAdapter(this,R.layout.appdrawer,list);
-
-
+        adapter = new SlidingMenuAdapter(this,list);
 
         newList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
@@ -91,6 +91,11 @@ public class BaseActivity extends AppCompatActivity  {
                         intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity");
                         startActivity(intent);
                         break;
+                    case 5:
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.SettingsActivity");
+                        startActivity(intent);
+                        break;
+
                     default:
                         intent = new Intent(".Activity.HomeActivity");
                         startActivity(intent);
@@ -133,6 +138,7 @@ public class BaseActivity extends AppCompatActivity  {
         drawerLayout.setDrawerListener(drawerToggle);
 
         ActionBar actionBar = getSupportActionBar();
+
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 

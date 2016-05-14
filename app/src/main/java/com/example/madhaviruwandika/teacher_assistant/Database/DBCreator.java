@@ -26,12 +26,12 @@ public class DBCreator extends SQLiteOpenHelper {
                 * Createing tables in database
              */
             db.execSQL("CREATE TABLE Student (ID INTEGER PRIMARY KEY, Name TEXT NOT NULL, DateOfBirth TEXT , Address VARCHAR(100) );");
-            db.execSQL("CREATE TABLE Parent (Parent_ID INTEGER PRIMARY KEY, S_id TEXT NOT NULL, Name TEXT , TP_no REAL ,email VARCHAR(100), FOREIGN KEY(S_id) REFERENCES Student(ID));");
+            db.execSQL("CREATE TABLE Parent (Parent_ID INTEGER PRIMARY KEY, S_id INTEGER NOT NULL, Name TEXT , TP_no TEXT ,email VARCHAR(100), FOREIGN KEY(S_id) REFERENCES Student(ID));");
             db.execSQL("CREATE TABLE Attend (S_id INTEGER, Class_Id INTEGER, FOREIGN KEY(S_id) REFERENCES Student(ID),FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
-            db.execSQL("CREATE TABLE TutionClass (ClassID INTEGER PRIMARY KEY, ClassName TEXT NOT NULL UNIQUE, StartDate TEXT ,EndDate TEXT ,Day TEXT,Time TEXT);");
+            db.execSQL("CREATE TABLE TutionClass (ClassID INTEGER PRIMARY KEY, ClassName TEXT NOT NULL UNIQUE, StartDate TEXT ,EndDate TEXT ,Day TEXT,Time TEXT,Fee REAL);");
             db.execSQL("CREATE TABLE StudentBehaviour (Record_id INTEGER PRIMARY KEY,S_id INTEGER, Class_Id INTEGER, Behaviour TEXT ,DateOfRec TEXT, FOREIGN KEY(S_id) REFERENCES Student(ID),FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
             db.execSQL("CREATE TABLE Payment (Payment_id INTEGER PRIMARY KEY,S_id INTEGER, Class_Id INTEGER, DateOP TEXT, FOREIGN KEY(S_id) REFERENCES Student(ID),FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
-            db.execSQL("CREATE TABLE Extra_Class (ExClassID INTEGER PRIMARY KEY,Class_Id INTEGER, DateOfClass TEXT, time Text, FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
+            db.execSQL("CREATE TABLE Extra_Class (ExClassID INTEGER PRIMARY KEY,Class_Id INTEGER, DateOfClass TEXT, time Text,ClassType Text, FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
             db.execSQL("CREATE TABLE Attendance_Sheet (Attendance_id INTEGER PRIMARY KEY,S_id INTEGER, Class_Id INTEGER, DateOPA TEXT, FOREIGN KEY(S_id) REFERENCES Student(ID),FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
             db.execSQL("CREATE TABLE SyllabusTopic (Topic_id INTEGER PRIMARY KEY, Class_Id INTEGER, Topic_level INTEGER, Topic Text,FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
             db.execSQL("CREATE TABLE ParentTopic (parent_Topic_id INTEGER, Child_Topic_Id INTEGER, FOREIGN KEY(Parent_Topic_id) REFERENCES SyllabusTopic(Topic_id ),FOREIGN KEY(Child_Topic_Id) REFERENCES SyllabusTopic(Topic_id));");

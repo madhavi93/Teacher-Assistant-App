@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/drawer_Layout"
@@ -33,22 +32,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="   Starting Date :"
-            android:id="@+id/txt_stratDate"
-            android:textSize="20dp"
-            android:textColor="#17037d"
-            android:layout_marginTop="57dp"
-            android:layout_below="@+id/txt_day"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="   Day       :"
+            android:text="    Day       :"
+            android:layout_marginTop="20dp"
             android:id="@+id/txt_day"
             android:textSize="20dp"
             android:textColor="#17037d"
-            android:layout_marginTop="53dp"
             android:layout_below="@+id/txt_time"
             android:layout_alignParentStart="true" />
 
@@ -58,10 +46,10 @@
             android:text="   Time    :"
             android:id="@+id/txt_time"
             android:textSize="20dp"
+            android:layout_marginTop="20dp"
             android:textColor="#17037d"
             android:layout_below="@+id/txt_name"
-            android:layout_alignEnd="@+id/txt_day"
-            android:layout_marginTop="51dp" />
+            android:layout_alignParentStart="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -69,10 +57,12 @@
             android:text="          ADD          "
             android:id="@+id/button8"
             android:background="#033aa8"
+            android:layout_marginTop="20dp"
             android:textColor="#ffffff"
-            android:layout_marginTop="84dp"
-            android:layout_below="@+id/txt_stratDate"
-            android:layout_toEndOf="@+id/txt_name" />
+            android:layout_alignParentBottom="true"
+            android:layout_alignStart="@+id/editTextTime"
+            android:layout_marginBottom="88dp"
+            android:onClick="onClick" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -80,12 +70,12 @@
             android:id="@+id/editTextname"
             android:layout_alignBottom="@+id/txt_name"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/txt_stratDate" />
+            android:layout_toEndOf="@+id/textView3" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextDay"
+            android:id="@+id/editTextTime"
             android:layout_alignBottom="@+id/txt_time"
             android:layout_alignEnd="@+id/editTextname"
             android:layout_toEndOf="@+id/txt_name" />
@@ -94,17 +84,66 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editTextSdate"
-            android:layout_alignBottom="@+id/txt_stratDate"
-            android:layout_alignEnd="@+id/editText5"
-            android:layout_toEndOf="@+id/txt_stratDate" />
+            android:layout_above="@+id/textView3"
+            android:layout_alignEnd="@+id/editTextDay"
+            android:layout_toEndOf="@+id/textView3" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText5"
+            android:id="@+id/editTextDay"
             android:layout_alignBottom="@+id/txt_day"
-            android:layout_alignEnd="@+id/editTextDay"
-            android:layout_toEndOf="@+id/txt_stratDate" />
+            android:layout_alignEnd="@+id/editTextTime"
+            android:layout_alignStart="@+id/editTextTime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="   Ending Date : "
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView3"
+            android:textColor="#17037d"
+            android:layout_below="@+id/textView5"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextendDate"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_alignEnd="@+id/editTextSdate"
+            android:layout_toEndOf="@+id/textView3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="   Starting Date"
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView5"
+            android:textColor="#17037d"
+            android:layout_below="@+id/txt_day"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="   Fee :  Rs."
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView8"
+            android:textColor="#17037d"
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextfee"
+            android:layout_alignTop="@+id/textView8"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textView8" />
 
     </RelativeLayout>
 
@@ -115,6 +154,7 @@
         android:layout_gravity = "start"
         android:background="@color/colorDraver"
         android:choiceMode="singleChoice"
-        android:textAlignment="center" />
+        android:textAlignment="center"
+        android:layout_marginTop="15dp"/>
 
 </android.support.v4.widget.DrawerLayout>

@@ -7,23 +7,27 @@ public class Student {
 
     private int s_id;
     private String name;
-    private String classname;
+    private int classID;
     private String doB;
     private String address;
 
-    public Student(int s_id,String name,String classname,String Dob, String address){
+    public Student(int s_id,String name,int classID,String Dob, String address){
         this.s_id = s_id;
         this.name = name;
-        this.classname = classname;
+        this.classID = classID;
         this.address = address;
         this.doB = Dob;
     }
 
-    public Student(String name,String Dob, String address,String classname){
+    public Student(String name,String Dob, String address,int classID){
         this.name = name;
         this.address = address;
         this.doB = Dob;
-        this.classname = classname;
+        this.classID = classID;
+    }
+
+    public Student() {
+
     }
 
     public int getS_id() { return s_id; }
@@ -38,12 +42,12 @@ public class Student {
         this.name = name;
     }
 
-    public String getClassname() {
-        return classname;
+    public int getClassname() {
+        return classID;
     }
 
-    public void setClassname(String classname) {
-        this.classname = classname;
+    public void setClassname(int classID) {
+        this.classID = classID;
     }
 
     public String getDoB() { return doB; }

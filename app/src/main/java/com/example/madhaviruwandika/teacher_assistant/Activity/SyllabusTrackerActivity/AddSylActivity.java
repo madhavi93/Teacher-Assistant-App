@@ -1,14 +1,11 @@
 package com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.BaseActivity;
-import com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendEmailFragment;
-import com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendSMSFragment;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
 public class AddSylActivity extends BaseActivity {
@@ -118,39 +113,52 @@ public class AddSylActivity extends BaseActivity {
             super(fm);
         }
 
+
+
         @Override
         public Fragment getItem(int position) {
+
+            Bundle bundle = getIntent().getExtras();
+            Bundle fragmentBundel = new Bundle();
+            fragmentBundel.putInt("ClassID",bundle.getInt("ClassID"));
+
+            AddMainTopicFragment addMainTopicFragment = new AddMainTopicFragment();
+            AddSubTopicFragment  addSubTopicFragment = new AddSubTopicFragment();
+
+
+
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
+
                 case 0:
-                    return new AddSyllabus1Fragment();
+                    addMainTopicFragment.setArguments(fragmentBundel);
+                    return addMainTopicFragment;
                 case 1:
-                    return  new AddMainTopicFragment();
-                case 2:
-                    return new AddSubTopicFragment();
+                    addSubTopicFragment.setArguments(fragmentBundel);
+                    return addSubTopicFragment;
                 default:
-                    return new AddSyllabus1Fragment();
+                    addMainTopicFragment.setArguments(fragmentBundel);
+                    return addMainTopicFragment;
             }
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 2;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
+
                 case 0:
-                    return "Syllabus" ;
-                case 1:
                     return "Add Main Topic";
-                case 2:
+                case 1:
                     return "Add Sub Topic";
                 default:
-                    return "Syllabus";
+                    return "Add Main Topic";
             }
         }
     }

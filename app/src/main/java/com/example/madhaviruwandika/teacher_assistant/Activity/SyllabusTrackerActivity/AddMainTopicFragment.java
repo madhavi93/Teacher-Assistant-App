@@ -7,7 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
+import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
 /**
@@ -27,6 +30,14 @@ public class AddMainTopicFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    ClassController classController;
+    Context context;
+    Bundle myBundle;
+    int classID = 0;
+    TextView classT;
+
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +76,27 @@ public class AddMainTopicFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_main_topic, container, false);
+        View root = inflater.inflate(R.layout.fragment_add_main_topic, container, false);
+
+        classT = (TextView) root.findViewById(R.id.TextClass);
+
+
+        context= root.getContext();
+
+        classController = new ClassController(getContext());
+        myBundle = this.getArguments();
+        classID = myBundle.getInt("ClassID");
+
+        TutionClass my_Class = new TutionClass();
+        if(classID != 0) {
+            my_Class = classController.getTutionClassByID(classID);
+        }
+
+        classT.setText(my_Class.getClassName());
+
+
+
+        return root;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

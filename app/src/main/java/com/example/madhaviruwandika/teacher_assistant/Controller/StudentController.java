@@ -8,6 +8,7 @@ import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.Studen
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConnection;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBCreator;
 import com.example.madhaviruwandika.teacher_assistant.Adapter.DA.StudentDA;
+import com.example.madhaviruwandika.teacher_assistant.Model.Parent;
 import com.example.madhaviruwandika.teacher_assistant.Model.Student;
 
 import java.util.List;
@@ -17,30 +18,47 @@ import java.util.List;
  */
 public class StudentController {
 
-    private final SQLiteDatabase DBC;
+
     private StudentDAO  sDAO;
 
     public StudentController(Context context){
-        DBC = DBConnection.getInstance(context).getWritableDatabase();
+
         sDAO = new StudentDA(context);
-        Log.d("MYACTIVITY", "Called Controller====================================================================================================================================");
+        Log.d("MYACTIVITY", "Called Student Controller");
         //DBCreator dbCreater = new DBCreator(context);
     }
 
-    public void addStudent(String name,String Dob, String address,String classname){
-        Log.d("MYACTIVITY", "Called Controller====================================================================================================================================");
-        Student s= new Student(name,Dob,address,classname);
-        sDAO.setStudentDetails(s);
+    public int addStudent(String name,String Dob, String address,int classId){
+
+        Log.d("MYACTIVITY", "Called Student Controller for add student");
+        Student s= new Student(name,Dob,address,classId);
+        int id = sDAO.setStudentDetails(s);
+        return id;
+    }
+
+    public void addParent(int SID,String name,String TpNo, String email){
+
+        Log.d("MYACTIVITY", "Called Student Controller for add parent");
+        Parent parent = new Parent(SID,name,TpNo,email);
+        sDAO.addParent(parent);
 
     }
 
-    public void addParent(String name,int TpNo, String email){
+    public void addStudentClass(int SID, int ClassID){
+
+        Log.d("MYACTIVITY", "Called Student Controller for Student-Class");
+        sDAO.AddStudentClass(ClassID, SID);
 
     }
-
-    public List<String> getDetails(){
+    public List<Student> getDetails(){
         return sDAO.getStudentDetails();
     }
+
+    public List<Student> getStudentListByClassID(int id){
+        return sDAO.getStudentListByClasssID(id);
+    }
+
+
 
 
 }
