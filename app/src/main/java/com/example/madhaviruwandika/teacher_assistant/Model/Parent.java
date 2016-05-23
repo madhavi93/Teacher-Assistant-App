@@ -10,12 +10,16 @@ public class Parent
     private String name;
     private String Tp_no;
     private String Email;
+    private int ParentID;
 
     public Parent(int SID,String name, String tp_no, String email) {
         this.SID = SID;
         this.name = name;
         Tp_no = tp_no;
         Email = email;
+    }
+
+    public Parent() {
     }
 
     public String getName() {return name;}
@@ -43,4 +47,12 @@ public class Parent
     }
 
     public int getSID() {return SID;}
+
+    public int getParentID() {
+        return ParentID;
+    }
+
+    public void setParentID(int parentID) {
+        ParentID = parentID;
+    }
 }

@@ -1,6 +1,8 @@
 package com.example.madhaviruwandika.teacher_assistant.Adapter.Util;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -45,8 +47,8 @@ public class StudentRegisterAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
 
         View v = View.inflate(context, R.layout.register_student_name, null);
-        TextView txt = (TextView)v.findViewById(R.id.name);
 
+        TextView txt = (TextView)v.findViewById(R.id.name);
         CheckBox checkBox = (CheckBox) v.findViewById(R.id.attendence);
 
         ItemRegisterName item = student.get(position);
@@ -58,5 +60,7 @@ public class StudentRegisterAdapter extends BaseAdapter {
             checkBox.setChecked(false);
 
         return v;
+
     }
+
 }

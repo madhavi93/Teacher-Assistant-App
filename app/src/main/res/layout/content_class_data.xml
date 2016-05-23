@@ -17,27 +17,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="     Add Syllabus     "
-        android:id="@+id/btnAddSyl"
-        android:layout_marginTop="78dp"
-        android:background="#8dd9f9"
-        android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/btnAddStd"
-        android:layout_alignEnd="@+id/btnAddStd" />
-
-    <Button
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="     Add Student     "
         android:id="@+id/btnAddStd"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="49dp"
         android:background="#25b7f5"
-        android:layout_below="@+id/btnAddSyl"
-        android:layout_alignStart="@+id/btnAddClass"
-        android:layout_alignEnd="@+id/btnAddClass" />
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/btnAddClass"
+            android:layout_alignEnd="@+id/btnAddClass" />
 
     <Button
         android:layout_width="wrap_content"
@@ -57,8 +46,30 @@
         android:id="@+id/btnAddEXCls"
         android:background="#295e74"
         android:layout_below="@+id/btnAddClass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+        android:layout_marginTop="41dp"
+        android:layout_alignStart="@+id/btnUpdateClass"
+        android:layout_alignEnd="@+id/btnUpdateClass" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPDATE CLASS DETAIL"
+            android:id="@+id/btnUpdateClass"
+            android:layout_marginTop="43dp"
+            android:layout_below="@+id/btnAddEXCls"
+            android:background="#b0aaaa"
+            android:layout_alignEnd="@+id/btnUpdateStdDetails"
+            android:layout_alignStart="@+id/btnUpdateStdDetails" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Update Student Details"
+            android:id="@+id/btnUpdateStdDetails"
+            android:layout_marginTop="43dp"
+            android:layout_below="@+id/btnUpdateClass"
+            android:layout_centerHorizontal="true"
+            android:background="#e3e9b5" />
 
     </RelativeLayout>
 

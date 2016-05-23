@@ -4,9 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/drawer_Layout"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyWorkActivity"
@@ -14,8 +11,139 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Large Text"
+            android:id="@+id/textView48"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Class : "
+            android:id="@+id/textView49"
+            android:layout_below="@+id/textView48"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="45dp" />
 
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerClass"
+            android:layout_alignTop="@+id/textView49"
+            android:layout_toEndOf="@+id/textView49" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Unit : "
+            android:id="@+id/textView50"
+            android:layout_below="@+id/spinnerClass"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerUnit"
+            android:layout_alignTop="@+id/textView50"
+            android:layout_alignStart="@+id/spinnerClass" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Lesson : "
+            android:id="@+id/textView51"
+            android:layout_below="@+id/spinnerUnit"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner2"
+            android:layout_below="@+id/spinnerUnit"
+            android:layout_toEndOf="@+id/textView51" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Amount covered : "
+            android:id="@+id/textView52"
+            android:layout_below="@+id/spinner2"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerAmountCovered"
+            android:layout_alignTop="@+id/textView52"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textView52" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Time period :  "
+            android:id="@+id/textView53"
+            android:layout_alignBottom="@+id/editTextTimePeriod"
+            android:layout_toStartOf="@+id/editTextTimePeriod" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextTimePeriod"
+            android:layout_below="@+id/spinnerAmountCovered"
+            android:layout_alignEnd="@+id/spinnerAmountCovered"
+            android:layout_alignStart="@+id/textView48" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(minutes)"
+            android:id="@+id/textView54"
+            android:layout_below="@+id/textView53"
+            android:layout_toEndOf="@+id/textView48" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Procedure : "
+            android:id="@+id/textView55"
+            android:layout_below="@+id/textView54"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextProcedure"
+            android:layout_below="@+id/textView55"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add"
+            android:id="@+id/button2"
+            android:layout_below="@+id/editTextProcedure"
+            android:layout_alignStart="@+id/textView54" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="See Comment"
+            android:id="@+id/button3"
+            android:layout_below="@+id/editTextProcedure"
+            android:layout_toStartOf="@+id/editTextTimePeriod" />
     </RelativeLayout>
 
     <ListView

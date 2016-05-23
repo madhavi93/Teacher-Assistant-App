@@ -138,7 +138,6 @@ public class BaseActivity extends AppCompatActivity  {
         drawerLayout.setDrawerListener(drawerToggle);
 
         ActionBar actionBar = getSupportActionBar();
-
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
 

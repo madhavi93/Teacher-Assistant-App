@@ -1,27 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/drawer_Layout"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.classActivity.AddClass"
-    tools:showIn="@layout/activity_add_class">
+    tools:showIn="@layout/activity_add_class"
+    android:background="#e6fafc">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="   Class Name :"
             android:id="@+id/txt_name"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="41dp"
             android:autoText="false"
             android:textAlignment="gravity"
             android:textSize="20dp"
@@ -29,40 +26,6 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="    Day       :"
-            android:layout_marginTop="20dp"
-            android:id="@+id/txt_day"
-            android:textSize="20dp"
-            android:textColor="#17037d"
-            android:layout_below="@+id/txt_time"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="   Time    :"
-            android:id="@+id/txt_time"
-            android:textSize="20dp"
-            android:layout_marginTop="20dp"
-            android:textColor="#17037d"
-            android:layout_below="@+id/txt_name"
-            android:layout_alignParentStart="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="          ADD          "
-            android:id="@+id/button8"
-            android:background="#033aa8"
-            android:layout_marginTop="20dp"
-            android:textColor="#ffffff"
-            android:layout_alignParentBottom="true"
-            android:layout_alignStart="@+id/editTextTime"
-            android:layout_marginBottom="88dp"
-            android:onClick="onClick" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -72,66 +35,98 @@
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/textView3" />
 
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextTime"
-            android:layout_alignBottom="@+id/txt_time"
-            android:layout_alignEnd="@+id/editTextname"
-            android:layout_toEndOf="@+id/txt_name" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextSdate"
-            android:layout_above="@+id/textView3"
-            android:layout_alignEnd="@+id/editTextDay"
-            android:layout_toEndOf="@+id/textView3" />
-
-        <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/editTextDay"
-            android:layout_alignBottom="@+id/txt_day"
-            android:layout_alignEnd="@+id/editTextTime"
-            android:layout_alignStart="@+id/editTextTime" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="   Ending Date : "
+            android:text="   Time    :"
+            android:id="@+id/txt_time"
+            android:textSize="20dp"
             android:layout_marginTop="20dp"
-            android:id="@+id/textView3"
+            android:layout_marginBottom="60dp"
             android:textColor="#17037d"
-            android:layout_below="@+id/textView5"
+            android:layout_below="@+id/txt_name"
             android:layout_alignParentStart="true" />
 
-        <EditText
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editTextendDate"
-            android:layout_alignBottom="@+id/textView3"
-            android:layout_alignEnd="@+id/editTextSdate"
-            android:layout_toEndOf="@+id/textView3" />
+            android:text="    Day       :"
+            android:id="@+id/txt_day"
+            android:textSize="20dp"
+            android:textColor="#17037d"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="   Starting Date"
-            android:layout_marginTop="20dp"
             android:id="@+id/textView5"
+            android:layout_marginTop="15dp"
             android:textColor="#17037d"
             android:layout_below="@+id/txt_day"
             android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButtonSdate"
+            android:src="@drawable/calendar"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignStart="@+id/imageButtonEndDate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="                          "
+            android:id="@+id/StartDate"
+            android:layout_marginTop="15dp"
+            android:layout_alignBottom="@+id/imageButtonSdate"
+            android:layout_toEndOf="@+id/textView3" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="   Ending Date : "
+            android:id="@+id/textView3"
+            android:layout_marginTop="15dp"
+            android:textColor="#17037d"
+            android:layout_below="@+id/textView5"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButtonEndDate"
+            android:src="@drawable/calendar"
+            android:layout_alignBottom="@+id/EndDate"
+            android:layout_toEndOf="@+id/EndDate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="                  "
+            android:id="@+id/EndDate"
+            android:layout_alignTop="@+id/textView3"
+            android:layout_alignEnd="@+id/StartDate"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_toEndOf="@+id/textView3" />
+
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="   Fee :  Rs."
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:id="@+id/textView8"
             android:textColor="#17037d"
             android:layout_below="@+id/textView3"
@@ -141,20 +136,76 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editTextfee"
-            android:layout_alignTop="@+id/textView8"
+            android:layout_alignBottom="@+id/textView8"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@+id/textView8" />
 
-    </RelativeLayout>
 
-    <ListView
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:id="@+id/drawer_list"
-        android:layout_gravity = "start"
-        android:background="@color/colorDraver"
-        android:choiceMode="singleChoice"
-        android:textAlignment="center"
-        android:layout_marginTop="15dp"/>
 
-</android.support.v4.widget.DrawerLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="          ADD          "
+            android:id="@+id/btnUpdate"
+            android:background="#033aa8"
+            android:textColor="#ffffff"
+            android:layout_marginTop="15dp"
+            android:onClick="onClick"
+            android:layout_below="@+id/editTextfee"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="From  "
+            android:id="@+id/textViewFromTime"
+            android:textSize="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_below="@+id/editTextTime"
+            android:layout_alignEnd="@+id/textView5" />
+
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButtonFrom"
+            android:src="@drawable/timepicker"
+            android:layout_alignBottom="@+id/textViewFromTime"
+            android:layout_alignEnd="@+id/btnUpdate" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageButtonTo"
+            android:src="@drawable/timepicker"
+            android:layout_below="@+id/imageButtonFrom"
+            android:layout_alignEnd="@+id/btnUpdate" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To "
+            android:id="@+id/textViewToTime"
+            android:textSize="20dp"
+            android:layout_alignBottom="@+id/imageButtonTo"
+            android:layout_alignStart="@+id/textViewFromTime" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="                  "
+            android:id="@+id/editTextTime"
+            android:layout_alignBottom="@+id/txt_time"
+            android:layout_alignTop="@+id/txt_time"
+            android:layout_alignStart="@+id/editTextfee" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerDay"
+            android:layout_alignBottom="@+id/txt_day"
+            android:layout_toEndOf="@+id/txt_day" />
+
+
+</RelativeLayout>

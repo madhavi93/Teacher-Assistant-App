@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,7 +18,7 @@ import android.widget.TextView;
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.BaseActivity;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
-public class MyWorkActivity extends BaseActivity {
+public class MyWorkActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
@@ -113,18 +114,22 @@ public class MyWorkActivity extends BaseActivity {
             super(fm);
         }
 
+
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
+                /*
                 case 0:
                     return new AddWorkFragment();
                 case 1:
                     return new SeeCommentFragment();
                 default:
                     return new AddWorkFragment();
+                     */
             }
+           return null;
         }
 
         @Override

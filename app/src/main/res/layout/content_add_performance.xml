@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,12 +9,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.AddPerformanceActivity"
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.AddPerformanceActivity"
     tools:showIn="@layout/activity_add_performance">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -22,16 +22,17 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Class :"
             android:id="@+id/textView10"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="49dp"
+            android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginLeft="15dp"/>
+            android:layout_alignParentStart="true" />
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner2"
+            android:id="@+id/spinner"
             android:layout_alignBottom="@+id/textView10"
+            android:layout_alignEnd="@+id/scrollView"
             android:layout_toEndOf="@+id/textView10" />
 
         <TextView
@@ -40,72 +41,104 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Student List :"
             android:id="@+id/textView31"
-            android:layout_below="@+id/textView10"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="15dp"/>
+            android:layout_below="@+id/textView36"
+            android:layout_alignParentStart="true" />
+
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView31"
+            android:layout_alignStart="@+id/textView31"
+            android:fillViewport="false"
+            android:id="@+id/scrollView"
+            android:background="#e4fbfb">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView31"
+                android:layout_alignStart="@+id/textView31"
+                android:id="@+id/markListLayout">
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/markList"
+                android:columnCount="3"
+                >
+
+
+                <TableRow
+                    android:id="@+id/logs_table_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#FFE7FBFB"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:id="@+id/sID"
+                        android:text="ID           "
+                        android:layout_column="0"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:id="@+id/name"
+                        android:textAlignment="center"
+                        android:text="Name              "
+                        android:layout_column="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/editTextMark"
+                        android:text="Mark        "
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:layout_column="8"/>
+
+                </TableRow>
+            </TableLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add"
-            android:id="@+id/button"
+            android:id="@+id/buttonAdd"
+            android:layout_marginBottom="93dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="74dp" />
+            android:background="#a7ecf9" />
 
-        <ScrollView
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Exam :"
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView36"
+            android:layout_below="@+id/spinner"
+            android:layout_alignStart="@+id/textView10" />
+
+        <Spinner
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView31"
-            android:layout_alignEnd="@+id/spinner2"
-            android:fillViewport="false"
-            android:id="@+id/scrollView">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/firstrow">
-
-                <TextView
-                    android:id="@+id/textView1"
-                    android:layout_width="281dp"
-                    android:layout_height="match_parent"
-                    android:text="Name"
-                    android:background="#0000"
-                    android:layout_below="@+id/scrollView"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignBottom="@+id/textView2"
-                    android:layout_marginLeft="15dp"
-                    android:textSize="20dp"/>
-
-                <TextView
-
-                    android:id="@+id/textView2"
-                    android:layout_width="90dp"
-                    android:layout_height="wrap_content"
-                    android:text="Mark"
-                    android:layout_gravity="right"
-                    android:background="#88FF"
-                    android:layout_below="@+id/textView31"
-                    android:layout_alignEnd="@+id/spinner2"
-                    android:layout_toEndOf="@+id/button"
-                    android:textSize="20dp"/>
-
-            </LinearLayout>
-
-        </ScrollView>
-
+            android:id="@+id/spinnerExam"
+            android:layout_alignTop="@+id/textView36"
+            android:layout_alignStart="@+id/spinner"
+            android:layout_alignEnd="@+id/scrollView" />
 
     </RelativeLayout>
 
-    <ListView
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:id="@+id/drawer_list"
-        android:layout_gravity = "start"
-        android:background="@color/colorDraver"
-        android:choiceMode="singleChoice"
-        android:textAlignment="center"
-        android:layout_marginTop="15dp"/>
 
-</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>

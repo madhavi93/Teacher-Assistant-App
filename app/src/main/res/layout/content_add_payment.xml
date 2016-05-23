@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.AddPaymentActivity"
+    tools:showIn="@layout/activity_add_payment"
+    android:background="#02465d">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp"
+        android:background="#d4f7fe"
+        >
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Class  :"
+            android:id="@+id/textView2"
+            android:layout_alignBottom="@+id/spinnerClass"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerClass"
+            android:spinnerMode="dropdown"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="47dp"
+            android:layout_toEndOf="@+id/textView2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Student Name :"
+            android:id="@+id/textView4"
+            android:layout_marginTop="51dp"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerSName"
+            android:layout_alignTop="@+id/textView4"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textView4" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     Add     "
+            android:id="@+id/btnAdd"
+            android:onClick="onClick"
+            android:layout_below="@+id/spinnerSName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:background="#9bd0f9"
+            android:textSize="20dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

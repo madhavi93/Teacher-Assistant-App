@@ -28,8 +28,8 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
 
     private Spinner spinner;
 
-
     int ClssIDPos;
+    String ClassName;
     List<TutionClass> classList;
 
     ClassController cldc;
@@ -80,10 +80,12 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(".Activity.SyllabusTrackerActivity.AddSylActivity");
-                        intent.putExtra("ClassID",ClssIDPos);
-                        startActivity(intent);
-                        startActivity(intent);
+                        if(ClssIDPos != 0) {
+                            Intent intent = new Intent(".Activity.SyllabusTrackerActivity.AddSylActivity");
+                            intent.putExtra("ClassID", ClssIDPos);
+                            intent.putExtra("ClassName", ClassName);
+                            startActivity(intent);
+                        }
                     }
                 }
 
@@ -99,10 +101,13 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent(".Activity.SyllabusTrackerActivity.ViewSylActivity");
-                        intent.putExtra("ClassID",ClssIDPos);
-                        startActivity(intent);
-                        startActivity(intent);
+                        if(ClssIDPos != 0) {
+                            Intent intent = new Intent(".Activity.SyllabusTrackerActivity.ViewSylActivity");
+                            intent.putExtra("ClassID", ClssIDPos);
+                            intent.putExtra("ClassName", ClassName);
+                            intent.putExtra("LoadFrom",1);
+                            startActivity(intent);
+                        }
                     }
                 }
 
@@ -118,10 +123,12 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyWorkActivity");
-                        intent.putExtra("ClassID",ClssIDPos);
-                        startActivity(intent);
-                        startActivity(intent);
+                        if(ClssIDPos != 0){
+                            Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyWorkActivity");
+                            intent.putExtra("ClassID",ClssIDPos);
+                            intent.putExtra("ClassName",ClassName);
+                            startActivity(intent);
+                        }
                     }
                 }
         );
@@ -130,10 +137,15 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         ClssIDPos = position;
+        if(position != 0) {
+            ClassName = classList.get(position-1).getClassName();
+        }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 }

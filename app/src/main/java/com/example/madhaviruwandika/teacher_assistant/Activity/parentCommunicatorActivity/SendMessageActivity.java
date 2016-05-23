@@ -2,28 +2,13 @@ package com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicat
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.BaseActivity;
-import com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.addPaymentFragment;
-import com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.markAttendenceFragment;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
 
@@ -49,7 +34,6 @@ public class SendMessageActivity extends BaseActivity {
     public void SendSMSButtonClickListner(){
 
         sendSms = (ImageButton)findViewById(R.id.imageButtonSendSMS);
-
         sendSms.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

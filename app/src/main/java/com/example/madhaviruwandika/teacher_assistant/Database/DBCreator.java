@@ -33,13 +33,14 @@ public class DBCreator extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE Payment (Payment_id INTEGER PRIMARY KEY,S_id INTEGER, Class_Id INTEGER, DateOP TEXT, FOREIGN KEY(S_id) REFERENCES Student(ID),FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
             db.execSQL("CREATE TABLE Extra_Class (ExClassID INTEGER PRIMARY KEY,Class_Id INTEGER, DateOfClass TEXT, time Text,ClassType Text, FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
             db.execSQL("CREATE TABLE Attendance_Sheet (Attendance_id INTEGER PRIMARY KEY,S_id INTEGER, Class_Id INTEGER, DateOPA TEXT, FOREIGN KEY(S_id) REFERENCES Student(ID),FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
-            db.execSQL("CREATE TABLE SyllabusTopic (Topic_id INTEGER PRIMARY KEY, Class_Id INTEGER, Topic_level INTEGER, Topic Text,FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
-            db.execSQL("CREATE TABLE ParentTopic (parent_Topic_id INTEGER, Child_Topic_Id INTEGER, FOREIGN KEY(Parent_Topic_id) REFERENCES SyllabusTopic(Topic_id ),FOREIGN KEY(Child_Topic_Id) REFERENCES SyllabusTopic(Topic_id));");
-            db.execSQL("CREATE TABLE DailyWork (Daily_Work_ID INTEGER PRIMARY KEY, topic_ID TEXT NOT NULL UNIQUE, DateOT TEXT ,TimeSpend TEXT ,Content_Covered TEXT,  FOREIGN KEY(topic_ID) REFERENCES SyllabusTopic(Topic_id ));");
+            db.execSQL("CREATE TABLE SyllabusLesson (Unit_id INTEGER, Lesson Text, Lesson_no INTEGER, Time_Period INTEGER, Special_act Text,Finished_amount REAL,FOREIGN KEY(Unit_id) REFERENCES Unit(UnitID));");
+            db.execSQL("CREATE TABLE Unit(UnitID INTEGER PRIMARY KEY, ClassID INTEGER,Unit Text, FOREIGN KEY(ClassID) REFERENCES TutionClass(ClassID));");
+            db.execSQL("CREATE TABLE DailyWork (Daily_Work_ID INTEGER PRIMARY KEY, DateOT TEXT ,ClassID INTEGER,UnitID INTEGER, TimeSpent INTEGER,Content_Covered Real,Comment TEXT,FOREIGN KEY(UnitID) REFERENCES Unit(UnitID), FOREIGN KEY(ClassID) REFERENCES TutionClass(ClassID));");
             db.execSQL("CREATE TABLE GroupMessage (Message_ID INTEGER PRIMARY KEY, Msg_type INTEGER, DateOfMsg TEXT ,Content TEXT ,Class_Id INTEGER, No_Of_Recip TEXT, FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));" );
             db.execSQL("CREATE TABLE SingleMessage(Message_ID INTEGER PRIMARY KEY, Msg_type INTEGER, DateOfMsg TEXT ,Content TEXT ,Recipient INTEGER);" );
             db.execSQL("CREATE TABLE Exam(Exam_ID INTEGER PRIMARY KEY, Class_ID INTEGER, InclassType TEXT ,DateOfExam TEXT ,Lesson TEXT, FOREIGN KEY(Class_ID) REFERENCES TutionClass(ClassID));" );
-            db.execSQL("CREATE TABLE PerformedAt(Exam_ID INTEGER PRIMARY KEY,S_id INTEGER, Mark INTEGER , FOREIGN KEY(S_id) REFERENCES Student(ID));");
+            db.execSQL("CREATE TABLE PerformedAt(Exam_ID INTEGER,S_id INTEGER, Mark INTEGER , FOREIGN KEY(S_id) REFERENCES Student(ID));");
+            db.execSQL("CREATE TABLE StartOfClass(ClassID INTEGER,Date TEXT, Start_Time TEXT, End_Time TEXT, FOREIGN KEY(ClassID) REFERENCES TutionClass(ClassID));");
 
         }
 
@@ -57,13 +58,15 @@ public class DBCreator extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS Payment");
             db.execSQL("DROP TABLE IF EXISTS Extra_Class");
             db.execSQL("DROP TABLE IF EXISTS Attendance_Sheet");
-            db.execSQL("DROP TABLE IF EXISTS SyllabusTopic");
-            db.execSQL("DROP TABLE IF EXISTS ParentTopic");
+            db.execSQL("DROP TABLE IF EXISTS SyllabusLesson");
+            db.execSQL("DROP TABLE IF EXISTS Unit");
             db.execSQL("DROP TABLE IF EXISTS DailyWork");
             db.execSQL("DROP TABLE IF EXISTS GroupMessage");
             db.execSQL("DROP TABLE IF EXISTS SingleMessage");
             db.execSQL("DROP TABLE IF EXISTS Exam");
             db.execSQL("DROP TABLE IF EXISTS PerformedAt");
+            db.execSQL("DROP TABLE IF EXISTS StartOfClass");
+
 
             onCreate(db);
         }

@@ -9,7 +9,8 @@ import android.util.Log;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConnection;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConstant;
 import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.SyllabusDAO;
-import com.example.madhaviruwandika.teacher_assistant.Model.Topic;
+import com.example.madhaviruwandika.teacher_assistant.Model.Lesson;
+import com.example.madhaviruwandika.teacher_assistant.Model.LessonUnit;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 
 import java.util.ArrayList;
@@ -26,40 +27,58 @@ public class SyllabusDA implements SyllabusDAO{
         this.db = DBConnection.getInstance(context).getWritableDatabase();
     }
 
-    @Override
-    public int AddTopic(Topic topic) {
+    public int addtoSylUnit(LessonUnit lessonUnit){
+        Log.d("MYACTIVITY", "INSERTING TO Tution Class");
 
+        int unitID = getUnitTID()+1;
         // set values to contentValues
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DBConstant.syllabusTopic_col1, getLastTopicId()+1);
-        contentValues.put(DBConstant.syllabusTopic_col2, topic.getClass_Id());
-        contentValues.put(DBConstant.syllabusTopic_col3,topic.getTopic_level());
-        contentValues.put(DBConstant.syllabusTopic_col4,topic.getTopic());
+        contentValues.put(DBConstant.Unit_col1,unitID);
+        contentValues.put(DBConstant.Unit_col2,lessonUnit.getClass_Id());
+        contentValues.put(DBConstant.Unit_col3,lessonUnit.getUnit());
 
-
-        long result = db.insert("SyllabusTopic", null, contentValues);
-
-        if( topic.getTopic_level() != 0){
-            addToParentTopicSelation(topic.getParentTopicID(),topic.getTopic_id());
-        }
-
+        long result = db.insert("Unit", null, contentValues);
 
         if(result == -1){
-            Log.d("MYACTIVITY", "VALUES ARE NOT_INSERTED TO SyllabusTopic");
+            Log.d("MYACTIVITY", "VALUES ARE NOT_INSERTED TO Unit");
             return 0;
         }
         else {
-            Log.d("MYACTIVITY", "VALUES ARE INSERTED TO SyllabusTopic ");
-            Log.d("MYACTIVITY", String.valueOf(getLastTopicId()));
-            return getLastTopicId();
+            Log.d("MYACTIVITY", "VALUES ARE INSERTED TO UNIT");
+            return unitID;
         }
+
+    }
+    public int addtoSylLesson(Lesson lesson){
+
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(DBConstant.SyllabusLesson_col1,lesson.getUnitNo());
+        contentValues.put(DBConstant.SyllabusLesson_col2,lesson.getLesson());
+        contentValues.put(DBConstant.SyllabusLesson_col3,lesson.getLessonNo());
+        contentValues.put(DBConstant.SyllabusLesson_col4,lesson.getTotaltimeSupposedToSpend());
+        contentValues.put(DBConstant.SyllabusLesson_col5,lesson.getSpecialACT());
+        contentValues.put(DBConstant.SyllabusLesson_col6,lesson.getAmountCovered());
+
+        long result = db.insert("SyllabusLesson", null, contentValues);
+
+        if(result == -1){
+            Log.d("MYACTIVITY", "VALUES ARE NOT_INSERTED TO SyllabusLesson ");
+            return -1;
+        }
+        else {
+            Log.d("MYACTIVITY", "VALUES ARE INSERTED TO SyllabusLesson  ");
+            return 1;
+        }
+
     }
 
-    @Override
-    public int getLastTopicId() {
+    public int getUnitTID(){
+
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.syllabusTopic_col1 + " from SyllabusTopic ", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.Unit_col1 + " from Unit", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -77,72 +96,33 @@ public class SyllabusDA implements SyllabusDAO{
     }
 
     @Override
-    public Topic getTopicByid(int ID) {
-        Topic topic = new Topic();
+    public List<Lesson> getLessonD(int ClassID) {
+        List<Lesson> LessonList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from SyllabusLesson inner join Unit on SyllabusLesson.Unit_id =Unit.UnitID where ClassID = "+ClassID, null);
 
-        Cursor cursor = db.rawQuery("select * from SyllabusTopic where "+DBConstant.syllabusTopic_col1+"="+String.valueOf(ID), null);
-        if (cursor.getCount() == 0) {
+        if(cursor.getCount()==0){
             Log.d("MYACTIVITY", "No Value");
-
-        } else {
-            //iterate through result set
-            if (cursor.moveToFirst()) {
-                do {
-
-                    topic.setTopic_id(ID);
-                    topic.setClass_Id(Integer.parseInt(cursor.getString(1)));
-                    topic.setTopic_level(Integer.parseInt(cursor.getString(2)));
-                    topic.setTopic(cursor.getString(3));
-
-                } while (cursor.moveToNext());
-            }
-        }
-
-        Cursor cursor2 = db.rawQuery("select * from ParentTopic where "+DBConstant.parentTopic_col2+"="+String.valueOf(ID), null);
-        if (cursor.getCount() == 0) {
-            Log.d("MYACTIVITY", "No Value");
-
-        } else {
-            //iterate through result set
-            if (cursor.moveToFirst()) {
-                do {
-
-                    topic.setParentTopicID(Integer.parseInt(cursor.getString(0)));
-
-                } while (cursor.moveToNext());
-            }
-        }
-
-
-        return topic ;
-
-
-
-    }
-
-
-    public int addToParentTopicSelation(int parentT,int childT) {
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(DBConstant.parentTopic_col1, parentT);
-        contentValues.put(DBConstant.parentTopic_col2, childT );
-
-
-
-        long result = db.insert("ParentTopic", null, contentValues);
-        if(result == -1){
-            Log.d("MYACTIVITY", "VALUES ARE NOT_INSERTED TO ParentTopic");
-            return 0;
         }
         else {
-            Log.d("MYACTIVITY", "VALUES ARE INSERTED TO parentTTopic ");
-            Log.d("MYACTIVITY", String.valueOf(getLastTopicId()));
-            return getLastTopicId();
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    Lesson l = new Lesson();
+
+                    l.setUnitNo(cursor.getInt(cursor.getColumnIndex("Unit")));
+                    l.setLesson(cursor.getString(cursor.getColumnIndex(DBConstant.SyllabusLesson_col2)));
+                    l.setLessonNo(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col3)));
+                    l.setAmountTimeSpent(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col4)));
+                    l.setSpecialACT(cursor.getString(cursor.getColumnIndex(DBConstant.SyllabusLesson_col5)));
+                    l.setAmountCovered(cursor.getDouble(cursor.getColumnIndex(DBConstant.SyllabusLesson_col6)));
+
+
+                    LessonList.add(l);
+
+                } while (cursor.moveToNext());
+            }
         }
-
+        return LessonList;
     }
-
-
-    // CREATE TABLE SyllabusTopic (Topic_id INTEGER PRIMARY KEY, Class_Id INTEGER, Topic_level INTEGER, Topic Text,FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
 
 }

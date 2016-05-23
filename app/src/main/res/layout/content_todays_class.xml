@@ -4,40 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/drawer_Layout"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.TodaysClassActivity"
-    tools:showIn="@layout/activity_todays_class">
+    tools:showIn="@layout/activity_todays_class"
+    android:background="@drawable/today_class">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="   Start"
-        android:id="@+id/btnStartClass"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="     Class   :"
-        android:id="@+id/textView25"
-        android:layout_marginTop="108dp"
-        android:layout_alignParentTop="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Class   :"
+            android:id="@+id/textView25"
+            android:layout_marginTop="61dp"
+            android:textColor="#050505"
+            android:textSize="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinner"
-            android:layout_alignTop="@+id/textView25"
+            android:layout_alignBottom="@+id/textView25"
+            android:background="#caeafb"
+            android:layout_alignEnd="@+id/btnMarkAttendence"
             android:layout_toEndOf="@+id/textView25" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonStarting"
+            android:textSize="25dp"
+            android:background="@drawable/btn_start"
+            android:layout_alignBottom="@+id/spinner"
+            android:layout_toEndOf="@+id/btnMarkAttendence" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  Mark  Atendence  "
+            android:id="@+id/btnMarkAttendence"
+            android:background="#95f7f6"
+            android:textSize="25dp"
+            android:layout_below="@+id/textView25"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:text="Add Payment"
+            android:id="@+id/buttonAddPayment"
+            android:background="#a3b3d8"
+            android:textSize="25dp"
+            android:layout_below="@+id/btnMarkAttendence"
+            android:layout_alignStart="@+id/btnMarkAttendence"
+            android:layout_alignEnd="@+id/btnMarkAttendence" />
 
     </RelativeLayout>
 

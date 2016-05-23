@@ -4,11 +4,107 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.SyllabusTrackerActivity.ViewSylActivity"
     tools:showIn="@layout/activity_view_syl">
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Class :"
+            android:id="@+id/textViewClass"
+            android:layout_marginTop="25dp"
+            android:layout_marginLeft="15dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewClass"
+            android:layout_alignStart="@+id/textView31"
+            android:layout_marginTop="5dp"
+            android:fillViewport="false"
+            android:id="@+id/scrollView"
+            android:background="#e4fbfb">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView31"
+                android:layout_alignStart="@+id/textView31"
+                android:id="@+id/markListLayout">
+
+                <TableLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/Syllbus"
+                    android:columnCount="4">
+
+
+                    <TableRow
+                        android:id="@+id/logs_table_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#FFE7FBFB"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:id="@+id/unitNO"
+                            android:text="Unit "
+                            android:layout_column="0"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:id="@+id/lessonNo"
+                            android:textAlignment="center"
+                            android:text="L.No "
+                            android:layout_column="1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/lesson"
+                            android:text="Lesson                 "
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:layout_column="2"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/time"
+                            android:text="Time"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:layout_column="8"/>
+
+                    </TableRow>
+                </TableLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&lt;&lt;Back"
+            android:id="@+id/buttonBack"
+            android:layout_marginBottom="72dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/textViewClass"
+            android:background="#337bb6" />
+
+    </RelativeLayout>
 </RelativeLayout>

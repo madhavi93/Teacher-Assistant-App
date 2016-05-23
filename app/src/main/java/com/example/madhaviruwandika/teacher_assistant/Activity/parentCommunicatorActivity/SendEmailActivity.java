@@ -17,8 +17,6 @@ public class SendEmailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_email);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
     }
 
 }

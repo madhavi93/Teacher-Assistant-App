@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.AttendenceAndPamentFragment">
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.AttendenceAndPamentFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

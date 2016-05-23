@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Class  :"
-            android:id="@+id/txt1"
+            android:id="@+id/editTextSName"
             android:layout_above="@+id/spinnerSName"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="83dp" />
@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerClass"
-            android:layout_alignTop="@+id/txt1"
+            android:layout_alignTop="@+id/editTextSName"
             android:layout_alignParentEnd="true"
             android:layout_alignStart="@+id/btnAdd"
             android:spinnerMode="dropdown"/>

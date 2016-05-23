@@ -14,9 +14,11 @@ import com.example.madhaviruwandika.teacher_assistant.R;
 public class ClassDataActivity extends BaseActivity {
 
     private Button addStd ;
-    private Button addSyl ;
+    private Button updateClass ;
     private Button addClass ;
     private Button addExClass ;
+    private Button updateStudent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,29 +29,14 @@ public class ClassDataActivity extends BaseActivity {
 
         super.onCreate(savedInstanceState);
 
-        OnAddSylButtonClickListner();
         OnAddStudentButtonClickListner();
         OnAddClassButtonClickListner();
         OnAddEXClassButtonClickListner();
+        OnUpdateClassButtonClickListner();
+        OnUpdateStudentButtonClickListner();
 
     }
 
-    public void OnAddSylButtonClickListner(){
-
-        addSyl = (Button) findViewById(R.id.btnAddSyl);
-
-        addSyl.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(".Activity.SyllabusTrackerActivity.AddSylActivity");
-                        startActivity(intent);
-                    }
-                }
-
-        );
-
-    }
 
     public void OnAddStudentButtonClickListner(){
 
@@ -95,6 +82,41 @@ public class ClassDataActivity extends BaseActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.add_ExtraClass");
+                        startActivity(intent);
+                    }
+                }
+
+        );
+
+    }
+
+
+    public void OnUpdateClassButtonClickListner(){
+
+        updateClass = (Button) findViewById(R.id.btnUpdateClass);
+
+        updateClass.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.UpdateClassDActivity");
+                        startActivity(intent);
+                    }
+                }
+
+        );
+
+    }
+
+    public void OnUpdateStudentButtonClickListner(){
+
+        updateStudent = (Button) findViewById(R.id.btnUpdateStdDetails);
+
+        updateStudent.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.UpdateStudentActivity");
                         startActivity(intent);
                     }
                 }

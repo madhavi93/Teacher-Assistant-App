@@ -14,7 +14,7 @@ public class Student {
     public Student(int s_id,String name,int classID,String Dob, String address){
         this.s_id = s_id;
         this.name = name;
-        this.classID = classID;
+        this.setClassID(classID);
         this.address = address;
         this.doB = Dob;
     }
@@ -23,7 +23,7 @@ public class Student {
         this.name = name;
         this.address = address;
         this.doB = Dob;
-        this.classID = classID;
+        this.setClassID(classID);
     }
 
     public Student() {
@@ -42,13 +42,6 @@ public class Student {
         this.name = name;
     }
 
-    public int getClassname() {
-        return classID;
-    }
-
-    public void setClassname(int classID) {
-        this.classID = classID;
-    }
 
     public String getDoB() { return doB; }
 
@@ -57,4 +50,12 @@ public class Student {
     public String getAddress() { return address; }
 
     public void setAddress(String address) { this.address = address; }
+
+    public int getClassID() {
+        return classID;
+    }
+
+    public void setClassID(int classID) {
+        this.classID = classID;
+    }
 }

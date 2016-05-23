@@ -22,12 +22,13 @@ import com.example.madhaviruwandika.teacher_assistant.R;
 
 public class manegeClassActivity extends BaseActivity {
 
+    /*
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        setContentView(R.layout.activity_send_message);
+        setContentView(R.layout.activity_manege_class);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         super.onCreate(savedInstanceState);
@@ -104,15 +105,19 @@ public class manegeClassActivity extends BaseActivity {
         }
     }
 
+    /*
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
+    /*
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
+
 
         @Override
         public Fragment getItem(int position) {
@@ -164,5 +169,6 @@ public class manegeClassActivity extends BaseActivity {
             }
         }
     }
+    */
 
 }

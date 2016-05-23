@@ -15,7 +15,7 @@ public class DBConstant {
     public static final String stdTable_col4 = "Address";
 
     public static final String attend_col1 = "S_id";
-    public static final String attend_col2 = "ClassID";
+    public static final String attend_col2 = "Class_Id";
 
     public static final String tutionClass_col1 = "ClassID";
     public static final String tutionClass_col2 = "ClassName";
@@ -42,18 +42,24 @@ public class DBConstant {
     public static final String attendenceSheet_col3 = "Class_Id";
     public static final String attendenceSheet_col4 = "DateOPA";
 
-    public static final String syllabusTopic_col1 = "Topic_id";
-    public static final String syllabusTopic_col2 = "Class_Id";
-    public static final String syllabusTopic_col3 = "Topic_level";
-    public static final String syllabusTopic_col4 = "Topic";
+    public static final String SyllabusLesson_col1 = "Unit_id";
+    public static final String SyllabusLesson_col2 = "Lesson";
+    public static final String SyllabusLesson_col3 = "Lesson_no";
+    public static final String SyllabusLesson_col4 = "Time_Period";
+    public static final String SyllabusLesson_col5 = "Special_act";
+    public static final String SyllabusLesson_col6 = "Finished_amount";
 
-    public static final String parentTopic_col1 = "Parent_Topic_id";
-    public static final String parentTopic_col2 = "Child_Topic_Id";
+    public static final String Unit_col1 = "UnitID";
+    public static final String Unit_col2 = "ClassID";
+    public static final String Unit_col3 = "Unit";
 
     public static final String DailyWork_col1 = "Daily_Work_ID";
-    public static final String DailyWork_col2 = "topic_ID";
-    public static final String DailyWork_col3 = "DateOT";
-    public static final String DailyWork_col4 = "TimeSpend";
+    public static final String DailyWork_col2 = "DateOT";
+    public static final String DailyWork_col3 = "ClassID";
+    public static final String DailyWork_col4 = "UnitID";
+    public static final String DailyWork_col5 = "TimeSpend";
+    public static final String DailyWork_col6 = "Content_Covered";
+    public static final String DailyWork_col7 = "Comment";
 
     public static final String GroupMsg_col1 = "Message_ID";
     public static final String GroupMsg_col2 = "Msg_type";
@@ -87,5 +93,14 @@ public class DBConstant {
     public static final String ExtraClass_col4 = "time";
     public static final String ExtraClass_col5 = "ClassType";
 
+
+    public static final String markSheet_col1 = "Exam_ID";
+    public static final String markSheet_col2 = "S_id";
+    public static final String markSheet_col3 = "Mark";
+
+    public static final String StartOfClass_col1 ="ClassID";
+    public static final String StartOfClass_col2 = "Date";
+    public static final String StartOfClass_col3 = "Start_Time";
+    public static final String StartOfClass_col4 = "End_Time";
 
 }
