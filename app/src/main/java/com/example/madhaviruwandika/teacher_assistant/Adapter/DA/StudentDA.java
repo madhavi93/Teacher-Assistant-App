@@ -366,14 +366,14 @@ public class StudentDA implements StudentDAO {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(DBConstant.stdTable_col1,s.getS_id());
-        contentValues.put(DBConstant.stdTable_col2,s.getClassID());
+        contentValues.put(DBConstant.stdTable_col2,s.getName());
         contentValues.put(DBConstant.stdTable_col3, s.getDoB());
         contentValues.put(DBConstant.stdTable_col4,s.getAddress());
 
         ContentValues contentValues1 = new ContentValues();
         contentValues1.put(DBConstant.parent_col3,p.getName());
         contentValues1.put(DBConstant.parent_col4,p.getTp_no());
-        contentValues.put(DBConstant.parent_col5,p.getEmail());
+        contentValues1.put(DBConstant.parent_col5,p.getEmail());
 
 
 

@@ -287,11 +287,21 @@
             android:label="@string/title_activity_update_student"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.UpdateStudentActivity"/>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.UpdateStudentActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.SyllabusTrackerActivity.DailyWorkActivity"
+            android:label="@string/title_activity_daily_work"
+            android:theme="@style/AppTheme.NoActionBar">
 
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.DailyWorkActivity"/>
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
     </application>
 

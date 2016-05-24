@@ -53,11 +53,12 @@ public class DBConstant {
     public static final String Unit_col2 = "ClassID";
     public static final String Unit_col3 = "Unit";
 
+
     public static final String DailyWork_col1 = "Daily_Work_ID";
     public static final String DailyWork_col2 = "DateOT";
-    public static final String DailyWork_col3 = "ClassID";
-    public static final String DailyWork_col4 = "UnitID";
-    public static final String DailyWork_col5 = "TimeSpend";
+    public static final String DailyWork_col3 = "UnitID";
+    public static final String DailyWork_col4 = "Lesson_No";
+    public static final String DailyWork_col5 = "TimeSpent";
     public static final String DailyWork_col6 = "Content_Covered";
     public static final String DailyWork_col7 = "Comment";
 

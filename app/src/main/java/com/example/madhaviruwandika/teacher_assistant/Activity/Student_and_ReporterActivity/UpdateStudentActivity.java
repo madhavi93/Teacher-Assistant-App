@@ -125,7 +125,7 @@ public class UpdateStudentActivity extends AppCompatActivity implements AdapterV
             }
         });
 
-
+        OnUpdateButtonClickListner();
     }
 
     @Override
@@ -163,7 +163,7 @@ public class UpdateStudentActivity extends AppCompatActivity implements AdapterV
                 EDoB.setText(student.get("DOB"));
                 pTP_no.setText(student.get("TPNo"));
                 pEmail.setText(student.get("email"));
-                EDoB.setText(student.get("DOB"));
+
 
             }
 
@@ -204,8 +204,19 @@ public class UpdateStudentActivity extends AppCompatActivity implements AdapterV
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+                student.put("address", EAddress.getText().toString());
+                student.put("ParentName",pName.getText().toString());
+                student.put("DOB",EDoB.getText().toString());
+                student.put("TPNo", pTP_no.getText().toString());
+                student.put("email",pEmail.getText().toString());
+
+
+
                 if(sdc.UpdateStudent(student)==1){
                     Toast.makeText(UpdateStudentActivity.this, "Details are succesfully updated", Toast.LENGTH_LONG).show();
+                    clearInput();
                 }
                 else
                     Toast.makeText(UpdateStudentActivity.this, "Details are not updated.Try again", Toast.LENGTH_LONG).show();

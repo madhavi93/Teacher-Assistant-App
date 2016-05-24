@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/drawer_Layout"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyWorkActivity"
-    tools:showIn="@layout/activity_my_work">
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.DailyWorkActivity"
+    tools:showIn="@layout/activity_daily_work">
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,12 +29,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Class : "
             android:id="@+id/textView49"
+            android:layout_marginTop="10dp"
             android:layout_below="@+id/className"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="45dp" />
+            android:layout_alignParentStart="true" />
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerClass"
             android:layout_alignTop="@+id/textView49"
@@ -45,10 +47,11 @@
             android:text="Unit : "
             android:id="@+id/textView50"
             android:layout_below="@+id/spinnerClass"
+            android:layout_marginTop="20dp"
             android:layout_alignParentStart="true" />
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerUnit"
             android:layout_alignTop="@+id/textView50"
@@ -59,15 +62,16 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Lesson : "
+            android:layout_marginTop="20dp"
             android:id="@+id/textView51"
             android:layout_below="@+id/spinnerUnit"
             android:layout_alignParentStart="true" />
 
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spinner2"
-            android:layout_below="@+id/spinnerUnit"
+            android:id="@+id/spinnerLesson"
+            android:layout_alignTop="@+id/textView51"
             android:layout_toEndOf="@+id/textView51" />
 
         <TextView
@@ -76,7 +80,8 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Amount covered : "
             android:id="@+id/textView52"
-            android:layout_below="@+id/spinner2"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/spinnerLesson"
             android:layout_alignParentStart="true" />
 
         <Spinner
@@ -94,14 +99,16 @@
             android:text="Time period :  "
             android:id="@+id/textView53"
             android:layout_alignBottom="@+id/editTextTimePeriod"
-            android:layout_toStartOf="@+id/editTextTimePeriod" />
+            android:layout_alignParentStart="true" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/editTextTimePeriod"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/spinnerAmountCovered"
             android:layout_alignEnd="@+id/spinnerAmountCovered"
+            android:layout_toEndOf="@+id/textView52"
             android:layout_alignStart="@+id/className" />
 
         <TextView
@@ -109,6 +116,7 @@
             android:layout_height="wrap_content"
             android:text="(minutes)"
             android:id="@+id/textView54"
+            android:layout_marginTop="5dp"
             android:layout_below="@+id/textView53"
             android:layout_toEndOf="@+id/className" />
 
@@ -117,6 +125,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Procedure : "
+            android:layout_marginTop="20dp"
             android:id="@+id/textView55"
             android:layout_below="@+id/textView54"
             android:layout_alignParentStart="true" />
@@ -133,26 +142,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add"
-            android:id="@+id/button2"
+            android:id="@+id/buttonAdd"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/editTextProcedure"
-            android:layout_alignStart="@+id/textView54" />
+            android:layout_alignEnd="@+id/editTextProcedure" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="See Comment"
-            android:id="@+id/button3"
+            android:id="@+id/buttonSeeComment"
+            android:layout_marginTop="20dp"
             android:layout_below="@+id/editTextProcedure"
             android:layout_toStartOf="@+id/editTextTimePeriod" />
     </RelativeLayout>
 
-    <ListView
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:id="@+id/drawer_list"
-        android:layout_gravity = "start"
-        android:background="@color/colorDraver"
-        android:choiceMode="singleChoice"
-        android:textAlignment="center"
-        android:layout_marginTop="15dp"/>
-</android.support.v4.widget.DrawerLayout>
+</RelativeLayout>

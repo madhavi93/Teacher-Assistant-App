@@ -67,12 +67,16 @@ public class ViewSylActivity extends AppCompatActivity {
 
             TextView lessonN = new TextView(this);
             lessonN.setText(l.get("Lesson"));
-            Log.d("MY","%%%%%%%%%%%%%%%%%%%%%%%%%"+l.get("Lesson")+"%%%%%%%%%%%%%%%%%%%%%%%%");
+            Log.d("MY", "%%%%%%%%%%%%%%%%%%%%%%%%%" + l.get("Lesson") + "%%%%%%%%%%%%%%%%%%%%%%%%");
             tr.addView(lessonN);
 
             TextView time = new TextView(this);
             time.setText(l.get("totaltimeSupposedToSpend"));
             tr.addView(time);
+
+            TextView amount = new TextView(this);
+            amount.setText(l.get("amountCovered"));
+            tr.addView(amount);
 
             logsTableLayout.addView(tr);
         }

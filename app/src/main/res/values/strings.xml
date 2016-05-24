@@ -45,6 +45,7 @@
     <string name="title_activity_mark_attendence">Mark Attendence</string>
     <string name="title_activity_add_payment">Add Payment</string>
     <string name="title_activity_update_student">Update Student</string>
+    <string name="title_activity_daily_work">DailyWorkActivity</string>
 
 
 </resources>

@@ -302,10 +302,25 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
 
                         if (cldc.UpdateClass(tutionClass) == 1) {
                             Toast.makeText(UpdateClassDActivity.this, "Class Details are updated succesfully", Toast.LENGTH_LONG).show();
+                            ClearInput();
                         } else {
                             Toast.makeText(UpdateClassDActivity.this, "Class Details are not Updated succesfully.Try Again", Toast.LENGTH_LONG).show();
                         }
                     }
                  });
         }
+
+
+    public void ClearInput(){
+        classday.setText("");
+        startingDate.setText("");
+        endDate.setText("");
+        From.setText("");
+        To.setText("");
+        fee.setText("");
+        classtime.setText("");
+        className.setSelection(0);
+
     }
+
+}

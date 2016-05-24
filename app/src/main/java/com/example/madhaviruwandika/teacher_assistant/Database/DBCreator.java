@@ -35,7 +35,7 @@ public class DBCreator extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE Attendance_Sheet (Attendance_id INTEGER PRIMARY KEY,S_id INTEGER, Class_Id INTEGER, DateOPA TEXT, FOREIGN KEY(S_id) REFERENCES Student(ID),FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));");
             db.execSQL("CREATE TABLE SyllabusLesson (Unit_id INTEGER, Lesson Text, Lesson_no INTEGER, Time_Period INTEGER, Special_act Text,Finished_amount REAL,FOREIGN KEY(Unit_id) REFERENCES Unit(UnitID));");
             db.execSQL("CREATE TABLE Unit(UnitID INTEGER PRIMARY KEY, ClassID INTEGER,Unit Text, FOREIGN KEY(ClassID) REFERENCES TutionClass(ClassID));");
-            db.execSQL("CREATE TABLE DailyWork (Daily_Work_ID INTEGER PRIMARY KEY, DateOT TEXT ,ClassID INTEGER,UnitID INTEGER, TimeSpent INTEGER,Content_Covered Real,Comment TEXT,FOREIGN KEY(UnitID) REFERENCES Unit(UnitID), FOREIGN KEY(ClassID) REFERENCES TutionClass(ClassID));");
+            db.execSQL("CREATE TABLE DailyWork (Daily_Work_ID INTEGER PRIMARY KEY, DateOT TEXT ,UnitID INTEGER,Lesson_No INTEGER, TimeSpent INTEGER,Content_Covered Real,Comment TEXT,FOREIGN KEY(UnitID) REFERENCES Unit(UnitID));");
             db.execSQL("CREATE TABLE GroupMessage (Message_ID INTEGER PRIMARY KEY, Msg_type INTEGER, DateOfMsg TEXT ,Content TEXT ,Class_Id INTEGER, No_Of_Recip TEXT, FOREIGN KEY(Class_Id) REFERENCES TutionClass(ClassID));" );
             db.execSQL("CREATE TABLE SingleMessage(Message_ID INTEGER PRIMARY KEY, Msg_type INTEGER, DateOfMsg TEXT ,Content TEXT ,Recipient INTEGER);" );
             db.execSQL("CREATE TABLE Exam(Exam_ID INTEGER PRIMARY KEY, Class_ID INTEGER, InclassType TEXT ,DateOfExam TEXT ,Lesson TEXT, FOREIGN KEY(Class_ID) REFERENCES TutionClass(ClassID));" );

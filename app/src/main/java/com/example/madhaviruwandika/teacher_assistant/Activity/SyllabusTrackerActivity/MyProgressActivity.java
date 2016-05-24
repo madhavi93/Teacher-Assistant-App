@@ -124,7 +124,7 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
                     @Override
                     public void onClick(View v) {
                         if(ClssIDPos != 0){
-                            Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyWorkActivity");
+                            Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.DailyWorkActivity");
                             intent.putExtra("ClassID",ClssIDPos);
                             intent.putExtra("ClassName",ClassName);
                             startActivity(intent);

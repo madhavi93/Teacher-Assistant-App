@@ -193,14 +193,15 @@ public class AddSylActivity extends AppCompatActivity implements AdapterView.OnI
                     validChect = false;
                     timeperiod.setError("Invalied input");
                 }
-                else if(timeperiod.getText().toString()!= "") {
+                else
                     timePeriod = Integer.parseInt(timeperiod.getText().toString());
-                }
+
 
 
                 if(validChect != false) {
                     if(intelligenceSyllabusController.addToSyllabus(ClassID, UnitNo, LessonNo, lessonName, timePeriod, specialNote)== 1){
                         Toast.makeText(AddSylActivity.this, "Lesson Detais are succesfully added.", Toast.LENGTH_LONG).show();
+                        ClearText();
                     }
                     else {
                         Toast.makeText(AddSylActivity.this, "Lesson Details are not added.Try again", Toast.LENGTH_LONG).show();
