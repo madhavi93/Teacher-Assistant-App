@@ -147,6 +147,8 @@ public class HomeActivity extends BaseActivity implements AdapterView.OnItemClic
 
 */
 
+
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch(position){

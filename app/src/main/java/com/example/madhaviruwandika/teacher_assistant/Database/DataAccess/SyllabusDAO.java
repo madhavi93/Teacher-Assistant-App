@@ -1,5 +1,6 @@
 package com.example.madhaviruwandika.teacher_assistant.Database.DataAccess;
 
+import com.example.madhaviruwandika.teacher_assistant.Model.ExtraClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Lesson;
 import com.example.madhaviruwandika.teacher_assistant.Model.LessonUnit;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
@@ -20,7 +21,10 @@ public interface SyllabusDAO {
     public List<Lesson> getLessonListByClassIDandUnitID(int classID,int UnitID);
     public int addDailyWork(Work work);
     public int getUnitIDByClassandUnit(int classID,int UnitId);
-    public long updateCoverdAmountsInSyllubas(int UnitID,int lessonNo,Double amountCovered);
-    public double getFinishedAmountOfLesson(int UnitID,int lessonNo);
+    public long updateCoverdAmountsInSyllubas(int UnitID,int lessonNo,Double amountCovered,int timeSpent);
+    public Lesson getFinishedAmountOfLesson(int UnitID,int lessonNo);
     public int getLastDailyWorkID();
+    public Lesson getLessonByClassIDandUnitIDandLessonNo(int ClassID,int UnitID,int LessonNo);
+    public TutionClass getClassByClassID(int ClassID);
+    public List<ExtraClass> getExtraClassListByClassID(int ClassID);
 }

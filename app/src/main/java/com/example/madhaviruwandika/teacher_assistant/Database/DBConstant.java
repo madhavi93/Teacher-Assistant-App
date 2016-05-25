@@ -48,6 +48,7 @@ public class DBConstant {
     public static final String SyllabusLesson_col4 = "Time_Period";
     public static final String SyllabusLesson_col5 = "Special_act";
     public static final String SyllabusLesson_col6 = "Finished_amount";
+    public static final String SyllabusLesson_col7 = "Time_taken";
 
     public static final String Unit_col1 = "UnitID";
     public static final String Unit_col2 = "ClassID";

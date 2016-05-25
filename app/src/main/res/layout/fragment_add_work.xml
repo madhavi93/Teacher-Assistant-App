@@ -2,73 +2,156 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.AddWorkFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-
+    tools:context=".Activity.SyllabusTrackerActivity.layout.AddWorkFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="left|center_vertical">
+        android:layout_height="match_parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Date : "
-            android:id="@+id/textView18"
+            android:text="Large Text"
+            android:id="@+id/className"
+            android:layout_marginTop="15dp"
             android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="77dp" />
-
+            android:layout_centerHorizontal="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Lesson Covered :"
-            android:id="@+id/textView22"
-            android:layout_marginTop="40dp"
-            android:layout_below="@+id/textView18"
+            android:text="Class : "
+            android:id="@+id/textView49"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/className"
             android:layout_alignParentStart="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <Spinner
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Amount of lesson Covered : "
-            android:id="@+id/textwiewLessonAmount"
-            android:layout_below="@+id/textView22"
-            android:layout_marginTop="40dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:id="@+id/spinnerClass"
+            android:layout_alignTop="@+id/textView49"
+            android:layout_toEndOf="@+id/textView49" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Comment : "
-            android:id="@+id/textView23"
-            android:layout_below="@+id/textwiewLessonAmount"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="40dp" />
+            android:text="Unit : "
+            android:id="@+id/textView50"
+            android:layout_below="@+id/spinnerClass"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerUnit"
+            android:layout_alignTop="@+id/textView50"
+            android:layout_alignStart="@+id/spinnerClass" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Lesson : "
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView51"
+            android:layout_below="@+id/spinnerUnit"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerLesson"
+            android:layout_alignTop="@+id/textView51"
+            android:layout_toEndOf="@+id/textView51" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Amount covered : "
+            android:id="@+id/textView52"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/spinnerLesson"
+            android:layout_alignParentStart="true" />
+
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinnerAmountCovered"
+            android:layout_alignTop="@+id/textView52"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textView52" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Time period :  "
+            android:id="@+id/textView53"
+            android:layout_alignBottom="@+id/editTextTimePeriod"
+            android:layout_alignParentStart="true" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/editText4"
-            android:layout_alignBottom="@+id/textView23"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/textView23" />
+            android:id="@+id/editTextTimePeriod"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/spinnerAmountCovered"
+            android:layout_alignEnd="@+id/spinnerAmountCovered"
+            android:layout_toEndOf="@+id/textView52"
+            android:layout_alignStart="@+id/className" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(minutes)"
+            android:id="@+id/textView54"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/textView53"
+            android:layout_toEndOf="@+id/className" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Procedure : "
+            android:layout_marginTop="20dp"
+            android:id="@+id/textView55"
+            android:layout_below="@+id/textView54"
+            android:layout_alignParentStart="true" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/editTextProcedure"
+            android:layout_below="@+id/textView55"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ADD"
-            android:id="@+id/btnWorkAdd"
-            android:layout_below="@+id/editText4"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="42dp" />
+            android:text=" Add "
+            android:id="@+id/buttonAdd"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="30dp"
+            android:layout_below="@+id/editTextProcedure"
+            android:layout_alignEnd="@+id/editTextProcedure"
+            android:background="#6396f6" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" See Comment "
+            android:id="@+id/buttonSeeComment"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/editTextProcedure"
+            android:layout_toStartOf="@+id/editTextTimePeriod"
+            android:background="#6396f6" />
     </RelativeLayout>
+
 </FrameLayout>

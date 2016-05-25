@@ -67,7 +67,7 @@ public class Syllabus_Inteligence {
         //get syllabus lesson list sorted according to amount covered and time limit
         SortedLessonListAccordingToTime = syllabusTree.getSortedLessonListAccordingToTime();
         // format Date
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Calendar cal = Calendar.getInstance();
         // format and get timeperiod
         String time = tutionClass.getTime();
@@ -76,6 +76,7 @@ public class Syllabus_Inteligence {
         int timePeriodForDay = getTimePeriod(timeperiod[0],timeperiod[1]);
 
         try {
+
             int NoOFDays = getWorkingDaysBetweenTwoDates(dateFormat.parse(dateFormat.format(cal.getTime())),dateFormat.parse(tutionClass.getEndDate()),tutionClass.getDay());
             remainingClassTime = (timePeriodForDay*NoOFDays)+ extraClasseTime;
 
@@ -83,21 +84,22 @@ public class Syllabus_Inteligence {
             Log.d("MYACTIVITY","Invalied Date Format");
         }
         remainingTimeFromSyl = syllabusTree.getRequiredTimeToCoverRemaining();
+
         if(remainingClassTime == remainingTimeFromSyl){
             comment = "0nShedule";
         }
         else if(remainingClassTime > remainingTimeFromSyl)
         {
-           comment ="behindTheSchedule";
+           comment = "OnSchedule";
         }
         else {
-            comment = "OnSchedule";
+            comment = "behindTheSchedule";
         }
 
         return comment;
     }
 
-    public String analyzeComment(String c1,String c2){
+    public String analyzeComment(String c2,String c1){
         String comment = "";
 
         if(c1 == "behindTheSchedule" && c2 == "equal"){
@@ -109,6 +111,10 @@ public class Syllabus_Inteligence {
         else if(c1 == "behindTheSchedule" && c2 == "low"){
             comment = "You coved the todays lesson in less time than sheduled.Since you are running behind the schedule it is good.But pay attention whether childern understood the lesson.";
         }
+        else if(c1 == "behindTheSchedule" && c2 == ""){
+            comment = "you are running behind the schedule.pay attention on it.";
+        }
+
         else if(c1 == "OnSchedule" && c2 == "equal"){
             comment = "Great job. You are on schedule.";
         }
@@ -124,6 +130,9 @@ public class Syllabus_Inteligence {
                 comment = "You are on schedule.You took less time to cover the lesson today.So you can plan on few Revision classes";
             }
         }
+        else if(c1 == "OnSchedule" && c2 == ""){
+            comment = "You are on schedule.Good work.";
+        }
         return  comment;
     }
 
@@ -131,19 +140,31 @@ public class Syllabus_Inteligence {
 
         String[] overallComment = new String[2];
 
-        overallComment[0] = getCommentOnWork(lesson);
-        overallComment[1] = analyzeComment(overallComment[0],getCommentComparedToOverallSyllabus(units, lessons, tutionClass, extraClasseTime));
+        if(lesson == null) {
 
+            overallComment[0] = "";
+            overallComment[1] = analyzeComment(overallComment[0], getCommentComparedToOverallSyllabus(units, lessons, tutionClass, extraClasseTime));
+            Log.d("MY",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+overallComment[1]+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+        }
+        else {
+            overallComment[0] = getCommentOnWork(lesson);
+            overallComment[1] = analyzeComment(overallComment[0],getCommentComparedToOverallSyllabus(units, lessons, tutionClass, extraClasseTime));
+
+        }
         return overallComment ;
     }
 
     public int getWorkingDaysBetweenTwoDates(Date startDate, Date endDate,String day) {
+
         Calendar startCal = Calendar.getInstance();
         startCal.setTime(startDate);
 
         Calendar endCal = Calendar.getInstance();
         endCal.setTime(endDate);
 
+        Log.d("MY", ">>>>>>>>>" + startDate + ">>>>>>>>>>>>");
+        Log.d("MY", ">>>>>>>>>" + endDate + ">>>>>>>>>>>>");
         int ClassDays = 0;
 
         //Return 0 if start and end are the same
@@ -156,24 +177,26 @@ public class Syllabus_Inteligence {
             endCal.setTime(startDate);
         }
 
+
         int Day = findDay(day);
 
         do {
+
+            if (startCal.get(Calendar.DAY_OF_WEEK) == Day) {
+                ClassDays+=1;
+            }
             //excluding start date
             startCal.add(Calendar.DAY_OF_MONTH, 1);
-            if (startCal.get(Calendar.DAY_OF_WEEK) == Day) {
-                ++ClassDays;
-            }
-        } while (startCal.getTimeInMillis() < endCal.getTimeInMillis()); //excluding end date
+            //Log.d("MY", ">>>>>>>>>" + startCal.getTime() + ">>>>>>>>>>>>");
+        } while (startCal.getTimeInMillis() <= endCal.getTimeInMillis()); //excluding end date
 
-        return ClassDays+2;
+        return ClassDays;
     }
 
-    public  int findDay(String day){
+     public  int findDay(String day){
 
         if(day == "Monday"){
             return Calendar.MONDAY;
-
         }else if(day == "Tuesday"){
             return Calendar.TUESDAY;
         }else if(day == "Wednessday"){
@@ -184,50 +207,80 @@ public class Syllabus_Inteligence {
             return Calendar.FRIDAY;
         }else if(day == "Saturday"){
             return Calendar.SATURDAY;
-        }else {
+        }else  if(day == "Sunday"){
             return Calendar.SUNDAY;
+        }else {
+            return -1;
         }
+
 
     }
 
     public int getTimePeriod(String StartTime, String EndTime){
 
+
+        if(StartTime.length()==6){
+            StartTime = '0'+StartTime;
+        }
+        if(EndTime.length() == 6){
+            EndTime = '0'+EndTime;
+        }
         String formatStart_24 = "";
         String formatEnd_24 = "";
+
         long diff = 0;
-        if(StartTime.substring(4) == "am"){
+        if(StartTime.substring(5).equals("am")){
             formatStart_24 = StartTime.substring(0,5);
+            if(Integer.parseInt(formatStart_24.substring(0,2))>12){
+                formatStart_24 = "";
+            }
         }
-        if(StartTime.substring(4) == "pm"){
+        else if(StartTime.substring(5).equals("pm") ){
             int x = Integer.parseInt(StartTime.substring(0,2));
             x += 12;
-            formatStart_24 = x+StartTime.substring(1,5);
+            formatStart_24 = x+StartTime.substring(2,5);
+
         }
-        if(EndTime.substring(4) == "am"){
-            formatEnd_24 = EndTime.substring(0,5);//12.23am
+        if(EndTime.substring(5).equals("am")){
+            formatEnd_24 = EndTime.substring(0,3);//12.23am
+            if(Integer.parseInt(formatEnd_24.substring(0,2))>12){
+                formatEnd_24 = "";
+            }
         }
-        if(EndTime.substring(4) == "pm"){
+
+        else if(EndTime.substring(5).equals("pm") ){
             int x = Integer.parseInt(EndTime.substring(0, 2));
             x += 12;
-            formatEnd_24 = x+EndTime.substring(1,5);
+            formatEnd_24 = x+EndTime.substring(2,5);
+
         }
+
 
         SimpleDateFormat format = new SimpleDateFormat("HH.mm");
         Date d1 = null;
         Date d2 = null;
+        long diffMinutes = 0;
+        long diffHours = 0;
 
         try {
             d1 = format.parse(formatStart_24);
             d2 = format.parse(formatEnd_24);
             //in milliseconds
-            diff = d2.getTime() - d1.getTime();
 
-            long diffMinutes = diff / (60 * 1000) % 60;
+            diff = d2.getTime() - d1.getTime();
+            if(diff>0) {
+                diffMinutes = diff / (60 * 1000) % 60;
+                diffHours = diff / (60 * 60 * 1000) % 24;
+
+                diffMinutes += diffMinutes+ (diffHours*60);
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return (int)(long)diff ;
+
+        return (int)(long)diffMinutes ;
     }
 
 }

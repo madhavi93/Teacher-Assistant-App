@@ -78,6 +78,10 @@ public class ViewSylActivity extends AppCompatActivity {
             amount.setText(l.get("amountCovered"));
             tr.addView(amount);
 
+            TextView timeTaken = new TextView(this);
+            timeTaken.setText(l.get("AmountTimeSpent"));
+            tr.addView(timeTaken);
+
             logsTableLayout.addView(tr);
         }
         backButtonClick();

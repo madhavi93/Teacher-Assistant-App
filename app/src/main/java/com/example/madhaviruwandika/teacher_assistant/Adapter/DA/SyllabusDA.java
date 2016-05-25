@@ -9,6 +9,7 @@ import android.util.Log;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConnection;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConstant;
 import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.SyllabusDAO;
+import com.example.madhaviruwandika.teacher_assistant.Model.ExtraClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Lesson;
 import com.example.madhaviruwandika.teacher_assistant.Model.LessonUnit;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
@@ -59,8 +60,8 @@ public class SyllabusDA implements SyllabusDAO{
 
 
     }
-    public int addtoSylLesson(Lesson lesson){
 
+    public int addtoSylLesson(Lesson lesson){
 
         ContentValues contentValues = new ContentValues();
 
@@ -70,6 +71,8 @@ public class SyllabusDA implements SyllabusDAO{
         contentValues.put(DBConstant.SyllabusLesson_col4,lesson.getTotaltimeSupposedToSpend());
         contentValues.put(DBConstant.SyllabusLesson_col5,lesson.getSpecialACT());
         contentValues.put(DBConstant.SyllabusLesson_col6, lesson.getAmountCovered());
+        contentValues.put(DBConstant.SyllabusLesson_col7,lesson.getAmountTimeSpent());
+
 
         long result = db.insert("SyllabusLesson", null, contentValues);
 
@@ -125,6 +128,7 @@ public class SyllabusDA implements SyllabusDAO{
                     l.setTotaltimeSupposedToSpend(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col4)));
                     l.setSpecialACT(cursor.getString(cursor.getColumnIndex(DBConstant.SyllabusLesson_col5)));
                     l.setAmountCovered(cursor.getDouble(cursor.getColumnIndex(DBConstant.SyllabusLesson_col6)));
+                    l.setAmountTimeSpent(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col7)));
 
                     LessonList.add(l);
 
@@ -179,7 +183,7 @@ public class SyllabusDA implements SyllabusDAO{
                     l.setAmountTimeSpent(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col4)));
                     l.setSpecialACT(cursor.getString(cursor.getColumnIndex(DBConstant.SyllabusLesson_col5)));
                     l.setAmountCovered(cursor.getDouble(cursor.getColumnIndex(DBConstant.SyllabusLesson_col6)));
-
+                    l.setAmountTimeSpent(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col7)));
                     LessonList.add(l);
 
                 } while (cursor.moveToNext());
@@ -192,7 +196,7 @@ public class SyllabusDA implements SyllabusDAO{
     public int getUnitIDByClassandUnit(int classID, int UnitId) {
         List<Integer> idList = new ArrayList<>();
         int id = 0;
-        Cursor cursor = db.rawQuery("select " + DBConstant.Unit_col1 + " from Unit where "+DBConstant.Unit_col2+" = "+ classID +" and "+DBConstant.Unit_col3+" = "+UnitId, null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.Unit_col1 + " from Unit where " + DBConstant.Unit_col2 + " = " + classID + " and " + DBConstant.Unit_col3 + " = " + UnitId, null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             id = 0;
@@ -208,35 +212,47 @@ public class SyllabusDA implements SyllabusDAO{
     }
 
     @Override
-    public long updateCoverdAmountsInSyllubas(int UnitID, int lessonNo, Double amountCovered) {
+    public long updateCoverdAmountsInSyllubas(int UnitID, int lessonNo, Double amountCovered,int amountTimeSpent) {
 
         ContentValues contentValues = new ContentValues();
         contentValues.put(DBConstant.SyllabusLesson_col6,amountCovered);
+        Log.d("my", "*********************************************" + amountTimeSpent + "*********************************");
 
-        long i = db.update("SyllabusLesson", contentValues, DBConstant.SyllabusLesson_col1 + " = " + UnitID + " and " + DBConstant.SyllabusLesson_col3+" = "+lessonNo, null);
+        contentValues.put(DBConstant.SyllabusLesson_col7,amountTimeSpent);
+
+        long i = db.update("SyllabusLesson", contentValues, DBConstant.SyllabusLesson_col1 + " = " + UnitID + " and " + DBConstant.SyllabusLesson_col3 + " = " + lessonNo, null);
 
         Log.d("my","*********************************************"+getFinishedAmountOfLesson(UnitID,lessonNo)+"*********************************");
         return i;
     }
 
     @Override
-    public double getFinishedAmountOfLesson(int UnitID, int lessonNo) {
-        double finishedAmount = 0;
-        Cursor cursor = db.rawQuery("select "+DBConstant.SyllabusLesson_col6+" from SyllabusLesson where "+DBConstant.SyllabusLesson_col1+" = "+UnitID+" and "+DBConstant.SyllabusLesson_col3+" = "+lessonNo , null);
+    public Lesson getFinishedAmountOfLesson(int UnitID, int lessonNo) {
+        Lesson l = new Lesson();
+        Cursor cursor = db.rawQuery("select * from SyllabusLesson where "+DBConstant.SyllabusLesson_col1+" = "+UnitID+" and "+DBConstant.SyllabusLesson_col3+" = "+lessonNo , null);
 
         if(cursor.getCount()==0){
             Log.d("MYACTIVITY", "No Value");
-            finishedAmount = 0;
+            l = null;
         }
         else {
             //iterate through result set
             if (cursor.moveToFirst()) {
                 do {
-                    finishedAmount = cursor.getDouble(0);
+
+                    l.setUnitNo(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col1)));
+                    l.setLesson(cursor.getString(cursor.getColumnIndex(DBConstant.SyllabusLesson_col2)));
+                    l.setLessonNo(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col3)));
+                    l.setAmountTimeSpent(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col4)));
+                    l.setSpecialACT(cursor.getString(cursor.getColumnIndex(DBConstant.SyllabusLesson_col5)));
+                    l.setAmountCovered(cursor.getDouble(cursor.getColumnIndex(DBConstant.SyllabusLesson_col6)));
+                    l.setAmountTimeSpent(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col7)));
+
+
                 } while (cursor.moveToNext());
             }
         }
-        return finishedAmount;
+        return l;
     }
 
     @Override
@@ -259,6 +275,90 @@ public class SyllabusDA implements SyllabusDAO{
         }
         return idnext;
     }
+
+    @Override
+    public Lesson getLessonByClassIDandUnitIDandLessonNo(int ClassID, int UnitID, int LessonNo) {
+
+        Lesson l = new Lesson();
+        Cursor cursor = db.rawQuery("select * from SyllabusLesson inner join Unit on SyllabusLesson.Unit_id =Unit.UnitID where ClassID = "+ClassID+" and "+DBConstant.Unit_col3 +" = "+UnitID+" and "+DBConstant.SyllabusLesson_col3+" = "+LessonNo, null);
+
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+
+                    l.setUnitNo(cursor.getInt(cursor.getColumnIndex("Unit")));
+                    l.setLesson(cursor.getString(cursor.getColumnIndex(DBConstant.SyllabusLesson_col2)));
+                    l.setLessonNo(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col3)));
+                    l.setAmountTimeSpent(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col4)));
+                    l.setSpecialACT(cursor.getString(cursor.getColumnIndex(DBConstant.SyllabusLesson_col5)));
+                    l.setAmountCovered(cursor.getDouble(cursor.getColumnIndex(DBConstant.SyllabusLesson_col6)));
+                    l.setAmountTimeSpent(cursor.getInt(cursor.getColumnIndex(DBConstant.SyllabusLesson_col7)));
+
+                } while (cursor.moveToNext());
+            }
+        }
+        return l;
+    }
+
+    @Override
+    public TutionClass getClassByClassID(int ClassID) {
+        TutionClass tutionClass = new TutionClass();
+        Cursor cursor = db.rawQuery("select * from TutionClass where "+DBConstant.tutionClass_col1+"="+String.valueOf(ClassID), null);
+        if (cursor.getCount() == 0) {
+            Log.d("MYACTIVITY", "No Value");
+            return null;
+        } else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+
+                    tutionClass.setClassID(Integer.parseInt(cursor.getString(0)));
+                    tutionClass.setClassName(cursor.getString(1));
+                    tutionClass.setStartDate(cursor.getString(2));
+                    tutionClass.setEndDate(cursor.getString(3));
+                    tutionClass.setDay(cursor.getString(4));
+                    tutionClass.setTime(cursor.getString(5));
+                    tutionClass.setFee(Integer.parseInt(cursor.getString(6)));
+
+                } while (cursor.moveToNext());
+            }
+        }
+        return tutionClass ;
+    }
+
+    @Override
+    public List<ExtraClass> getExtraClassListByClassID(int ClassID) {
+        List<ExtraClass> list = new ArrayList<>();
+        int idnext;
+        Cursor cursor = db.rawQuery("select * from Extra_Class where Class_Id = "+ClassID, null);
+        if (cursor.getCount() == 0) {
+            Log.d("MYACTIVITY", "No Value");
+            idnext = 0;
+        } else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    ExtraClass extraClass = new ExtraClass();
+
+                    extraClass.setExtraClassID(cursor.getInt(0));
+                    extraClass.setClassID(cursor.getInt(1));
+                    extraClass.setDate(cursor.getString(2));
+                    extraClass.setTime(cursor.getString(3));
+                    extraClass.setClassType(cursor.getString(4));
+
+                    list.add(extraClass);
+
+                } while (cursor.moveToNext());
+            }
+
+        }
+        return list;
+    }
+
 
     @Override
     public int addDailyWork(Work work) {

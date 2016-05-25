@@ -92,12 +92,6 @@ public class SyllabusTree {
 class TreeNode{
 
     public String treeState;
-    /*
-     amountCoverd = 1 -> white
-     amountCoverd = 0 -> Red
-     amountCoverd != (1,0) -> blue
-    */
-
     public Lesson lesson;
 
     public TreeNode(String treeState,Lesson lesson){

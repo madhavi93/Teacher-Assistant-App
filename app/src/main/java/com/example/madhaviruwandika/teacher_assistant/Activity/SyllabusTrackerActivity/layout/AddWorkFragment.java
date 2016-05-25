@@ -1,14 +1,14 @@
-package com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity;
+package com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.layout;
 
-import android.content.Intent;
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -17,18 +17,20 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyWorkActivity;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
 import com.example.madhaviruwandika.teacher_assistant.Controller.IntelligenceSyllabusController;
-import com.example.madhaviruwandika.teacher_assistant.Model.Lesson;
-import com.example.madhaviruwandika.teacher_assistant.Model.Parent;
 import com.example.madhaviruwandika.teacher_assistant.R;
 import com.example.madhaviruwandika.teacher_assistant.Validator.InputValidator;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DailyWorkActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+
+public class AddWorkFragment extends Fragment implements AdapterView.OnItemSelectedListener{
 
     Spinner spinnerClass;
     Spinner spinnerUnit;
@@ -44,45 +46,46 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
     ClassController classController;
     IntelligenceSyllabusController intelligenceSyllabusController;
 
-    int classID;
+    int classID = 0;
     String classN;
-    int UnitID;
-    int LessonId;
+    int UnitID = 0;
+    int LessonId = 0;
     Double amountCovered;
     int timePeriod;
     String procedureNote;
 
     List<Map<String, String>> LessonList;
     List<Map<String,String>> unitList;
+    Map<String,String> work;
+
+
+    public AddWorkFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_daily_work);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
 
-        //set home button and back arrow to toolbar
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
+        View rootView = inflater.inflate(R.layout.fragment_add_work, container, false);
+        spinnerClass = (Spinner)rootView.findViewById(R.id.spinnerClass);
+        spinnerUnit = (Spinner)rootView.findViewById(R.id.spinnerUnit);
+        spinnerLesson = (Spinner)rootView.findViewById(R.id.spinnerLesson);
+        spinnerAmountCovered = (Spinner)rootView.findViewById(R.id.spinnerAmountCovered);
+        timeTaken = (EditText)rootView.findViewById(R.id.editTextTimePeriod);
+        procedure = (EditText)rootView.findViewById(R.id.editTextProcedure);
+        add = (Button)rootView.findViewById(R.id.buttonAdd);
+        seeComment = (Button)rootView.findViewById(R.id.buttonSeeComment);
+        className = (TextView)rootView.findViewById(R.id.className);
 
-        spinnerClass = (Spinner)findViewById(R.id.spinnerClass);
-        spinnerUnit = (Spinner)findViewById(R.id.spinnerUnit);
-        spinnerLesson = (Spinner)findViewById(R.id.spinnerLesson);
-        spinnerAmountCovered = (Spinner)findViewById(R.id.spinnerAmountCovered);
-        timeTaken = (EditText)findViewById(R.id.editTextTimePeriod);
-        procedure = (EditText)findViewById(R.id.editTextProcedure);
-        add = (Button)findViewById(R.id.buttonAdd);
-        seeComment = (Button)findViewById(R.id.buttonSeeComment);
-        className = (TextView)findViewById(R.id.className);
-
-        myBundle = getIntent().getExtras();
+        myBundle = this.getArguments();
         classID = myBundle.getInt("ClassID");
         className.setText(myBundle.getString("ClassName"));
 
-        classController = new ClassController(this);
-        intelligenceSyllabusController = new  IntelligenceSyllabusController(this);
+        classController = new ClassController(getActivity());
+        intelligenceSyllabusController = new  IntelligenceSyllabusController(getActivity());
+        work = new HashMap<>();
 
         List<String> covered_Amount = new ArrayList<>();
         covered_Amount.add("");
@@ -93,7 +96,7 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
         // Spinner click listener
         spinnerAmountCovered.setOnItemSelectedListener(this);
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, covered_Amount);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, covered_Amount);
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
@@ -104,7 +107,7 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
         // Spinner click listener for class
         spinnerClass.setOnItemSelectedListener(this);
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, categories);
         // Drop down layout style - list view with radio button
         dataAdapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
@@ -112,33 +115,16 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
 
 
 
-        myBundle = getIntent().getExtras();
+        myBundle = this.getArguments();
         classID = myBundle.getInt("ClassID");
-        className.setText(myBundle.getString("ClassName") );
+        className.setText(myBundle.getString("ClassName"));
         spinnerClass.setSelection(classID);
         spinnerClass.setEnabled(false);
 
 
         OnAddButtonClickListner();
-
-
-
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        Intent myIntent = new Intent(getApplicationContext(), MyProgressActivity.class);
-        startActivityForResult(myIntent, 0);
-        return true;
+        onSeeCommentClickListner();
+        return  rootView;
     }
 
 
@@ -158,7 +144,7 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
             // Spinner click listener for lesson No
             spinnerUnit.setOnItemSelectedListener(this);
             // Creating adapter for spinner
-            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,units);
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,units);
             // Drop down layout style - list view with radio button
             dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             // attaching data adapter to spinner
@@ -181,7 +167,7 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
                 // Spinner click listener for lesson No
                 spinnerLesson.setOnItemSelectedListener(this);
                 // Creating adapter for spinner
-                ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lessons);
+                ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, lessons);
                 // Drop down layout style - list view with radio button
                 dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 // attaching data adapter to spinner
@@ -190,17 +176,17 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
 
         }
         else  if(spinner.getId() == R.id.spinnerLesson){
-             if(position!= 0)
-             {
-                 LessonId = Integer.parseInt(LessonList.get(position-1).get("lessonNo"));
+            if(position!= 0)
+            {
+                LessonId = Integer.parseInt(LessonList.get(position-1).get("lessonNo"));
 
-             }
+            }
 
 
         }
         else if(spinner.getId() == R.id.spinnerAmountCovered){
             if(position!= 0){
-                 amountCovered = Double.parseDouble(spinner.getSelectedItem().toString());
+                amountCovered = Double.parseDouble(spinner.getSelectedItem().toString());
             }
         }
 
@@ -216,11 +202,15 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
             @Override
             public void onClick(View v) {
                 if(addData() == 1){
-                    Toast.makeText(DailyWorkActivity.this, "Details are succesfully added.", Toast.LENGTH_LONG).show();
+
+                    ((MyWorkActivity)getActivity()).setLessonCoveredToday(LessonId);
+                    ((MyWorkActivity)getActivity()).setUnitID(UnitID);
+                    Log.d("WE",">>>>>>>>>>>>>>>>>>>>>>>>>"+LessonId+">>>>>>>>>>>>>>>>>>>>>>>>>>");
+                    Toast.makeText(getActivity(), "Details are succesfully added.", Toast.LENGTH_LONG).show();
                     ClearText();
                 }
                 else {
-                    Toast.makeText(DailyWorkActivity.this, "Details are not added.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Details are not added.", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -233,20 +223,38 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
             @Override
             public void onClick(View v) {
 
+                ViewPager viewPager = (ViewPager)getActivity().findViewById(R.id.container);
+                viewPager.setCurrentItem(1);
+
+
             }
         });
     }
 
     public int addData(){
 
+        boolean valiedCheck = true;
+
         if(InputValidator.isValidDigits(timeTaken.getText().toString())){
-            timePeriod = Integer.parseInt(timeTaken.getText().toString());
+            try {
+                timePeriod = Integer.parseInt(timeTaken.getText().toString());
+
+            }catch (NumberFormatException e){
+                valiedCheck = false;
+            }
         }
         else {
-            timePeriod = 0;
+            valiedCheck = false;
         }
+
         procedureNote = procedure.getText().toString();
-        return intelligenceSyllabusController.addDailyWork(classID,UnitID,LessonId,timePeriod,amountCovered,procedureNote);
+
+        if(valiedCheck){
+
+            return intelligenceSyllabusController.addDailyWork(classID,UnitID,LessonId,timePeriod,amountCovered,procedureNote);
+        }
+        else
+        {return 0;}
     }
 
     public void ClearText(){
@@ -257,4 +265,6 @@ public class DailyWorkActivity extends AppCompatActivity implements AdapterView.
         timeTaken.setText("");
         procedure.setText("");
     }
+
+
 }

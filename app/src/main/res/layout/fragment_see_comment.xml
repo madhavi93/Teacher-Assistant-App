@@ -2,44 +2,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.SeeCommentFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    tools:context=".Activity.SyllabusTrackerActivity.layout.SeeCommentFragment">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal|bottom">
-
+        android:layout_gravity="left|top">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="                                                                                   "
-            android:id="@+id/textView24"
-            android:background="#e0f8fa"
-            android:layout_below="@+id/btnCommnt"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="83dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="View Comment"
-            android:id="@+id/btnCommnt"
+            android:text="Large Text"
+            android:id="@+id/className"
+            android:layout_marginTop="15dp"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textViewComent"
+            android:background="#dcd8d8"
+            android:layout_below="@+id/button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="42dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Extra Class"
-            android:id="@+id/button9"
-            android:layout_marginEnd="42dp"
-            android:layout_marginBottom="116dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true" />
+            android:text="     See Comment     "
+            android:id="@+id/button"
+            android:layout_marginTop="20dp"
+            android:background="#74aeeb"
+            android:layout_below="@+id/className"
+            android:layout_centerHorizontal="true" />
+
+
     </RelativeLayout>
 </FrameLayout>

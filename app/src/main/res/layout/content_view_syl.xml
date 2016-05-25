@@ -61,7 +61,8 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:id="@+id/unitNO"
-                            android:text="Unit "
+                            android:text="U .\nNo  "
+                            android:textSize="15dp"
                             android:layout_column="0"/>
 
                         <TextView
@@ -70,14 +71,16 @@
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:id="@+id/lessonNo"
                             android:textAlignment="center"
-                            android:text="L.No "
+                            android:text="L .\nNo  "
+                            android:textSize="15dp"
                             android:layout_column="1"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/lesson"
-                            android:text="Lesson "
+                            android:text="Lesson  "
+                            android:textSize="15dp"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:layout_column="2"/>
 
@@ -85,16 +88,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/time"
-                            android:text="Time\n(min)"
+                            android:text="Time\nSheduler(min) "
                             android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:textSize="15dp"
                             android:layout_column="3"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/amount"
-                            android:text=" C\n amount"
+                            android:text=" Covered \n amount "
+                            android:textSize="15dp"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:layout_column="4"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/TimeTaken"
+                            android:text="time\ntaken(min)"
+                            android:textSize="15dp"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            android:layout_column="5"/>
+
+
 
                     </TableRow>
                 </TableLayout>

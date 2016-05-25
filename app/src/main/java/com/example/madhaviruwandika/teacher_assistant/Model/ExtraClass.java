@@ -11,6 +11,8 @@ public class ExtraClass {
     private String time;
     private String classType;
 
+    public ExtraClass() {
+    }
 
     public ExtraClass(int extraClassID, int classID, String date, String time, String classType) {
         ExtraClassID = extraClassID;

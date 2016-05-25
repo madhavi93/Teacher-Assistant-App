@@ -1,13 +1,16 @@
 package com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,20 +18,35 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.madhaviruwandika.teacher_assistant.Activity.Util.BaseActivity;
 import com.example.madhaviruwandika.teacher_assistant.R;
+
+import com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.layout.AddWorkFragment;
+import com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.layout.SeeCommentFragment;
 
 public class MyWorkActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+
+    Bundle myBundle;
+    int classID;
+    private int UnitID = 0;
+    private int lessonCoveredToday = 0;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        setContentView(R.layout.activity_send_message);
+        setContentView(R.layout.activity_my_work);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         super.onCreate(savedInstanceState);
+
+        //set home button and back arrow to toolbar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -42,6 +60,9 @@ public class MyWorkActivity extends AppCompatActivity {
         tableLayout.setupWithViewPager(mViewPager);
 
 
+        myBundle = getIntent().getExtras();
+        classID = myBundle.getInt("ClassID");
+
     }
 
 
@@ -52,21 +73,21 @@ public class MyWorkActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+    public int getLessonCoveredToday() {
+        return lessonCoveredToday;
     }
 
+    public void setLessonCoveredToday(int lessonCoveredToday) {
+        this.lessonCoveredToday = lessonCoveredToday;
+    }
+
+    public int getUnitID() {
+        return UnitID;
+    }
+
+    public void setUnitID(int unitID) {
+         UnitID = unitID;
+    }
 
 
     /**
@@ -119,17 +140,35 @@ public class MyWorkActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            Bundle bundle = new Bundle();
+            AddWorkFragment addWorkFragment = new AddWorkFragment();
+            SeeCommentFragment seeCommentFragment = new SeeCommentFragment();
+
             switch (position) {
-                /*
+
                 case 0:
-                    return new AddWorkFragment();
+
+                    bundle.putInt("ClassID", classID);
+                    bundle.putString("ClassName", myBundle.getString("ClassName"));
+                    addWorkFragment.setArguments(bundle);
+                    return addWorkFragment;
+
                 case 1:
-                    return new SeeCommentFragment();
+                        bundle.putInt("ClassID", classID);
+                        bundle.putString("ClassName", myBundle.getString("ClassName"));
+                        seeCommentFragment.setArguments(bundle);
+                        return  seeCommentFragment;
+
+
                 default:
-                    return new AddWorkFragment();
-                     */
+
+                    bundle.putInt("ClassID", classID);
+                    bundle.putString("ClassName", myBundle.getString("ClassName"));
+                    addWorkFragment.setArguments(bundle);
+                    return addWorkFragment;
+
             }
-           return null;
+
         }
 
         @Override
@@ -152,5 +191,20 @@ public class MyWorkActivity extends AppCompatActivity {
     }
 
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        Intent myIntent = new Intent(getApplicationContext(), MyProgressActivity.class);
+        startActivityForResult(myIntent, 0);
+        return true;
+    }
 
 }
