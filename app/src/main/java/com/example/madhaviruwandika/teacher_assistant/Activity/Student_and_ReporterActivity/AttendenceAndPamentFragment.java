@@ -32,7 +32,7 @@ public class AttendenceAndPamentFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_attendence_and_pament, container, false);
 
         atendenceState = (TextView)v.findViewById(R.id.attendence_State);
-        logsTableLayout = (TableLayout)v.findViewById(R.id.Syllbus);
+        logsTableLayout = (TableLayout)v.findViewById(R.id.dateList);
         myBundle = this.getArguments();
 
         studentController = new StudentController(getActivity());

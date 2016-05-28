@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -110,9 +111,12 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
             spinnerstd.setAdapter(dataAdapter);
 
         }
-        else  if(spinner.getId() == R.id.spinnerStudent){
-            if(position != 0)
-            StudentIDPos = Integer.parseInt(studentList.get(position-1)[0][0]);
+        else  if(spinner.getId() == R.id.spinnerSName){
+
+            if(position != 0){
+                 StudentIDPos = Integer.parseInt(studentList.get(position-1)[0][0]);
+                Log.d("55555555","/////////////////"+StudentIDPos+"///////////////////////"+ClassIDPos+"//////////////////");
+            }
         }
 
     }
@@ -129,6 +133,7 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View v) {
                 addPayment(StudentIDPos,ClassIDPos);
+                Log.d("4444444444","/////////////////"+StudentIDPos+"///////////////////////"+ClassIDPos+"//////////////////");
             }
         });
 

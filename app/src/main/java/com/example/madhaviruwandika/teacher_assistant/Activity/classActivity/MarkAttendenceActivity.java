@@ -81,7 +81,7 @@ public class MarkAttendenceActivity extends AppCompatActivity {
 
         register = new ArrayList<>();
         for(int i=0;i<studentList.size();i++){
-            register.add(new ItemRegisterName(studentList.get(i)[0][1],false));
+            register.add(new ItemRegisterName(Integer.parseInt(studentList.get(i)[0][0]),studentList.get(i)[0][1],false));
         }
 
         adapter = new StudentRegisterAdapter(this,register);

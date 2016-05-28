@@ -462,6 +462,7 @@ public class StudentDA implements StudentDAO {
 
         int attendCount = 0;
         int days = 0 ;
+
         Cursor cursor = db.rawQuery("select * from Attendance_Sheet where "+DBConstant.attendenceSheet_col2+" = "+s_id + " and "+DBConstant.attendenceSheet_col3+" = "+ClassID , null);
 
         if(cursor.getCount()==0){
@@ -488,9 +489,10 @@ public class StudentDA implements StudentDAO {
     @Override
     public List<Payment> getPayments(int s_id, int class_id) {
         List<Payment> paymentList = new ArrayList<>();
+
         Cursor cursor = db.rawQuery("select * from Payment where S_id = "+s_id + " and Class_Id = "+class_id , null);
         if(cursor.getCount()==0){
-            Log.d("MYACTIVITY", "No Value");
+            Log.d("MYACTIVITY", "No Value...");
         }
         else {
 

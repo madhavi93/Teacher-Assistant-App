@@ -386,12 +386,13 @@ public class ClassDA implements ClassDAO{
             contentValues.put(DBConstant.attendenceSheet_col2, attendence_sheets.get(i).getS_id());
             contentValues.put(DBConstant.attendenceSheet_col3, attendence_sheets.get(i).getClass_Id());
             contentValues.put(DBConstant.attendenceSheet_col4, attendence_sheets.get(i).getDateOPA());
-            contentValues.put(DBConstant.attendenceSheet_col4, attendence_sheets.get(i).isAttendenceState());
-
+            contentValues.put(DBConstant.attendenceSheet_col5, attendence_sheets.get(i).isAttendenceState());
+            Log.d(">>>>>>>>>>>>>>>>", ">>>>>>>>>>>>>>>>>>>>>>" + attendence_sheets.get(i).getS_id()+">>>>>>>>>>>>>>>>>>"+attendence_sheets.get(i).getClass_Id()+">>>>>>>>>>>>>");
             result = db.insert("Attendance_Sheet",null,contentValues);
         }
 
-        Log.d("MY","....................................Attendence Are Added..........................");
+        Log.d("MY","....................................Attendence Are Added.........................."+getAttendenceID()+".................................");
+
         return result;
 
     }

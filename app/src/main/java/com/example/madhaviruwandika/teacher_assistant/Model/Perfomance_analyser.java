@@ -76,21 +76,22 @@ public class Perfomance_analyser {
 
     public String AttendenceState(int classDays,int NoOfDatesAttended){
 
-        int percentage = (NoOfDatesAttended/classDays)*100;
 
-        if(percentage < 50 ){
-            return "Very poor attendence.";
-        }
-        else if(percentage < 70){
-            return "poor Attendence";
-        }
-        else if (percentage < 90){
-            return "Attendence is good";
-        }
-        else {
-            return "Very good Attendence";
-        }
+        if(classDays!= 0) {
+            int percentage = (NoOfDatesAttended / classDays) * 100;
 
+            if (percentage < 50) {
+                return "Very poor attendence.";
+            } else if (percentage < 70) {
+                return "poor Attendence";
+            } else if (percentage < 90) {
+                return "Attendence is good";
+            } else {
+                return "Very good Attendence";
+            }
+        }
+        else
+            return "Class is not started.";
     }
 
 
