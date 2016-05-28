@@ -228,7 +228,10 @@ public class ClassController {
             attendence.setS_id(list.get(i).getSID());
             attendence.setClass_Id(ClassID);
             attendence.setDateOPA(dateFormat.format(cal.getTime()));
+            attendence.setAttendenceState(list.get(i).getAttendence());
+
             attendence_sheet.add(attendence);
+
         }
 
         if(classDAO.addDailyAttendence(attendence_sheet)!= -1){

@@ -5,5 +5,8 @@
     <color name="colorAccent">#8998a3</color>
     <color name="colorDraver">#dedede</color>
     <color name="tableRow">#88FF</color>
+    <color name="MinBar">#f99898</color>
+    <color name="MaxBar">#5cf697</color>
+    <color name="StdBar">#f6fb54</color>
 
 </resources>

@@ -208,6 +208,7 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
 
                         if ( addExams()) {
                             Toast.makeText(AddExamRecordsActivity.this, "Exam Details are added succesfully.", Toast.LENGTH_LONG).show();
+                            ClearText();
                         } else {
                             Toast.makeText(AddExamRecordsActivity.this, "Exam Details are not added succesfully.Try Again", Toast.LENGTH_LONG).show();
                         }
@@ -234,6 +235,7 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
             dateText.setError("Input is Not Valid");
             validateCheck=false;
         }
+        Lesson = lesson.getText().toString();
 
         if(validateCheck){
             if(classController.addExams(ClassID, dateText.getText().toString(), ExamType, Lesson)==1){

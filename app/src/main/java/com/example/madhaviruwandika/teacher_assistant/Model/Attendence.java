@@ -9,21 +9,24 @@ public class Attendence {
     private int S_id  ;
     private  int Class_Id;
     private String DateOPA;
+    private boolean attendenceState;
 
     public Attendence() {
     }
 
-    public Attendence(int s_id, int class_Id, String dateOPA) {
+    public Attendence(int s_id, int class_Id, String dateOPA,boolean attendenceState) {
         S_id = s_id;
         Class_Id = class_Id;
         DateOPA = dateOPA;
+        this.setAttendenceState(attendenceState);
     }
 
-    public Attendence(int attendance_id, int s_id, int class_Id, String dateOPA) {
+    public Attendence(int attendance_id, int s_id, int class_Id, String dateOPA,boolean attendenceState) {
         Attendance_id = attendance_id;
         S_id = s_id;
         Class_Id = class_Id;
         DateOPA = dateOPA;
+        this.setAttendenceState(attendenceState);
     }
 
     public int getAttendance_id() {
@@ -56,5 +59,13 @@ public class Attendence {
 
     public void setDateOPA(String dateOPA) {
         DateOPA = dateOPA;
+    }
+
+    public boolean isAttendenceState() {
+        return attendenceState;
+    }
+
+    public void setAttendenceState(boolean attendenceState) {
+        this.attendenceState = attendenceState;
     }
 }

@@ -15,6 +15,9 @@ public class Payment {
         this.CID = CID;
     }
 
+    public Payment() {
+    }
+
     public Payment(int SID, int CID) {
         this.SID = SID;
         this.CID = CID;

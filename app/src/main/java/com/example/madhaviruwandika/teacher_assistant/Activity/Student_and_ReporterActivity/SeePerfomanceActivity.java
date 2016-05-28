@@ -26,6 +26,7 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
 
     int studentClssIDPos;
     int StudentID;
+    String name;
     List<String[][]> studentList;
 
     StudentController stcr;
@@ -56,7 +57,6 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
         // attaching data adapter to spinner
         spinnerClass.setAdapter(dataAdapter);
 
-
     }
 
 
@@ -72,10 +72,10 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
                         Bundle bundle = new Bundle();
                         intent.putExtra("ClassID",studentClssIDPos);
                         intent.putExtra("StudentID",StudentID);
+                        intent.putExtra("name",name);
                         startActivity(intent);
                     }
                 }
-
         );
 
     }
@@ -119,6 +119,7 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
 
             if(position != 0) {
                 StudentID = Integer.parseInt(studentList.get(position-1)[0][0]);
+                name = studentList.get(position-1)[0][1];
             }
         }
     }

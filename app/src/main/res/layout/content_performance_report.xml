@@ -12,11 +12,6 @@
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.PerformanceReportActivity"
     tools:showIn="@layout/activity_performance_report"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </RelativeLayout>
 
 
 </LinearLayout>

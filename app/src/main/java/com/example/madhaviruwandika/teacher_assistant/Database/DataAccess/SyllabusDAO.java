@@ -3,6 +3,8 @@ package com.example.madhaviruwandika.teacher_assistant.Database.DataAccess;
 import com.example.madhaviruwandika.teacher_assistant.Model.ExtraClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Lesson;
 import com.example.madhaviruwandika.teacher_assistant.Model.LessonUnit;
+import com.example.madhaviruwandika.teacher_assistant.Model.Parent;
+import com.example.madhaviruwandika.teacher_assistant.Model.Payment;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Work;
 
@@ -27,4 +29,5 @@ public interface SyllabusDAO {
     public Lesson getLessonByClassIDandUnitIDandLessonNo(int ClassID,int UnitID,int LessonNo);
     public TutionClass getClassByClassID(int ClassID);
     public List<ExtraClass> getExtraClassListByClassID(int ClassID);
+
 }

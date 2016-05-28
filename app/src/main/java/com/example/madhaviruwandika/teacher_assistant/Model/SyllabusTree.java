@@ -75,8 +75,8 @@ public class SyllabusTree {
                 }
                 if ((i != 0) && (((1-SortedLessonListAccordingToTime.get(i).getAmountCovered())*SortedLessonListAccordingToTime.get(i).getTotaltimeSupposedToSpend()) < ((1-SortedLessonListAccordingToTime.get(i-1).getAmountCovered())*SortedLessonListAccordingToTime.get(i-1).getTotaltimeSupposedToSpend()) ) ){
                     Lesson temp = SortedLessonListAccordingToTime.get(i-1);
-                    SortedLessonListAccordingToTime.add(i-1,SortedLessonListAccordingToTime.get(i));
-                    SortedLessonListAccordingToTime.add(i,temp);
+                    SortedLessonListAccordingToTime.set(i-1,SortedLessonListAccordingToTime.get(i));
+                    SortedLessonListAccordingToTime.set(i,temp);
                     swapped = true;
                     newLimit = i-1;
                 }

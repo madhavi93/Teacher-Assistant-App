@@ -55,6 +55,7 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
 
         // initialize class controller
         stcr = new StudentController(this);
+        cldc =new ClassController(this);
 
         logsTableLayout = (TableLayout) findViewById(R.id.markList);
         TableRow tableRowHeader = (TableRow) findViewById(R.id.logs_table_header);
@@ -72,20 +73,6 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
         spinner.setAdapter(dataAdapter);
 
 
-        exams = stcr.getExamList();
-        ArrayList<String> examNames = new ArrayList<>();
-        examNames.add("");
-
-        for (int i=0; i < exams.size(); i++){
-            String ename = exams.get(i).get("ClassID")+"_"+exams.get(i).get("date");
-            examNames.add(ename);
-        }
-
-        spinnerExam = (Spinner) findViewById(R.id.spinnerExam);
-        spinnerExam.setOnItemSelectedListener(this);
-        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, examNames);
-        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerExam.setAdapter(dataAdapter2);
 
         onAddButtonClickListner();
 
@@ -118,6 +105,23 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
                 tr.addView(mark);
                 logsTableLayout.addView(tr);
             }
+
+            exams = stcr.getExamListByClassID(studentClssIDPos);
+            ArrayList<String> examNames = new ArrayList<>();
+            examNames.add("");
+
+            for (int i=0; i < exams.size(); i++){
+                String ename = exams.get(i).get("ClassID")+"_"+exams.get(i).get("date");
+                examNames.add(ename);
+            }
+
+            spinnerExam = (Spinner) findViewById(R.id.spinnerExam);
+            spinnerExam.setOnItemSelectedListener(this);
+            ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, examNames);
+            dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerExam.setAdapter(dataAdapter2);
+
+
         }
         else  if(spinner.getId() == R.id.spinnerExam){
 
@@ -141,7 +145,6 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
                         for(int i=1;i< logsTableLayout.getChildCount();i++){
 
                             TableRow row = (TableRow)logsTableLayout.getChildAt(i);
-                            for(int j=0;j<3;j++){
 
                                 String[] studentMark = new String[2];
 
@@ -152,7 +155,7 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
                                 studentMark[1] = mark.getText().toString();
 
                                 markList.add(studentMark);
-                            }
+
                         }
 
                         if(ExamId != 0) {

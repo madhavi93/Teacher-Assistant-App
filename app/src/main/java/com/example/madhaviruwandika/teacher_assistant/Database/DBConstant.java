@@ -41,6 +41,7 @@ public class DBConstant {
     public static final String attendenceSheet_col2 = "S_id";
     public static final String attendenceSheet_col3 = "Class_Id";
     public static final String attendenceSheet_col4 = "DateOPA";
+    public static final String attendenceSheet_col5 ="AttendenceState";
 
     public static final String SyllabusLesson_col1 = "Unit_id";
     public static final String SyllabusLesson_col2 = "Lesson";

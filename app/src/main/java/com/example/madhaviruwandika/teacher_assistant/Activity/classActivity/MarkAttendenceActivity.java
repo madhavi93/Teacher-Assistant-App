@@ -93,19 +93,22 @@ public class MarkAttendenceActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
 
+
                 if (view != null) {
+
                     CheckBox checkBox = (CheckBox)view.findViewById(R.id.attendence);
 
                     if (checkBox.isChecked()) {
+                        register.get(position).setAttendence(false);
                         checkBox.setChecked(false);
-                        register.get(position).setAttendence(!register.get(position).getAttendence());
                     }
                     else if (!checkBox.isChecked()) {
+                        register.get(position).setAttendence(true);
                         checkBox.setChecked(true);
-                        register.get(position).setAttendence(!register.get(position).getAttendence());
                     }
 
                 }
+
             }
 
         });
@@ -122,7 +125,6 @@ public class MarkAttendenceActivity extends AppCompatActivity {
                     if(classController.addAttendence(register,classID)== 1){
                         Toast.makeText(MarkAttendenceActivity.this, "Attendence are added successfully", Toast.LENGTH_LONG).show();
                         communicationController.sendSMSAfterFinishingAttendence(classID,register);
-
                     }
                     else {
                         Toast.makeText(MarkAttendenceActivity.this, "Adding attendence failed", Toast.LENGTH_LONG).show();

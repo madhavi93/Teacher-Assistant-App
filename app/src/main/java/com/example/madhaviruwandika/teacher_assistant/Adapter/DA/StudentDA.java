@@ -11,7 +11,9 @@ import com.example.madhaviruwandika.teacher_assistant.Database.DBConstant;
 import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.StudentDAO;
 import com.example.madhaviruwandika.teacher_assistant.Model.Exam;
 import com.example.madhaviruwandika.teacher_assistant.Model.Parent;
+import com.example.madhaviruwandika.teacher_assistant.Model.Payment;
 import com.example.madhaviruwandika.teacher_assistant.Model.Student;
+import com.example.madhaviruwandika.teacher_assistant.Model.Student_perfomance;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 
 import java.util.ArrayList;
@@ -302,10 +304,35 @@ public class StudentDA implements StudentDAO {
     }
 
 
-    public List<Exam> getExamList(){
+    @Override
+    public List<Student_perfomance> getStudentPerfomanceInExam(int examID) {
+
+        List<Student_perfomance> list = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from PerformedAt where "+DBConstant.markSheet_col1+" = "+examID , null);
+
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    Student_perfomance student_perfomance = new Student_perfomance();
+                    student_perfomance.setS_id(cursor.getInt(1));
+                    student_perfomance.setMark(cursor.getInt(2));
+
+                    list.add(student_perfomance);
+
+                } while (cursor.moveToNext());
+            }
+        }
+        return list;
+    }
+
+    public List<Exam> getExamList(int classID){
 
         List<Exam> examList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from Exam", null);
+        Cursor cursor = db.rawQuery("select * from Exam where "+ DBConstant.exam_col2 +" = "+ classID, null);
 
         if(cursor.getCount()==0){
             Log.d("MYACTIVITY", "No Value");
@@ -387,4 +414,96 @@ public class StudentDA implements StudentDAO {
         return (long)1 ;
     }
 
+    @Override
+    public int getStudentMarkOnExam(int s_id, int examID) {
+
+        int studentMark = 0;
+        Cursor cursor = db.rawQuery("select * from PerformedAt where "+DBConstant.markSheet_col1+" = "+examID+" and "+DBConstant.markSheet_col2+ " = "+s_id , null);
+
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    studentMark = cursor.getInt(2);
+                } while (cursor.moveToNext());
+            }
+        }
+        return studentMark;
+    }
+
+    @Override
+    public List<Student_perfomance> getMarkListOfExamsBystudentID(int s_id) {
+        List<Student_perfomance> studentMark = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from PerformedAt where "+DBConstant.markSheet_col2+" = "+s_id , null);
+
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    Student_perfomance student_perfomance = new Student_perfomance();
+                    student_perfomance.setMark(cursor.getInt(2));
+                    student_perfomance.setS_id(cursor.getInt(1));
+                    studentMark.add(student_perfomance);
+                } while (cursor.moveToNext());
+            }
+        }
+        return studentMark;
+
+    }
+
+    @Override
+    public int[] getAttendenceOfStudent(int s_id,int ClassID) {
+
+        int attendCount = 0;
+        int days = 0 ;
+        Cursor cursor = db.rawQuery("select * from Attendance_Sheet where "+DBConstant.attendenceSheet_col2+" = "+s_id + " and "+DBConstant.attendenceSheet_col3+" = "+ClassID , null);
+
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    days += 1;
+                    if(cursor.getInt(4) == 1){
+                        attendCount+=1;
+                    }
+                } while (cursor.moveToNext());
+            }
+        }
+        int[] array = {days,attendCount};
+
+        return array;
+
+    }
+
+    @Override
+    public List<Payment> getPayments(int s_id, int class_id) {
+        List<Payment> paymentList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from Payment where S_id = "+s_id + " and Class_Id = "+class_id , null);
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    Payment payment = new Payment();
+                    payment.setDoP(cursor.getString(3));
+
+                    paymentList.add(payment);
+                } while (cursor.moveToNext());
+            }
+        }
+        return  paymentList;
+    }
 }

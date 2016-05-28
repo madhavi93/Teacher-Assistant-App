@@ -252,10 +252,8 @@ public class ClassDA implements ClassDAO{
         return result;
 
     }
-
     @Override
     public Long addExams(Exam exam) {
-        Log.d("MYACTIVITY", "INSERTING TO Tution Class");
 
         // set values to contentValues
         ContentValues contentValues = new ContentValues();
@@ -277,7 +275,6 @@ public class ClassDA implements ClassDAO{
             return result;
         }
     }
-
 
     public int getExamID() {
 
@@ -389,6 +386,8 @@ public class ClassDA implements ClassDAO{
             contentValues.put(DBConstant.attendenceSheet_col2, attendence_sheets.get(i).getS_id());
             contentValues.put(DBConstant.attendenceSheet_col3, attendence_sheets.get(i).getClass_Id());
             contentValues.put(DBConstant.attendenceSheet_col4, attendence_sheets.get(i).getDateOPA());
+            contentValues.put(DBConstant.attendenceSheet_col4, attendence_sheets.get(i).isAttendenceState());
+
             result = db.insert("Attendance_Sheet",null,contentValues);
         }
 

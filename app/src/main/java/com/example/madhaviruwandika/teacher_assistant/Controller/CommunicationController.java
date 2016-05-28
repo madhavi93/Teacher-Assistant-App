@@ -227,11 +227,11 @@ public class CommunicationController {
 
         for (int j=0;j<list.size();j++) {
             if (list.get(j).getAttendence()) {
-                sendSMS(contactNoArray.get(j),"Your Child has attended to the class todoy.");
+                sendSMS(contactNoArray.get(j),"Your child has attended to the class today.");
             }
             else
             {
-                sendSMS(contactNoArray.get(j),"Your Child has attended to the class todoy.");
+                sendSMS(contactNoArray.get(j),"Your child has not attended to the class today.");
             }
 
         }

@@ -26,6 +26,7 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
     private int studentClssIDPos;
     private ClassController cldc;
     boolean markStarting = false;
+    boolean finishMarkingAttendenceOnStartedClass = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,6 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                                 Toast.makeText(TodaysClassActivity.this, "Class Starting Details are successfully added.", Toast.LENGTH_LONG).show();
                             }
                             else   Toast.makeText(TodaysClassActivity.this, "Class Starting Details are not added.Try Again.", Toast.LENGTH_LONG).show();
-
                         }
                     }
                 }
@@ -97,7 +97,7 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                     @Override
                     public void onClick(View v) {
 
-                        if(studentClssIDPos != 0 && markStarting == true) {
+                        if(studentClssIDPos != 0 && markStarting == true && finishMarkingAttendenceOnStartedClass == false) {
                             Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.MarkAttendenceActivity");
                            // Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.manegeClassActivity");
                             //initialize bundel and attach values to send to new activity
@@ -136,6 +136,7 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                 }
 
         );
+
 
     }
 

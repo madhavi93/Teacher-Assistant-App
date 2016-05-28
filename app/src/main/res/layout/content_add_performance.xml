@@ -12,9 +12,17 @@
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.AddPerformanceActivity"
     tools:showIn="@layout/activity_add_performance">
 
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="600dp"
+        android:fillViewport="false"
+        android:id="@+id/scrollView">
+
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,7 +40,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/spinner"
             android:layout_alignBottom="@+id/textView10"
-            android:layout_alignEnd="@+id/scrollView"
+            android:layout_alignEnd="@+id/markListLayout"
             android:layout_toEndOf="@+id/textView10" />
 
         <TextView
@@ -42,19 +50,9 @@
             android:text="Student List :"
             android:id="@+id/textView31"
             android:layout_marginLeft="15dp"
-            android:layout_marginTop="20dp"
-            android:layout_below="@+id/textView36"
-            android:layout_alignParentStart="true" />
+            android:layout_below="@+id/spinnerExam"
+            android:layout_alignStart="@+id/textView36" />
 
-
-        <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView31"
-            android:layout_alignStart="@+id/textView31"
-            android:fillViewport="false"
-            android:id="@+id/scrollView"
-            android:background="#e4fbfb">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -105,20 +103,20 @@
 
                 </TableRow>
             </TableLayout>
+        </RelativeLayout>
 
-            </RelativeLayout>
 
-        </ScrollView>
+
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Add"
             android:id="@+id/buttonAdd"
-            android:layout_marginBottom="93dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:background="#a7ecf9" />
+            android:background="#a7ecf9"
+            android:layout_below="@+id/markListLayout"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/textView31" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -136,9 +134,9 @@
             android:id="@+id/spinnerExam"
             android:layout_alignTop="@+id/textView36"
             android:layout_alignStart="@+id/spinner"
-            android:layout_alignEnd="@+id/scrollView" />
+            android:layout_alignEnd="@+id/markListLayout" />
 
     </RelativeLayout>
 
-
+    </ScrollView>
 </RelativeLayout>

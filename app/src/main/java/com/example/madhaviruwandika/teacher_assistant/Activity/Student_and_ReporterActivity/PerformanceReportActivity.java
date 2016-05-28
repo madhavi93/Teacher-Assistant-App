@@ -22,6 +22,7 @@ public class PerformanceReportActivity extends AppCompatActivity {
 
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
+    Bundle myBundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -45,6 +46,8 @@ public class PerformanceReportActivity extends AppCompatActivity {
 
         TabLayout tableLayout = (TabLayout) findViewById(R.id.tabs);
         tableLayout.setupWithViewPager(mViewPager);
+
+        myBundle = getIntent().getExtras();
 
     }
 
@@ -105,26 +108,38 @@ public class PerformanceReportActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
+            Bundle bundle = getIntent().getExtras();
+            bundle.putInt("StudentID",myBundle.getInt("StudentID"));
+            bundle.putString("name", myBundle.getString("name"));
+            bundle.putInt("ClassID",myBundle.getInt("ClassID"));
+
+            PerfomanceFragment perfomanceFragment = new PerfomanceFragment();
+            AttendenceAndPamentFragment attendenceAndPamentFragment = new AttendenceAndPamentFragment();
+            Perfomance_2_Fragment perfomance_2_fragment = new Perfomance_2_Fragment();
+
             switch (position) {
                 case 0:
-                    return new PerfomanceFragment();
+                    perfomanceFragment.setArguments(bundle);
+                    return perfomanceFragment;
 
                 case 1:
-                    return new AttendenceAndPamentFragment();
+                    perfomance_2_fragment.setArguments(bundle);
+                    return perfomance_2_fragment;
 
                 case 2:
-                    return new BehaviourFragment();
+                    attendenceAndPamentFragment.setArguments(bundle);
+                    return attendenceAndPamentFragment;
 
                 default:
-                    return new PerfomanceFragment();
-
+                    perfomanceFragment.setArguments(bundle);
+                    return perfomanceFragment;
             }
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
 
         @Override
@@ -133,9 +148,10 @@ public class PerformanceReportActivity extends AppCompatActivity {
                 case 0:
                     return "Inclass Performance" ;
                 case 1:
-                    return "Attendence";
+                    return "Inclass Performance 2" ;
                 case 2:
-                    return "Behaviour";
+                    return "Payment and Attendence";
+
                 default:
                     return "Inclass Performance";
             }
