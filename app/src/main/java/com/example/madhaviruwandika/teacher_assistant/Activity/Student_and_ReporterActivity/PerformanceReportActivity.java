@@ -111,7 +111,7 @@ public class PerformanceReportActivity extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             bundle.putInt("StudentID",myBundle.getInt("StudentID"));
             bundle.putString("name", myBundle.getString("name"));
-            bundle.putInt("ClassID",myBundle.getInt("ClassID"));
+            bundle.putInt(" ",myBundle.getInt("ClassID"));
 
             PerfomanceFragment perfomanceFragment = new PerfomanceFragment();
             AttendenceAndPamentFragment attendenceAndPamentFragment = new AttendenceAndPamentFragment();

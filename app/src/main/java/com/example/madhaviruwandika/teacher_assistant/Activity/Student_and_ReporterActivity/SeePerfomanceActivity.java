@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.madhaviruwandika.teacher_assistant.Controller.StudentController;
 import com.example.madhaviruwandika.teacher_assistant.R;
@@ -62,22 +63,29 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
 
     public void OnPerfomanceButtonClickListner(){
 
-        SeePerformance = (Button) findViewById(R.id.buttonSeeP);
-        SeePerformance.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.PerformanceReportActivity");
-                        // bind values with new activity
-                        Bundle bundle = new Bundle();
-                        intent.putExtra("ClassID",studentClssIDPos);
-                        intent.putExtra("StudentID",StudentID);
-                        intent.putExtra("name",name);
-                        startActivity(intent);
-                    }
-                }
-        );
 
+            SeePerformance = (Button) findViewById(R.id.buttonSeeP);
+
+            SeePerformance.setOnClickListener(
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            if( StudentID != 0 ) {
+                                Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.PerformanceReportActivity");
+                                // bind values with new activity
+                                Bundle bundle = new Bundle();
+                                intent.putExtra("ClassID", studentClssIDPos);
+                                intent.putExtra("StudentID", StudentID);
+                                intent.putExtra("name", name);
+                                startActivity(intent);
+                            }
+                            else {
+                                Toast.makeText(SeePerfomanceActivity.this, "Please select student", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+            );
     }
 
     @Override

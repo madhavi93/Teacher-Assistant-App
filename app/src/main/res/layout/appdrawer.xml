@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
 
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:id="@+id/list_item"
-    android:layout_gravity = "center_vertical"
-    android:background="@color/colorDraver"
-    android:choiceMode="singleChoice"
-    android:textAlignment="center"
-    android:textSize="22dp"
-    android:layout_marginTop="500dp"
-    android:layout_marginBottom="500dp"
-     />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/list_item"
+        android:layout_gravity = "center_vertical"
+        android:gravity = "center"
+        android:background="@color/colorDraver"
+        android:choiceMode="singleChoice"
+        android:textAlignment="center"
+        android:textSize="22dp"
+    />
+</RelativeLayout>

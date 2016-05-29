@@ -18,7 +18,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
@@ -80,11 +79,10 @@ public class PerfomanceFragment extends Fragment {
         barDataSet3.setColors(new int[]{Color.GREEN});
 
         // combined all dataset into an arraylist
-        ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+        ArrayList<BarDataSet> dataSets = new ArrayList<BarDataSet>();
         dataSets.add(barDataSet1);
         dataSets.add(barDataSet2);
         dataSets.add(barDataSet3);
-
         ArrayList<String> labels = studentController.getExamNameListByClassID(mybundle.getInt("ClassID"));
 
         BarData data = new BarData(labels,dataSets); // initialize the Bardata with argument labels and dataSet
