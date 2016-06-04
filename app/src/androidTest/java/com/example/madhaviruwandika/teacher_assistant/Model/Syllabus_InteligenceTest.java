@@ -23,7 +23,6 @@ public class Syllabus_InteligenceTest extends TestCase {
 
     }
 
-
     public void testGetWorkingDaysBetweenTwoDates() throws Exception {
         assertEquals(3,syllabus_inteligence.getWorkingDaysBetweenTwoDates(dateFormat.parse("01-05-2016"),dateFormat.parse("22-05-2016"),"Monday"));
         assertEquals(5,syllabus_inteligence.getWorkingDaysBetweenTwoDates(dateFormat.parse("02-05-2016"),dateFormat.parse("30-05-2016"),"Monday"));

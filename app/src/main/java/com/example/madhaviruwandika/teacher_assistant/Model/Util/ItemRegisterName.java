@@ -21,6 +21,8 @@ public class ItemRegisterName {
         this.setAttendence(attendence);
     }
 
+    public ItemRegisterName() {
+    }
 
     public int getSID() {
         return SID;

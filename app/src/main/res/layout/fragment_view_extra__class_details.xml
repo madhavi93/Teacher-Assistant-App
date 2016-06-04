@@ -1,0 +1,137 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.ViewExtra_ClassDetails">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#e6fafc"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="     Class Type :"
+                    android:id="@+id/textView9"
+                    android:layout_below="@+id/txt_RelClass"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginTop="45dp"
+                    android:textSize="20dp"
+                    android:textColor="#030f94" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="     Date :"
+                    android:id="@+id/txt_date"
+                    android:textSize="20dp"
+                    android:layout_marginTop="30dp"
+                    android:textColor="#030f94"
+                    android:layout_alignEnd="@+id/txt_RelClass"
+                    android:layout_below="@+id/textView9" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="     Time :"
+                    android:id="@+id/textView11"
+                    android:textSize="20dp"
+                    android:textColor="#030f94"
+                    android:layout_below="@+id/txt_date"
+                    android:layout_alignEnd="@+id/txt_RelClass"
+                    android:layout_marginTop="30dp" />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="                            "
+                    android:id="@+id/textViewDate"
+                    android:layout_above="@+id/textView11"
+                    android:layout_alignStart="@+id/textViewTime" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="                  "
+                    android:id="@+id/textViewTime"
+                    android:layout_alignTop="@+id/textView11"
+                    android:layout_toEndOf="@+id/textView9" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:id="@+id/btnCancel"
+                    android:textSize="20dp"
+                    android:layout_marginTop="30dp"
+                    android:background="#484d82"
+                    android:textColor="#ffffff"
+                    android:layout_marginLeft="200dp"
+                    android:layout_below="@+id/textViewClassState" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textViewClassType"
+                    android:layout_alignBottom="@+id/textView9"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignTop="@+id/textView9"
+                    android:layout_toEndOf="@+id/textView9"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textView60"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/btnCancel"
+                    android:layout_alignEnd="@+id/textViewClassType" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="     Class State : "
+                    android:id="@+id/textView61"
+                    android:textSize="20dp"
+                    android:textColor="#030f94"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/textView11"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:id="@+id/textViewClassState"
+                    android:layout_alignBottom="@+id/textView61"
+                    android:layout_alignEnd="@+id/btnCancel"
+                    android:layout_alignTop="@+id/textView61"
+                    android:layout_toEndOf="@+id/textView61" />
+
+            </RelativeLayout>
+        </ScrollView>
+    </RelativeLayout>
+
+</FrameLayout>

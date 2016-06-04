@@ -5,6 +5,9 @@ package com.example.madhaviruwandika.teacher_assistant.Validator;
  */
 public class DAValidator {
 
+    public boolean isPasswardEncrypted(){
 
+        return true;
+    }
 
 }

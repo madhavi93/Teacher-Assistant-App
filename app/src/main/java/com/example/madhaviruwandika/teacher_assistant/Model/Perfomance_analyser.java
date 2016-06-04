@@ -52,12 +52,14 @@ public class Perfomance_analyser {
             swapped = false;
             int newLimit = n;
             for (int i=0;i<n;i++){
-                if ((i != 0) && studentPerfomances.get(i).getMark()<studentPerfomances.get(i-1).getMark() ){
-                    Student_perfomance temp = studentPerfomances.get(i-1);
-                    studentPerfomances.set(i-1,studentPerfomances.get(i));
-                    studentPerfomances.set(i,temp);
-                    swapped = true;
-                    newLimit = i-1;
+                if(studentPerfomances.get(i)!= null) {
+                    if ((i != 0) && studentPerfomances.get(i).getMark() < studentPerfomances.get(i - 1).getMark()) {
+                        Student_perfomance temp = studentPerfomances.get(i - 1);
+                        studentPerfomances.set(i - 1, studentPerfomances.get(i));
+                        studentPerfomances.set(i, temp);
+                        swapped = true;
+                        newLimit = i - 1;
+                    }
                 }
             }
             n = newLimit;
@@ -67,24 +69,31 @@ public class Perfomance_analyser {
     }
 
     public int[] getMaxAndMinOfTheExam(List<Student_perfomance> list){
-        studentPerfomances = sortTheMarkList(list);
         int[] minMax = new int[2];
-        minMax[0] = studentPerfomances.get(0).getMark();
-        minMax[1] = studentPerfomances.get(studentPerfomances.size()-1).getMark();
+        minMax[0] = 0;
+        minMax[1] = 0;
+        if(list.size() != 0) {
+
+            studentPerfomances = sortTheMarkList(list);
+            minMax[0] = studentPerfomances.get(0).getMark();
+            minMax[1] = studentPerfomances.get(studentPerfomances.size() - 1).getMark();
+        }
         return minMax;
+
     }
 
     public String AttendenceState(int classDays,int NoOfDatesAttended){
 
 
         if(classDays!= 0) {
-            int percentage = (NoOfDatesAttended / classDays) * 100;
+            int percentage = ((NoOfDatesAttended / classDays) * 100);
 
             if (percentage < 50) {
+                Log.d("PPPPP",">>>>>>>>>>>>>>>"+percentage+">>>>>>>>>>>>>>>>>");
                 return "Very poor attendence.";
-            } else if (percentage < 70) {
+            } else if (percentage >= 50 && percentage < 70) {
                 return "poor Attendence";
-            } else if (percentage < 90) {
+            } else if (percentage >= 70 && percentage < 90) {
                 return "Attendence is good";
             } else {
                 return "Very good Attendence";
@@ -94,5 +103,17 @@ public class Perfomance_analyser {
             return "Class is not started.";
     }
 
+    public static ArrayList<String[]> convertToMarkRangeOutOf100(ArrayList<String[]> s,int markRange){
+        ArrayList<String[]> mymark = s;
+        for (int i=0;i<s.size();i++){
+            int mark = Integer.parseInt(mymark.get(i)[1]);
+            Log.d("Mark", ">>>>>>>>>>>>>>>>>>>>" + markRange + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            int newMark = (int)(((double)mark/(double)markRange) * 100);
+            Log.d("MarkNEW",">>>>>>>>>>>>>>>>>>>>"+newMark+">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            String[] std = {s.get(i)[0],String.valueOf(newMark)};
+            mymark.set(i,std);
+        }
+        return mymark;
+    }
 
 }

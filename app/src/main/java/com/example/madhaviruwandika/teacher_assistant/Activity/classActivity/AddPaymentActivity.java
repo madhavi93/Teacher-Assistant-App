@@ -36,13 +36,16 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
 
     int StudentIDPos = 0;
     int ClassIDPos = 0;
+    String monthP = "";
 
     List<String> tutionClasses ;
     List<String[][]> studentList;
     Bundle myBundle;
+    ArrayList<String> monthList;
 
     Spinner spinnerstd;
     Spinner spinnercls;
+    Spinner month;
     Button AddPayment;
 
 
@@ -62,6 +65,7 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
 
         spinnerstd = (Spinner) findViewById(R.id.spinnerSName) ;
         spinnercls = (Spinner) findViewById(R.id.spinnerClass);
+        month = (Spinner)findViewById(R.id.spinnerFor_month);
 
         tutionClasses = classController.getClassListForSpinner();
 
@@ -72,7 +76,31 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         spinnercls.setAdapter(dataAdapter);
-        // Spinner click listener
+
+
+
+        monthList = new ArrayList<>();
+        monthList.add("");
+        monthList.add("January");
+        monthList.add("February");
+        monthList.add("March");
+        monthList.add("April");
+        monthList.add("May");
+        monthList.add("June");
+        monthList.add("July");
+        monthList.add("August");
+        monthList.add("September");
+        monthList.add("November");
+        monthList.add("December");
+
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, monthList);
+        // Drop down layout style - list view with radio button
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // attaching data adapter to spinner
+        month.setAdapter(dataAdapter2);
+
+
         myBundle = getIntent().getExtras();
 
         if(myBundle != null){
@@ -115,8 +143,13 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
 
             if(position != 0){
                  StudentIDPos = Integer.parseInt(studentList.get(position-1)[0][0]);
-                Log.d("55555555","/////////////////"+StudentIDPos+"///////////////////////"+ClassIDPos+"//////////////////");
             }
+        }
+
+        else if(spinner.getId() == R.id.spinnerFor_month){
+           if(position != 0){
+            monthP = monthList.get(position);
+           }
         }
 
     }
@@ -132,19 +165,27 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
         AddPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addPayment(StudentIDPos,ClassIDPos);
-                Log.d("4444444444","/////////////////"+StudentIDPos+"///////////////////////"+ClassIDPos+"//////////////////");
+                addPayment(StudentIDPos, ClassIDPos);
             }
         });
 
     }
 
     public int addPayment(int s_id,int c_id){
-        if(classController.addPayment(s_id,c_id) == 1){
-            Toast.makeText(AddPaymentActivity.this, "Payment added successfully.", Toast.LENGTH_LONG).show();
-            return 1;
-        }else {
-            Toast.makeText(AddPaymentActivity.this, "Adding Payment failed.Try again.", Toast.LENGTH_LONG).show();
+
+        if(!monthP.equals("")) {
+            if (classController.addPayment(s_id, c_id,monthP) == 1) {
+                Toast.makeText(AddPaymentActivity.this, "Payment added successfully.", Toast.LENGTH_LONG).show();
+                clearInterface();
+                return 1;
+            } else {
+                Toast.makeText(AddPaymentActivity.this, "Adding Payment failed.Try again.", Toast.LENGTH_LONG).show();
+                return 0;
+            }
+        }
+
+        else {
+            Toast.makeText(AddPaymentActivity.this, "Please select month of payment", Toast.LENGTH_LONG).show();
             return 0;
         }
 
@@ -155,5 +196,11 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
         Intent myIntent = new Intent(getApplicationContext(), TodaysClassActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
+    }
+
+    public void clearInterface(){
+        spinnercls.setSelection(0);
+        spinnerstd.setSelection(0);
+        month.setSelection(0);
     }
 }

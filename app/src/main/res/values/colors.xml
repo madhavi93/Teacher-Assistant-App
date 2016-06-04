@@ -8,5 +8,6 @@
     <color name="MinBar">#f99898</color>
     <color name="MaxBar">#5cf697</color>
     <color name="StdBar">#f6fb54</color>
+    <color name="backgroung_border">#25037b</color>
 
 </resources>

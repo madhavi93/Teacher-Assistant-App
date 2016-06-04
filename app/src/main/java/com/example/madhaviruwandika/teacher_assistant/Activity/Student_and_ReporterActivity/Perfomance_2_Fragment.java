@@ -25,7 +25,6 @@ public class Perfomance_2_Fragment extends Fragment {
 
     private LineChart lineChart;
     private TextView std;
-
     Bundle mybundle;
     StudentController studentController;
 
@@ -33,7 +32,6 @@ public class Perfomance_2_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         View view = inflater.inflate(R.layout.fragment_perfomance_2_, container, false);
         lineChart = (LineChart) view.findViewById(R.id.perfomance_chart);
         std = (TextView) view.findViewById(R.id.stdName);
@@ -49,7 +47,6 @@ public class Perfomance_2_Fragment extends Fragment {
             entries.add(new Entry(markList.get(i - 1), i));
         }
 
-
         ArrayList<String> labels = new ArrayList<>();
         for (int i=0;i<entries.size();i++)
         {
@@ -57,10 +54,9 @@ public class Perfomance_2_Fragment extends Fragment {
                 labels.add("");
             }
             else {
-                labels.add("Exam_"+(i+1));
+                labels.add("Exam_"+(i));
             }
         }
-
 
         LineDataSet dataset = new LineDataSet(entries, "Marks");
         dataset.setColor(Color.RED);

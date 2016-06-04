@@ -33,6 +33,7 @@ public interface StudentDAO {
         public List<Student_perfomance> getMarkListOfExamsBystudentID(int s_id);
         public int[] getAttendenceOfStudent(int s_id,int ClassID);
         public List<Payment> getPayments(int s_id,int class_id);
+        public List<Exam> getExamListWithOutMarkSheetByClassID(int classID );
 
 
 }

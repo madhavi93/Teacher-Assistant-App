@@ -303,7 +303,6 @@ public class StudentDA implements StudentDAO {
         return idnext;
     }
 
-
     @Override
     public List<Student_perfomance> getStudentPerfomanceInExam(int examID) {
 
@@ -405,7 +404,7 @@ public class StudentDA implements StudentDAO {
 
 
         long i = db.update("Student", contentValues, DBConstant.stdTable_col1 + " = " + s.getS_id(), null);
-        long j =db.update("Parent", contentValues1,DBConstant.parent_col1+" = "+p.getParentID(),null);
+        long j =db.update("Parent", contentValues1, DBConstant.parent_col1 + " = " + p.getParentID(), null);
 
         if(i == -1 && j == -1){
             return 0;
@@ -418,7 +417,7 @@ public class StudentDA implements StudentDAO {
     public int getStudentMarkOnExam(int s_id, int examID) {
 
         int studentMark = 0;
-        Cursor cursor = db.rawQuery("select * from PerformedAt where "+DBConstant.markSheet_col1+" = "+examID+" and "+DBConstant.markSheet_col2+ " = "+s_id , null);
+        Cursor cursor = db.rawQuery("select * from PerformedAt where " + DBConstant.markSheet_col1 + " = " + examID + " and " + DBConstant.markSheet_col2 + " = " + s_id, null);
 
         if(cursor.getCount()==0){
             Log.d("MYACTIVITY", "No Value");
@@ -501,11 +500,67 @@ public class StudentDA implements StudentDAO {
                 do {
                     Payment payment = new Payment();
                     payment.setDoP(cursor.getString(3));
-
+                    payment.setMonthOfPayment(cursor.getString(4));
                     paymentList.add(payment);
                 } while (cursor.moveToNext());
             }
         }
         return  paymentList;
     }
-}
+
+    @Override
+    public List<Exam> getExamListWithOutMarkSheetByClassID(int classID) {
+
+        ArrayList<Integer> examIDList = getExamsThatMArksAreEntered();
+        String arrayString = "";
+        for (int i=0;i<examIDList.size();i++){
+            arrayString = arrayString+examIDList.get(i);
+            if(i != (examIDList.size()-1)){
+                arrayString = arrayString+",";
+            }
+
+        }
+
+        List<Exam> examList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from Exam where "+ DBConstant.exam_col2 +" = "+classID+" AND"+DBConstant.exam_col1+" NOT IN ("+arrayString+")",null);
+
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    Exam exam = new Exam();
+
+                    exam.setExamID(Integer.parseInt(cursor.getString(0)));
+                    exam.setClassID(Integer.parseInt(cursor.getString(1)));
+                    exam.setEtype(cursor.getString(2));
+                    exam.setDate(cursor.getString(3));
+                    exam.setLesson(cursor.getString(4));
+                    examList.add(exam);
+                } while (cursor.moveToNext());
+            }
+        }
+        return examList;
+    }
+
+    public ArrayList<Integer> getExamsThatMArksAreEntered(){
+
+        ArrayList<Integer> ExamID = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select Distinct "+DBConstant.markSheet_col1+" from PerformedAt", null);
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    ExamID.add(cursor.getInt(0));
+                } while (cursor.moveToNext());
+            }
+        }
+        return ExamID;
+
+    }
+ }

@@ -18,6 +18,7 @@ public class ClassDataActivity extends BaseActivity {
     private Button addClass ;
     private Button addExClass ;
     private Button updateStudent;
+    private Button updateExtraClass;
 
 
     @Override
@@ -34,6 +35,7 @@ public class ClassDataActivity extends BaseActivity {
         OnAddEXClassButtonClickListner();
         OnUpdateClassButtonClickListner();
         OnUpdateStudentButtonClickListner();
+        OnViewExtraClassButtonClickListner();
 
     }
 
@@ -124,6 +126,24 @@ public class ClassDataActivity extends BaseActivity {
         );
 
     }
+
+    public void OnViewExtraClassButtonClickListner(){
+
+        updateExtraClass = (Button) findViewById(R.id.btnUpdateExtraClass);
+
+        updateExtraClass.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent( "com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.ViewExtraClassActivity");
+                        startActivity(intent);
+                    }
+                }
+
+        );
+
+    }
+
 
 
 

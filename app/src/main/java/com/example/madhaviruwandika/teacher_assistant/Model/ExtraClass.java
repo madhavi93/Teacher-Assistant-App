@@ -10,6 +10,7 @@ public class ExtraClass {
     private String date;
     private String time;
     private String classType;
+    private String classState;
 
     public ExtraClass() {
     }
@@ -20,6 +21,15 @@ public class ExtraClass {
         this.date = date;
         this.time = time;
         this.classType = classType;
+    }
+
+    public ExtraClass(int extraClassID, int classID, String date, String time, String classType,String classState) {
+        ExtraClassID = extraClassID;
+        ClassID = classID;
+        this.date = date;
+        this.time = time;
+        this.classType = classType;
+        this.classState = classState;
     }
 
     public ExtraClass(int classID, String date, String time, String classType) {
@@ -69,5 +79,13 @@ public class ExtraClass {
 
     public void setExtraClassID(int extraClassID) {
         ExtraClassID = extraClassID;
+    }
+
+    public String getClassState() {
+        return classState;
+    }
+
+    public void setClassState(String classState) {
+        this.classState = classState;
     }
 }

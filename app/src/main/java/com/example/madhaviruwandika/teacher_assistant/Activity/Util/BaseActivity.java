@@ -51,7 +51,7 @@ public class BaseActivity extends AppCompatActivity  {
         newList = (ListView)findViewById(R.id.drawer_list);
         list = new ArrayList<ItemSlideMenu>();
 
-
+        list.add(new ItemSlideMenu("  My profile"));
         list.add(new ItemSlideMenu("  Start class"));
         list.add(new ItemSlideMenu("  Syllabus tracker"));
         list.add(new ItemSlideMenu("  Student performance"));
@@ -70,34 +70,42 @@ public class BaseActivity extends AppCompatActivity  {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 Intent intent;
+                Bundle bundle = new Bundle();
+
                 switch (position) {
                     case 0:
-                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.TodaysClassActivity");
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.MyProfileActivity");
+                        intent.putExtra("fragment_no",1);
                         startActivity(intent);
                         break;
                     case 1:
-                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyProgressActivity");
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.TodaysClassActivity");
                         startActivity(intent);
                         break;
                     case 2:
-                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.StudentProgressActivity");
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyProgressActivity");
                         startActivity(intent);
                         break;
                     case 3:
-                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendMessageActivity");
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.StudentProgressActivity");
                         startActivity(intent);
                         break;
                     case 4:
-                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity");
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendMessageActivity");
                         startActivity(intent);
                         break;
                     case 5:
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity");
+                        startActivity(intent);
+                        break;
+                    case 6:
                         intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.SettingsActivity");
                         startActivity(intent);
                         break;
 
                     default:
                         intent = new Intent(".Activity.HomeActivity");
+                        intent.putExtra("fragment_no",1);
                         startActivity(intent);
                         break;
 

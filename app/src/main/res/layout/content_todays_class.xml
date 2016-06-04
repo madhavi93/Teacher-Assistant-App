@@ -57,14 +57,26 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
             android:text="Add Payment"
             android:id="@+id/buttonAddPayment"
             android:background="#a3b3d8"
             android:textSize="25dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/buttonFinishClass"
+            android:layout_alignStart="@+id/btnMarkAttendence"
+            android:layout_alignEnd="@+id/spinner" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Finish Class"
+            android:textSize="25dp"
+            android:id="@+id/buttonFinishClass"
+            android:background="#8e9da9"
+            android:layout_marginTop="30dp"
             android:layout_below="@+id/btnMarkAttendence"
             android:layout_alignStart="@+id/btnMarkAttendence"
-            android:layout_alignEnd="@+id/btnMarkAttendence" />
+            android:layout_alignEnd="@+id/spinner" />
 
     </RelativeLayout>
 

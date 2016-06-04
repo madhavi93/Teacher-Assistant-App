@@ -9,6 +9,11 @@ public class DBConstant {
     public static final String DB_name = "TeacherAssistant";
 
     //names of coloumn in tables
+    public static final String myProfileTable_col1 = "Change_ID";
+    public static final String myProfileTable_col2 = "Name";
+    public static final String myProfileTable_col3 = "password";
+    public static final String myProfileTable_col4 = "DateOFChange";
+
     public static final String stdTable_col1 = "ID";
     public static final String stdTable_col2 = "Name";
     public static final String stdTable_col3 = "DateOfBirth";
@@ -36,6 +41,7 @@ public class DBConstant {
     public static final String payment_col2 = "S_id";
     public static final String payment_col3 = "Class_Id";
     public static final String payment_col4 = "DateOP";
+    public static final String payment_col5 ="Month_Of_Payment";
 
     public static final String attendenceSheet_col1 = "Attendance_id";
     public static final String attendenceSheet_col2 = "S_id";
@@ -95,7 +101,7 @@ public class DBConstant {
     public static final String ExtraClass_col3 = "DateOfClass";
     public static final String ExtraClass_col4 = "time";
     public static final String ExtraClass_col5 = "ClassType";
-
+    public static final String ExtraClass_col6 = "ClassState";
 
     public static final String markSheet_col1 = "Exam_ID";
     public static final String markSheet_col2 = "S_id";
@@ -105,5 +111,7 @@ public class DBConstant {
     public static final String StartOfClass_col2 = "Date";
     public static final String StartOfClass_col3 = "Start_Time";
     public static final String StartOfClass_col4 = "End_Time";
+
+
 
 }

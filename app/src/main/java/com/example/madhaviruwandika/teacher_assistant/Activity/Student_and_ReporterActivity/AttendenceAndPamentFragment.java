@@ -51,6 +51,10 @@ public class AttendenceAndPamentFragment extends Fragment {
             date.setText(String.valueOf(" " + payment.get("date")));
             tr.addView(date);
 
+            TextView month = new TextView(getActivity());
+            month.setText(payment.get("month"));
+            tr.addView(month);
+
             logsTableLayout.addView(tr);
         }
 

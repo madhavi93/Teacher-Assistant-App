@@ -5,6 +5,23 @@ package com.example.madhaviruwandika.teacher_assistant.Model;
  */
 public class StudentPerformanceReport {
 
+    private String className;
+    private String studentName;
 
 
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
 }

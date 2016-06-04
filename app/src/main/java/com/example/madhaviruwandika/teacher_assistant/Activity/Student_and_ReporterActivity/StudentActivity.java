@@ -183,6 +183,11 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
             EDoB.setError("INVALID INPUT");
             validateCheck = false;
         }
+        if(!InputValidator.isDateisPast(DoB)){
+            EDoB.setError("INVALID INPUT");
+            validateCheck = false;
+        }
+
 
         String pname = pName.getText().toString();
         if(!InputValidator.isValidLetters(pname)){

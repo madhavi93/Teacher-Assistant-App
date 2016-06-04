@@ -38,8 +38,6 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
     CheckBox groupMessage;
 
     List<String[][]> studentList;
-
-    Boolean isGroup;
     int ClassID;
     int StudentID;
     CommunicationController communicationController;
@@ -76,19 +74,29 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
+    public void clearText(){
+        recipient.setSelection(0);
+        spinnerClass.setSelection(0);
+        message.setText("");
+        groupMessage.setChecked(false);
+
+    }
+
     public void onClick(View v){
         String smsText = message.getText().toString();
-        if(!isGroup) {
+        if(!groupMessage.isChecked()) {
             String pnNo = communicationController.parentTPNo(StudentID);
             Log.d("Send SMS", "SENT SUCCESSFULLY........................................................................." +StudentID+"....."+ pnNo);
             int sendStatus = communicationController.sendSMSMessage(pnNo, smsText) ;
             if ( sendStatus== 1) {
                 Toast.makeText(SendSMSActivity.this, "Message Sent succesfully.", Toast.LENGTH_LONG).show();
+                clearText();
             } else if(sendStatus == 0) {
                 Toast.makeText(SendSMSActivity.this, "Message Sending failed.", Toast.LENGTH_LONG).show();
             }
             else if(sendStatus == 2) {
                 Toast.makeText(SendSMSActivity.this, "Message Sent succesfully. But failed to add to your records", Toast.LENGTH_LONG).show();
+                clearText();
             }
         }
 
@@ -124,8 +132,6 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
             if(!groupMessage.isChecked()){
 
                 ClassID = communicationController.getClassIDBySpinnerItemSelected(position);
-                isGroup = false;
-
                 studentList = communicationController.getStudentListByClassID(ClassID);
 
                 ArrayList<String> students = new ArrayList<>();
@@ -150,7 +156,6 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
             else
             {
                 ClassID = communicationController.getClassIDBySpinnerItemSelected(position);
-                isGroup = true;
             }
 
 

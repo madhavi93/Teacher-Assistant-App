@@ -67,7 +67,6 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
         mMinute = c.get(Calendar.MINUTE);
     }
 
-
     // Register  DatePickerDialog listener
     private DatePickerDialog.OnDateSetListener mDateSetListener =
             new DatePickerDialog.OnDateSetListener() {
@@ -266,10 +265,6 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
         String ClassName = className.getText().toString();
 
         String time = classtime.getText().toString();
-        /* if(!InputValidator.isTimeperiodValid(time)){
-            classtime.setError("Not Valied Input");
-            validateCheck =false;
-        } */
 
         String day = days.get(dayID);
         if(!InputValidator.isValidLetters(day)){
@@ -285,6 +280,10 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
 
         String EndDate = endDate.getText().toString();
         if(!InputValidator.isValidDate(EndDate)){
+            endDate.setError("INVALID INPUT");
+            validateCheck = false;
+        }
+        if(InputValidator.isDateisPast(EndDate)){
             endDate.setError("INVALID INPUT");
             validateCheck = false;
         }

@@ -236,7 +236,6 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
             validateCheck=false;
         }
         Lesson = lesson.getText().toString();
-
         if(validateCheck){
             if(classController.addExams(ClassID, dateText.getText().toString(), ExamType, Lesson)==1){
                 return true;

@@ -2,19 +2,15 @@ package com.example.madhaviruwandika.teacher_assistant.Controller;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
-import android.content.Intent;
-import android.net.Uri;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendEmailActivity;
-import com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendMessageActivity;
 import com.example.madhaviruwandika.teacher_assistant.Adapter.DA.CommunicatorDA;
+import com.example.madhaviruwandika.teacher_assistant.Adapter.DA.MyProfileDA;
 import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.CommunicationDAO;
+import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.MyProfileDAO;
+import com.example.madhaviruwandika.teacher_assistant.Model.AppConstant;
 import com.example.madhaviruwandika.teacher_assistant.Model.GroupMessage;
 import com.example.madhaviruwandika.teacher_assistant.Model.Parent;
 import com.example.madhaviruwandika.teacher_assistant.Model.SingleMessage;
@@ -22,7 +18,6 @@ import com.example.madhaviruwandika.teacher_assistant.Model.Student;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Util.ItemRegisterName;
 
-import java.net.URI;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,13 +29,13 @@ import java.util.List;
  */
 public class CommunicationController {
 
-
     CommunicationDAO communicationDAO;
+    MyProfileDAO myProfileDAO;
 
     public CommunicationController(Context context){
         communicationDAO = new CommunicatorDA(context);
+        myProfileDAO = new MyProfileDA(context);
     }
-
 
     public String parentTPNo(int s_id){
         Parent parent = communicationDAO.getParent(s_id);
@@ -65,12 +60,9 @@ public class CommunicationController {
 
     public int sendSMS(String phoneNo,String message ) {
         try {
-
-
             SmsManager smsManager = SmsManager.getDefault();
-
             Log.d("Send SMS", "SENT SUCCESSFULLY........................................................................."+phoneNo);
-            smsManager.sendTextMessage(phoneNo, null, message, null, null);
+            smsManager.sendTextMessage(phoneNo, null, message+"\n**"+ myProfileDAO.getProfileData().getName()+", Tution Class Teacher"+"**" , null, null);
 
             return 1;
         }
@@ -125,9 +117,7 @@ public class CommunicationController {
 
     public int sendSMSForGroup(int ClassID,String message){
 
-
         List<Student> studentList = communicationDAO.getStudentListByClassID(ClassID);
-
         List<String> contactNoArray  = new ArrayList<String>();
         int failureCount = 0;
 
@@ -227,7 +217,7 @@ public class CommunicationController {
 
         for (int j=0;j<list.size();j++) {
             if (list.get(j).getAttendence()) {
-                sendSMS(contactNoArray.get(j),"Your child has attended to the class today.");
+                sendSMS(contactNoArray.get(j),"Your child has attended to the class today." );
             }
             else
             {
@@ -235,8 +225,23 @@ public class CommunicationController {
             }
 
         }
-
-
     }
+
+    public void SendSmsToNoifyFinishingtheClass(int ClassID){
+
+        List<Student> studentList = communicationDAO.getStudentListByClassID(ClassID);
+        List<String> contactNoArray  = new ArrayList<String>();
+
+        for (Student s: studentList){
+            contactNoArray.add(communicationDAO.getParent(s.getS_id()).getTp_no());
+        }
+        ArrayList<ItemRegisterName> list = communicationDAO.getTodaysRegister(ClassID,AppConstant.getInstance().getFinishClassDate());
+        for (int j=0;j<list.size();j++) {
+            if (list.get(j).getAttendence()) {
+                sendSMS(contactNoArray.get(j), "Today's Class has been finished.");
+            }
+        }
+    }
+
 
 }

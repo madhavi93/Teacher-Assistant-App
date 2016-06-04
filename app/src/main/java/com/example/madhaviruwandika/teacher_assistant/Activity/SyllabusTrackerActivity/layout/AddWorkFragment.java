@@ -205,7 +205,6 @@ public class AddWorkFragment extends Fragment implements AdapterView.OnItemSelec
 
                     ((MyWorkActivity)getActivity()).setLessonCoveredToday(LessonId);
                     ((MyWorkActivity)getActivity()).setUnitID(UnitID);
-                    Log.d("WE",">>>>>>>>>>>>>>>>>>>>>>>>>"+LessonId+">>>>>>>>>>>>>>>>>>>>>>>>>>");
                     Toast.makeText(getActivity(), "Details are succesfully added.", Toast.LENGTH_LONG).show();
                     ClearText();
                 }

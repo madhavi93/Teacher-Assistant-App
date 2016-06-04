@@ -3,6 +3,7 @@ package com.example.madhaviruwandika.teacher_assistant.Activity.classActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.BaseActivity;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
+import com.example.madhaviruwandika.teacher_assistant.Controller.CommunicationController;
+import com.example.madhaviruwandika.teacher_assistant.Model.AppConstant;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
 import java.util.List;
@@ -21,12 +24,13 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
     private Button startClass;
     private Button markAttendence;
     private Button AddPayment;
+    private Button finishClass;
     private Spinner spinner;
 
     private int studentClssIDPos;
     private ClassController cldc;
-    boolean markStarting = false;
-    boolean finishMarkingAttendenceOnStartedClass = false;
+    private CommunicationController communicationController;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +42,20 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         // initialize Class controller
         cldc = new ClassController(this);
+        communicationController = new CommunicationController(this);
         // get list of class
         List<String> categories = cldc.getClassListForSpinner();
 
-
         spinner = (Spinner) findViewById(R.id.spinner);
+        finishClass = (Button) findViewById(R.id.buttonFinishClass);
+
+        if(AppConstant.getInstance().iscontinuing_class()){
+            finishClass.setEnabled(true);
+        }
+        else {
+            finishClass.setEnabled(false);
+        }
+
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
         // Creating adapter for spinner
@@ -52,10 +65,17 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
+        if(AppConstant.getInstance().iscontinuing_class()){
+            studentClssIDPos = AppConstant.getInstance().getClassContinuing().getClassID();
+            spinner.setSelection(studentClssIDPos);
+            spinner.setEnabled(false);
+        }
+
         //initialize clickListner for the start button
         OnAdPaymentStudentButtonClickListner();
         OnMarkAttendenceButtonClickListner();
         OnStartClassStudentButtonClickListner();
+        OnFinishMarkingAttendenceClickListner();
     }
 
     @Override
@@ -76,9 +96,11 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                     @Override
                     public void onClick(View v) {
 
-                        if(studentClssIDPos != 0) {
-                            markStarting = true;
+                        // is no any class is continuing then allow next class to start
+                        if((studentClssIDPos != 0) && (!AppConstant.getInstance().iscontinuing_class()) ) {
                             if(cldc.MarkStartingOfTheClass(studentClssIDPos)==1){
+                                spinner.setEnabled(false);
+                                finishClass.setEnabled(true);
                                 Toast.makeText(TodaysClassActivity.this, "Class Starting Details are successfully added.", Toast.LENGTH_LONG).show();
                             }
                             else   Toast.makeText(TodaysClassActivity.this, "Class Starting Details are not added.Try Again.", Toast.LENGTH_LONG).show();
@@ -97,13 +119,13 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                     @Override
                     public void onClick(View v) {
 
-                        if(studentClssIDPos != 0 && markStarting == true && finishMarkingAttendenceOnStartedClass == false) {
+                        /*
+                        if class is started and attendence of the students are not marked then mark the attendence.
+                         */
+                        if(studentClssIDPos != 0 && (!AppConstant.getInstance().isMarkedAttendence()) && AppConstant.getInstance().iscontinuing_class()) {
                             Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.MarkAttendenceActivity");
-                           // Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.manegeClassActivity");
-                            //initialize bundel and attach values to send to new activity
                             Bundle bundle = new Bundle();
                             intent.putExtra("ClassID",studentClssIDPos);
-
                             startActivity(intent);
                         }
                         else {
@@ -139,6 +161,46 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
 
 
     }
+    public void OnFinishMarkingAttendenceClickListner(){
 
+       finishClass.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(AppConstant.getInstance().iscontinuing_class() && !AppConstant.getInstance().isMarkedAttendence()){
+                            Toast.makeText(TodaysClassActivity.this, "Please Mark Attendence before Confirm ending of the class.", Toast.LENGTH_LONG).show();
+                            try {
+
+                                Thread.sleep(1000);
+                                Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.MarkAttendenceActivity");
+                                Bundle bundle = new Bundle();
+                                intent.putExtra("ClassID",studentClssIDPos);
+                                startActivity(intent);
+
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        else {
+
+                            if(cldc.markFinishingOftheClass()==1){
+                                communicationController.SendSmsToNoifyFinishingtheClass(studentClssIDPos);
+                                AppConstant.getInstance().setClassContinuing(null);
+                                AppConstant.getInstance().setcontinuing_class(false);
+                                AppConstant.getInstance().setMarkedAttendence(false);
+                                finishClass.setEnabled(false);
+                                spinner.setEnabled(true);
+                                Toast.makeText(TodaysClassActivity.this, "Sent messages to parents", Toast.LENGTH_LONG).show();
+                            }
+
+
+                        }
+
+                    }
+                }
+
+        );
+    }
 
 }

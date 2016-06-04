@@ -3,6 +3,7 @@ package com.example.madhaviruwandika.teacher_assistant.Database.DataAccess;
 import com.example.madhaviruwandika.teacher_assistant.Model.Attendence;
 import com.example.madhaviruwandika.teacher_assistant.Model.ExtraClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Payment;
+import com.example.madhaviruwandika.teacher_assistant.Model.StartOfClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Student;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Exam;
@@ -32,5 +33,9 @@ public interface ClassDAO {
     public Long addDailyAttendence(ArrayList<Attendence> attendence_sheets);
     public int getAttendenceID();
     public long markStartingOfClass(int classID, String date,String Starttime,String endTime);
+    public List<StartOfClass> getTodaysClassList(String date);
+    public long markFinishingOfTheClass(StartOfClass startOfClass);
+    public List<ExtraClass> getExtraClassByID(int classID);
+    public long CancelExtraClass(int id);
 
 }

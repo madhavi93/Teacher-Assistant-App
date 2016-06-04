@@ -1,8 +1,13 @@
 package com.example.madhaviruwandika.teacher_assistant.Validator;
 
+import android.renderscript.Short4;
 import android.util.Log;
 
+import com.example.madhaviruwandika.teacher_assistant.Model.StartOfClass;
+
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -103,6 +108,32 @@ public class InputValidator {
             }
         }
         catch (NumberFormatException e){
+            return false;
+        }
+    }
+
+    public boolean  checkReEnteredPassword(String newPassward,String reEnter){
+        if(newPassward.equals(reEnter)){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static boolean isDateisPast(String date)
+    {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        try {
+            Date currntDate = dateFormat.parse(dateFormat.format(cal.getTime()).toString());
+            Date newDate = dateFormat.parse(date);
+            if(currntDate.after(newDate) || currntDate.equals(newDate)){
+                return true;
+            }
+            else return false;
+        } catch (ParseException e) {
+            e.printStackTrace();
             return false;
         }
     }

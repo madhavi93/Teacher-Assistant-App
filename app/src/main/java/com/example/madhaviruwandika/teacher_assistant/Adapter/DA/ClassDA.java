@@ -9,10 +9,12 @@ import android.util.Log;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConnection;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConstant;
 import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.ClassDAO;
+import com.example.madhaviruwandika.teacher_assistant.Model.AppConstant;
 import com.example.madhaviruwandika.teacher_assistant.Model.Attendence;
 import com.example.madhaviruwandika.teacher_assistant.Model.Exam;
 import com.example.madhaviruwandika.teacher_assistant.Model.ExtraClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Payment;
+import com.example.madhaviruwandika.teacher_assistant.Model.StartOfClass;
 import com.example.madhaviruwandika.teacher_assistant.Model.Student;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 
@@ -120,9 +122,7 @@ public class ClassDA implements ClassDAO{
         contentValues.put(DBConstant.payment_col2, payment.getSID());
         contentValues.put(DBConstant.payment_col3, payment.getCID());
         contentValues.put(DBConstant.payment_col4, payment.getDoP());
-
-
-
+        contentValues.put(DBConstant.payment_col5,payment.getMonthOfPayment());
 
         long result = db.insert("Payment", null, contentValues);
 
@@ -170,6 +170,7 @@ public class ClassDA implements ClassDAO{
         contentValues.put(DBConstant.ExtraClass_col3,exClass.getDate());
         contentValues.put(DBConstant.ExtraClass_col4,exClass.getTime());
         contentValues.put(DBConstant.ExtraClass_col5,exClass.getClassType());
+        contentValues.put(DBConstant.ExtraClass_col6,"Active");
 
 
         long result = db.insert("Extra_Class", null, contentValues);
@@ -209,7 +210,7 @@ public class ClassDA implements ClassDAO{
     public TutionClass getClassByID(int id) {
 
         TutionClass tutionClass = new TutionClass();
-        Cursor cursor = db.rawQuery("select * from TutionClass where "+DBConstant.tutionClass_col1+"="+String.valueOf(id), null);
+        Cursor cursor = db.rawQuery("select * from TutionClass where " + DBConstant.tutionClass_col1 + "=" + String.valueOf(id), null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             return null;
@@ -238,14 +239,17 @@ public class ClassDA implements ClassDAO{
         long result = -1;
         for (int i=0;i<ItemCount;i++){
 
-            // set values to contentValues
-            ContentValues contentValues = new ContentValues();
+            try {
+                // set values to contentValues
+                ContentValues contentValues = new ContentValues();
+                contentValues.put(DBConstant.markSheet_col1,examID);
+                contentValues.put(DBConstant.markSheet_col2, s.get(i)[0]);
+                contentValues.put(DBConstant.markSheet_col3,Integer.parseInt(s.get(i)[1]));
+                result = db.insert("PerformedAt", null, contentValues);
+            }catch (Exception e){
+                Log.d("MARK ADDING","Wrong mark");
+            }
 
-            contentValues.put(DBConstant.markSheet_col1,examID);
-            contentValues.put(DBConstant.markSheet_col2, s.get(i)[0]);
-            contentValues.put(DBConstant.markSheet_col3,s.get(i)[1]);
-
-            result = db.insert("PerformedAt", null, contentValues);
 
         }
 
@@ -387,12 +391,11 @@ public class ClassDA implements ClassDAO{
             contentValues.put(DBConstant.attendenceSheet_col3, attendence_sheets.get(i).getClass_Id());
             contentValues.put(DBConstant.attendenceSheet_col4, attendence_sheets.get(i).getDateOPA());
             contentValues.put(DBConstant.attendenceSheet_col5, attendence_sheets.get(i).isAttendenceState());
-            Log.d(">>>>>>>>>>>>>>>>", ">>>>>>>>>>>>>>>>>>>>>>" + attendence_sheets.get(i).getS_id()+">>>>>>>>>>>>>>>>>>"+attendence_sheets.get(i).getClass_Id()+">>>>>>>>>>>>>");
+            Log.d(">>>>>>>>>>>>>>>>", ">>>>>>>>>>>>>>>>>>>>>>" + attendence_sheets.get(i).getS_id()+">>>>>>>>>>>>>>>>>>"+attendence_sheets.get(i).getClass_Id()+">>>>>>>>>>>>>"+attendence_sheets.get(i).getDateOPA().length());
             result = db.insert("Attendance_Sheet",null,contentValues);
         }
 
         Log.d("MY","....................................Attendence Are Added.........................."+getAttendenceID()+".................................");
-
         return result;
 
     }
@@ -426,7 +429,7 @@ public class ClassDA implements ClassDAO{
         contentValues.put(DBConstant.StartOfClass_col2,date);
         contentValues.put(DBConstant.StartOfClass_col3,Starttime);
         contentValues.put(DBConstant.StartOfClass_col4,endTime);
-        long result = db.insert("StartOfClass",null,contentValues);
+        long result = db.insert("StartOfClass", null, contentValues);
 
         return result;
     }
@@ -459,5 +462,75 @@ public class ClassDA implements ClassDAO{
 
     }
 
+    public List<StartOfClass> getTodaysClassList(String date){
+        List<StartOfClass> list = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select *  from  StartOfClass where "+DBConstant.StartOfClass_col2+" = " + date, null);
+        if (cursor.getCount() == 0) {
+            Log.d("MYACTIVITY", "No Value");
+        } else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+
+                    StartOfClass startOfClass = new StartOfClass();
+                    startOfClass.setClassID(cursor.getInt(0));
+                    startOfClass.setDate(cursor.getString(1));
+                    startOfClass.setStart_Time(cursor.getString(2));
+                    startOfClass.setEnd_Time(cursor.getString(3));
+                    list.add(startOfClass);
+                } while (cursor.moveToNext());
+            }
+        }
+        return list;
+    }
+
+    public long markFinishingOfTheClass(StartOfClass startOfClass){
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DBConstant.StartOfClass_col4,startOfClass.getEnd_Time());
+
+        long i = db.update("StartOfClass", contentValues, DBConstant.StartOfClass_col1 + " = ? AND " + DBConstant.StartOfClass_col2 + " = ? AND " + DBConstant.StartOfClass_col3 + " = ? ", new String[]{String.valueOf(startOfClass.getClassID()), startOfClass.getDate(), startOfClass.getStart_Time()});
+        return i;
+
+    }
+
+    @Override
+    public List<ExtraClass> getExtraClassByID(int ClassID) {
+        List<ExtraClass> list = new ArrayList<>();
+        int idnext;
+        Cursor cursor = db.rawQuery("select * from Extra_Class where Class_Id =? AND ClassState=? ", new String[]{String.valueOf(ClassID), "Active"});
+        if (cursor.getCount() == 0) {
+            Log.d("MYACTIVITY", "No Value");
+            idnext = 0;
+        } else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    ExtraClass extraClass = new ExtraClass();
+
+                    extraClass.setExtraClassID(cursor.getInt(0));
+                    extraClass.setClassID(cursor.getInt(1));
+                    extraClass.setDate(cursor.getString(2));
+                    extraClass.setTime(cursor.getString(3));
+                    extraClass.setClassType(cursor.getString(4));
+                    extraClass.setClassState(cursor.getString(5));
+                    list.add(extraClass);
+
+                } while (cursor.moveToNext());
+            }
+        }
+        return list;
+    }
+
+
+    public long CancelExtraClass(int id){
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DBConstant.ExtraClass_col6,"Cancel");
+        long i = db.update("Extra_Class", contentValues, DBConstant.ExtraClass_col1 + " = ?" , new String[]{ String.valueOf(id)});
+        return i;
+
+
+    }
 
 }

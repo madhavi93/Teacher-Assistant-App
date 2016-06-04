@@ -12,13 +12,18 @@ import com.example.madhaviruwandika.teacher_assistant.Database.DBConnection;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConstant;
 import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.ClassDAO;
 import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.CommunicationDAO;
+import com.example.madhaviruwandika.teacher_assistant.Model.AppConstant;
 import com.example.madhaviruwandika.teacher_assistant.Model.GroupMessage;
 import com.example.madhaviruwandika.teacher_assistant.Model.Parent;
 import com.example.madhaviruwandika.teacher_assistant.Model.SingleMessage;
 import com.example.madhaviruwandika.teacher_assistant.Model.Student;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
+import com.example.madhaviruwandika.teacher_assistant.Model.Util.ItemRegisterName;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 
@@ -272,8 +277,34 @@ public class CommunicatorDA implements CommunicationDAO{
                 Log.d("MYACTIVITY", "VALUES ARE INSERTED ");
                 return result;
             }
-
     }
 
+    public ArrayList<ItemRegisterName> getTodaysRegister(int classID,String date){
+
+        ArrayList<ItemRegisterName> list = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from Attendance_Sheet where Class_Id =? AND DateOPA =? ",new String[]{String.valueOf(classID),date});
+            if (cursor.getCount() == 0) {
+                Log.d("MYACTIVITY", "No Value");
+            } else {
+                //iterate through result set
+                if (cursor.moveToFirst()) {
+                    do {
+                        Log.d("Date", "YYYYYYYYYYYYYYYYYYYYYYYY" + cursor.getString(3) + "$$$$$$$$$$$$$$$$$$$$$$$$$$$" + cursor.getString(2));
+                        ItemRegisterName item = new ItemRegisterName();
+                        item.setSID(Integer.parseInt(cursor.getString(1)));
+                        if(cursor.getInt(4)==1){
+                            item.setAttendence(true);
+                        }
+                        else {
+                            item.setAttendence(false);
+                        }
+
+                        list.add(item);
+                    } while (cursor.moveToNext());
+                }
+
+            }
+        return list;
+    }
 
 }

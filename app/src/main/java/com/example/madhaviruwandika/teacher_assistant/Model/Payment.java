@@ -8,11 +8,13 @@ public class Payment {
     private int SID;
     private int CID;
     private String DoP;
+    private String monthOfPayment;
 
-    public Payment( int SID, int CID , String doP) {
+    public Payment( int SID, int CID , String doP,String month) {
         DoP = doP;
         this.SID = SID;
         this.CID = CID;
+        this.monthOfPayment = month;
     }
 
     public Payment() {
@@ -46,6 +48,15 @@ public class Payment {
     public void setDoP(String doP) {
         DoP = doP;
     }
+
+    public String getMonthOfPayment() {
+        return monthOfPayment;
+    }
+
+    public void setMonthOfPayment(String monthOfPayment) {
+        this.monthOfPayment = monthOfPayment;
+    }
+
 
 
 

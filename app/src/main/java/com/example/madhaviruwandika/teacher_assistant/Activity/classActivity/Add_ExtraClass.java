@@ -77,7 +77,7 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
                 public void onDateSet(DatePicker view, int yearSelected,
                                       int monthOfYear, int dayOfMonth) {
                     String year = String.valueOf(yearSelected);
-                    String month = String.valueOf(monthOfYear);
+                    String month = String.valueOf(monthOfYear+1);
                     String day = String.valueOf(dayOfMonth);
                     if (month.length()==1){
                         month = "0"+month;
@@ -150,9 +150,9 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
 
         // initialize view items
         radio_g = (RadioGroup)findViewById(R.id.ClassType);
-        btnAdd = (Button)findViewById(R.id.add);
+        btnAdd = (Button)findViewById(R.id.btnUpdate);
         Time = (TextView)findViewById(R.id.textViewTime);
-        date = (TextView)findViewById(R.id.editTextDate);
+        date = (TextView)findViewById(R.id.textViewDate);
         datePcker = (ImageButton)findViewById(R.id.imageButtonDate);
         Ifrom = (ImageButton)findViewById(R.id.imageButtonFrom);
         ITo = (ImageButton)findViewById(R.id.imageButtonTo);
@@ -219,6 +219,10 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
 
                         String dateOfClass = date.getText().toString();
                         if(!InputValidator.isValidDate(dateOfClass)){
+                            inputValidation = false;
+                            date.setError("Not a valid Date");
+                        }
+                        if(InputValidator.isDateisPast(dateOfClass)){
                             inputValidation = false;
                             date.setError("Not a valid Date");
                         }
@@ -294,6 +298,8 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
     public void clearView(){
         Time.setText("");
         date.setText("");
+        To.setText("");
+        From.setText("");
         spinner_class.setSelection(0);
     }
 }

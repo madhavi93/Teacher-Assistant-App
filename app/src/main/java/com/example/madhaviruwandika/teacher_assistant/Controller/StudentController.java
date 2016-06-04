@@ -117,6 +117,24 @@ public class StudentController {
         return examD;
     }
 
+    public ArrayList<Map<String,String>> getExamListWithOutMarkSheetByClassID(int classID){
+
+        List<Exam> exams = sDAO.getExamListWithOutMarkSheetByClassID(classID);
+        ArrayList<Map<String,String>> examD = new ArrayList<>();
+
+        for (Exam e : exams){
+            Map<String,String> exam = new HashMap<>();
+            exam.put("ExamID",String.valueOf(e.getExamID()));
+            exam.put("ClassID",String.valueOf(e.getClassID()));
+            exam.put("date",e.getDate());
+            exam.put("Etype",e.getEtype());
+            exam.put("lesson",e.getLesson());
+
+            examD.add(exam);
+        }
+        return examD;
+    }
+
     public List<TutionClass> getClassList(){
         List<TutionClass> classes = sDAO.getClassDetails();
         if(classes!= null){
@@ -242,6 +260,7 @@ public class StudentController {
 
             map.put("No",String.valueOf(i+1));
             map.put("date",paymentList.get(i).getDoP());
+            map.put("month",paymentList.get(i).getMonthOfPayment());
 
             list.add(map);
         }

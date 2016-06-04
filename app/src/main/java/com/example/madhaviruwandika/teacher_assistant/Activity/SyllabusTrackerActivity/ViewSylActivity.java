@@ -66,7 +66,7 @@ public class ViewSylActivity extends AppCompatActivity {
             tr.addView(lesson_no);
 
             TextView lessonN = new TextView(this);
-            lessonN.setText(l.get("Lesson"));
+            lessonN.setText(l.get("Lesson").substring(0,15));
             Log.d("MY", "%%%%%%%%%%%%%%%%%%%%%%%%%" + l.get("Lesson") + "%%%%%%%%%%%%%%%%%%%%%%%%");
             tr.addView(lessonN);
 
@@ -89,11 +89,9 @@ public class ViewSylActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         Intent myIntent = new Intent(getApplicationContext(), MyProgressActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
-
     }
 
     public void backButtonClick(){
@@ -118,5 +116,4 @@ public class ViewSylActivity extends AppCompatActivity {
         });
 
     }
-
 }

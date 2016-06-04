@@ -18,58 +18,69 @@
         android:layout_height="match_parent">
 
         <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="     Add Student     "
-        android:id="@+id/btnAddStd"
-        android:layout_marginTop="49dp"
-        android:background="#25b7f5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     Add Student     "
+            android:id="@+id/btnAddStd"
+            android:layout_marginTop="40dp"
+            android:background="#25b7f5"
             android:layout_alignParentTop="true"
-            android:layout_alignStart="@+id/btnAddClass"
-            android:layout_alignEnd="@+id/btnAddClass" />
+            android:layout_alignEnd="@+id/btnAddClass"
+            android:layout_alignStart="@+id/btnAddClass" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="     Add Class     "
-        android:id="@+id/btnAddClass"
-        android:background="#057bad"
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/btnAddStd"
-        android:layout_alignEnd="@+id/btnAddEXCls"
-        android:layout_alignStart="@+id/btnAddEXCls" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     Add Class     "
+            android:id="@+id/btnAddClass"
+            android:background="#057bad"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/btnAddStd"
+            android:layout_alignStart="@+id/btnAddEXCls"
+            android:layout_alignEnd="@+id/btnAddEXCls" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="     Add Extra Class     "
-        android:id="@+id/btnAddEXCls"
-        android:background="#295e74"
-        android:layout_below="@+id/btnAddClass"
-        android:layout_marginTop="41dp"
-        android:layout_alignStart="@+id/btnUpdateClass"
-        android:layout_alignEnd="@+id/btnUpdateClass" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     Add Extra Class     "
+            android:id="@+id/btnAddEXCls"
+            android:background="#295e74"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/btnAddClass"
+            android:layout_alignEnd="@+id/btnUpdateClass"
+            android:layout_alignStart="@+id/btnUpdateClass" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="UPDATE CLASS DETAIL"
             android:id="@+id/btnUpdateClass"
-            android:layout_marginTop="43dp"
-            android:layout_below="@+id/btnAddEXCls"
             android:background="#b0aaaa"
-            android:layout_alignEnd="@+id/btnUpdateStdDetails"
-            android:layout_alignStart="@+id/btnUpdateStdDetails" />
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/btnAddEXCls"
+            android:layout_alignStart="@+id/btnUpdateStdDetails"
+            android:layout_alignEnd="@+id/btnUpdateStdDetails" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update Student Details"
             android:id="@+id/btnUpdateStdDetails"
-            android:layout_marginTop="43dp"
+            android:background="#e3e9b5"
+            android:layout_marginTop="40dp"
             android:layout_below="@+id/btnUpdateClass"
+            android:layout_alignEnd="@+id/btnUpdateExtraClass"
+            android:layout_alignStart="@+id/btnUpdateExtraClass" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" View/Update Extra Classes "
+            android:id="@+id/btnUpdateExtraClass"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/btnUpdateStdDetails"
             android:layout_centerHorizontal="true"
-            android:background="#e3e9b5" />
+            android:background="#a3b18a" />
 
     </RelativeLayout>
 

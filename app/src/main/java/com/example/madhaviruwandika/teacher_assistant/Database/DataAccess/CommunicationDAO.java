@@ -5,7 +5,9 @@ import com.example.madhaviruwandika.teacher_assistant.Model.Parent;
 import com.example.madhaviruwandika.teacher_assistant.Model.SingleMessage;
 import com.example.madhaviruwandika.teacher_assistant.Model.Student;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
+import com.example.madhaviruwandika.teacher_assistant.Model.Util.ItemRegisterName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,4 +24,5 @@ public interface CommunicationDAO {
     public long RecordOfSendingSingleMessage(SingleMessage m);
     public long RecordOfSendingGroupMessage(GroupMessage m);
     public int getMessageID(String mType);
+    public ArrayList<ItemRegisterName> getTodaysRegister(int classID,String date);
 }
