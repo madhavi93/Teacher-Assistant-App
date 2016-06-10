@@ -251,7 +251,7 @@ public class StudentController {
 
     public List<Map<String,String>> getPayments(int s_id,int class_id){
 
-        List<Payment> paymentList = sDAO.getPayments(s_id,class_id);
+        List<Payment> paymentList = sDAO.getPayments(s_id, class_id);
         Log.d("MYACTIVITY", ">>>>>>>>>>>>>>>>>>>>>>>>."+s_id+">>>"+class_id+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         List<Map<String,String>> list = new ArrayList<>();
@@ -268,5 +268,16 @@ public class StudentController {
         return list;
     }
 
+
+    public int DeleteStudent(int s_id){
+
+        if(sDAO.DeleteStudent(s_id)!= -1){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
 
 }

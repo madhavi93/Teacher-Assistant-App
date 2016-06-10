@@ -118,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Update"
-            android:id="@+id/btnUpdate"
+            android:id="@+id/btnDelete"
             android:onClick="onClick"
             android:textColor="#ffffff"
             android:background="#033aa8"

@@ -12,6 +12,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyProgressActivity"
     tools:showIn="@layout/activity_my_progress">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -56,7 +56,6 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
     private int mYear, mMonth, mDay,mHour,mMinute;
 
     public StudentActivity(){
-
         // initialize variable to current date and time
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -96,7 +95,6 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         super.onCreate(savedInstanceState);
-
 
         // get values at the form
         Ename = (EditText) findViewById(R.id.editTextSName);
@@ -165,21 +163,21 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
     public boolean addStudentDetails() {
 
         Boolean validateCheck = true;
-
         /*
          *get values from the edit text views and assign them to variables
          * Check validation of the input
         */
         String name = Ename.getText().toString();
-        if(!InputValidator.isValidLetters(name)){
+        if(!InputValidator.isValidLetters(name) || name == ""){
             Ename.setError("INVALID INPUT");
             validateCheck = false;
         }
 
         String address = EAddress.getText().toString();
 
+
         String DoB = EDoB.getText().toString();
-        if(!InputValidator.isValidDate(DoB)){
+        if(!InputValidator.isValidDate(DoB) || DoB == ""){
             EDoB.setError("INVALID INPUT");
             validateCheck = false;
         }
@@ -190,26 +188,27 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
 
 
         String pname = pName.getText().toString();
-        if(!InputValidator.isValidLetters(pname)){
+        if(!InputValidator.isValidLetters(pname) || pname == "" ){
             Ename.setError("INVALID INPUT");
             validateCheck = false;
         }
 
-
         String  pTP = pTP_no.getText().toString();
-        if(!InputValidator.isValidDigits(pTP_no.getText().toString()) || pTP_no.getText().toString().length()!= 10  ){
+        if(!InputValidator.isValidDigits(pTP_no.getText().toString()) || pTP_no.getText().toString().length()!= 10 ){
             pTP_no.setError("INVALID INPUT");
+            validateCheck = false;
+        }
+        if(pTP == ""){
             validateCheck = false;
         }
 
         String email = pEmail.getText().toString();
-        if(!InputValidator.isValidEmail(email)){
+        if(!InputValidator.isValidEmail(email) || email ==""){
             pEmail.setError("INVALID INPUT");
             validateCheck = false;
         }
 
         if(studentClssIDPos!=0) {
-
             if (validateCheck) {
                 // pass student values for add to database and get student id
                 int SID = sdc.addStudent(name, DoB, address, studentClssIDPos);
@@ -224,11 +223,12 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     return false;
                 }
             } else {
+                Toast.makeText(StudentActivity.this, "There are some invalid inputs.please correct them and retry.", Toast.LENGTH_LONG).show();
                 return false;
             }
         }else {
 
-            Toast.makeText(StudentActivity.this, "Student Details are not added succesfully.Select Class and Try Again", Toast.LENGTH_LONG).show();
+            Toast.makeText(StudentActivity.this, "Student Details are not added successfully.Select Class and Try Again", Toast.LENGTH_LONG).show();
             return false;
         }
 

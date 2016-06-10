@@ -533,4 +533,15 @@ public class ClassDA implements ClassDAO{
 
     }
 
+    @Override
+    public long DeleteClass(int classID) {
+
+        long i = db.delete("TutionClass",DBConstant.tutionClass_col1+ " = "+classID,null);
+        return i;
+
+    }
+
+
+
+
 }

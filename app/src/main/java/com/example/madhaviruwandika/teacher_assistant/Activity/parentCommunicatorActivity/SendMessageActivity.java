@@ -38,9 +38,8 @@ public class SendMessageActivity extends BaseActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                            Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendSMSActivity");
-                            startActivity(intent);
+                        Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendSMSActivity");
+                        startActivity(intent);
                         }
 
                 }
@@ -52,7 +51,6 @@ public class SendMessageActivity extends BaseActivity {
     public void SendEmailButtonClickListner(){
 
         sendEmail = (ImageButton)findViewById(R.id.imageButtonSendEmail);
-
         sendEmail.setOnClickListener(
                 new View.OnClickListener() {
                     @Override

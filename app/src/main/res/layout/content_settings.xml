@@ -13,28 +13,35 @@
     tools:showIn="@layout/activity_settings">
 
     <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:background="#e6fafc"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp">
 
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Email Account"
-            android:id="@+id/buttonaddEmail"
+            android:text="     Delete Class     "
+            android:id="@+id/buttonDeleteClass"
+            android:layout_marginTop="66dp"
+            android:background="#7daf99"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="64dp"
-            android:layout_alignEnd="@+id/buttonSmsCon"
-            android:layout_alignStart="@+id/buttonSmsCon" />
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add SMS Connection"
-            android:id="@+id/buttonSmsCon"
-            android:layout_below="@+id/buttonaddEmail"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="45dp" />
+            android:text="Delete Student"
+            android:id="@+id/buttonDeleteStudent"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/buttonDeleteClass"
+            android:layout_alignEnd="@+id/buttonDeleteClass"
+            android:layout_alignStart="@+id/buttonDeleteClass"
+            android:background="#66eacf" />
     </RelativeLayout>
     <ListView
         android:layout_width="250dp"

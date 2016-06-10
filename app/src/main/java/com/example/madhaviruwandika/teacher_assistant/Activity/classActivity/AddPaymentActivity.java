@@ -56,19 +56,21 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // set home button enable
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        // initialize class controller
         classController = new ClassController(this);
 
-
+        // initialize form widgets
         spinnerstd = (Spinner) findViewById(R.id.spinnerSName) ;
         spinnercls = (Spinner) findViewById(R.id.spinnerClass);
         month = (Spinner)findViewById(R.id.spinnerFor_month);
 
+        // set tution class list for the use of class spinner
         tutionClasses = classController.getClassListForSpinner();
-
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tutionClasses);
@@ -77,8 +79,7 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
         // attaching data adapter to spinner
         spinnercls.setAdapter(dataAdapter);
 
-
-
+        // create array list for the use of month spinner
         monthList = new ArrayList<>();
         monthList.add("");
         monthList.add("January");
@@ -100,24 +101,23 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
         // attaching data adapter to spinner
         month.setAdapter(dataAdapter2);
 
-
+        // initialize the bundle and retrieve valus from the bundle
         myBundle = getIntent().getExtras();
-
         if(myBundle != null){
+            // get class id that is passed from the previous activity
             ClassIDPos = myBundle.getInt("ClassID");
             spinnercls.setSelection(ClassIDPos);
             spinnercls.setEnabled(false);
         }
-
-
         spinnercls.setOnItemSelectedListener(this);
+        // set click listner on the add button
         onAddPaymentClickListner();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         Spinner spinner = (Spinner)parent;
-
+        // set action if selected item is from the class spinner
         if(spinner.getId() == R.id.spinnerClass) {
             ClassIDPos = classController.getClassIDBySpinnerItemSelected(position);
 
@@ -139,13 +139,15 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
             spinnerstd.setAdapter(dataAdapter);
 
         }
+        // set action if selected item is from the student name spinner
         else  if(spinner.getId() == R.id.spinnerSName){
 
-            if(position != 0){
-                 StudentIDPos = Integer.parseInt(studentList.get(position-1)[0][0]);
+            if(position != 0) {
+                StudentIDPos = Integer.parseInt(studentList.get(position-1)[0][0]);
             }
         }
 
+        // set action if selected item is from the month spinner
         else if(spinner.getId() == R.id.spinnerFor_month){
            if(position != 0){
             monthP = monthList.get(position);
@@ -155,10 +157,11 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    public void onNothingSelected(AdapterView<?> parent) {}
 
-    }
-
+    /*
+    method that initialize click listner on add button
+     */
     public void onAddPaymentClickListner(){
         AddPayment = (Button)findViewById(R.id.btnAdd);
 
@@ -171,9 +174,12 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
 
     }
 
+    /*
+    method that pass data to controller for the purpose of adding to the database
+     */
     public int addPayment(int s_id,int c_id){
 
-        if(!monthP.equals("")) {
+        if((!monthP.equals("") )|| (c_id!=0)||(s_id!=0)) {
             if (classController.addPayment(s_id, c_id,monthP) == 1) {
                 Toast.makeText(AddPaymentActivity.this, "Payment added successfully.", Toast.LENGTH_LONG).show();
                 clearInterface();
@@ -183,21 +189,26 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
                 return 0;
             }
         }
-
         else {
-            Toast.makeText(AddPaymentActivity.this, "Please select month of payment", Toast.LENGTH_LONG).show();
+            Toast.makeText(AddPaymentActivity.this, "Missing data.please check again", Toast.LENGTH_LONG).show();
             return 0;
         }
 
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //set action when home button is selected
         Intent myIntent = new Intent(getApplicationContext(), TodaysClassActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
     }
 
+    /*
+    method that clear all the inputs
+     */
     public void clearInterface(){
         spinnercls.setSelection(0);
         spinnerstd.setSelection(0);

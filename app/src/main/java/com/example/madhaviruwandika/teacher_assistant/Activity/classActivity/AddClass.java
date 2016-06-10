@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -113,6 +114,7 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
                 // the callback received when the user "sets" the TimePickerDialog in the dialog
                 public void onTimeSet(TimePicker view, int hourOfDay, int min) {
                     String timeString;
+                    // change selected value of time picker to 12 hours time format
                     if(hourOfDay >12){
                         hourOfDay = hourOfDay - 12;
                         timeString = "pm";
@@ -125,26 +127,27 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
                         timeString = "am";
                     }
 
-
+                    // set selected time to 'From' text view
                     if (booleaFrom == 1){
                         booleaFrom = 0;
                         String hour = String.valueOf(hourOfDay);
                         String minut = String.valueOf(min);
                         if (minut.length() == 1){
-                            minut = "0"+minut;
+                            minut = '0'+minut;
                         }
-                        From.setText(hour+"."+min+""+timeString);
+                        From.setText(hour+"."+minut+""+timeString);
                         classtime.setText(From.getText());
 
                     }
+                    // set selected time to 'To' text view
                     else  if(booleanTo == 1){
                         booleanTo = 0;
                         String hour = String.valueOf(hourOfDay);
                         String minut = String.valueOf(min);
                         if (minut.length() == 1){
-                            minut = "0"+minut;
+                            minut = '0'+minut;
                         }
-                        To.setText(hour+"."+min+""+timeString);
+                        To.setText(hour+"."+minut+""+timeString);
                         classtime.setText(From.getText()+"-"+To.getText());
                     }
                 }
@@ -162,8 +165,10 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
+
         // initialize class Controller
         cldc = new ClassController(this);
+
         // get values at the form
         className = (EditText) findViewById(R.id.editTextname);
         classday = (Spinner) findViewById(R.id.spinnerDay);
@@ -178,7 +183,7 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
         Ifrom = (ImageButton)findViewById(R.id.imageButtonFrom);
         ITo = (ImageButton)findViewById(R.id.imageButtonTo);
 
-
+        // create list for the spinner_day
         days = new ArrayList<>();
         days.add("");
         days.add("Monday");
@@ -198,7 +203,8 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         classday.setAdapter(dataAdapter);
-        // Set ClickListener on btnSelect start Date
+
+        // Set ClickListener on btn start Date
         IstartDate.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -208,7 +214,7 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
             }
         });
 
-        // Set ClickListener on btnSelect end Date
+        // Set ClickListener on btn end Date
         IendDate.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
@@ -227,7 +233,6 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
                 showDialog(TIME_DIALOG_ID);
             }
         });
-
         ITo.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -246,7 +251,6 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
         if(addClassDetails()){
             Toast.makeText(AddClass.this, "Class Details are succesfully added.", Toast.LENGTH_LONG).show();
             clearInput();
-
         }
         else {
             Toast.makeText(AddClass.this, "Class Details are not added succesfully.Try Again", Toast.LENGTH_LONG).show();
@@ -262,24 +266,34 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
          *get values from the edit text views and assign them to variables
          * Check validation of the input
         */
+        // set class name
         String ClassName = className.getText().toString();
-
-        String time = classtime.getText().toString();
-
-        String day = days.get(dayID);
-        if(!InputValidator.isValidLetters(day)){
+        if(ClassName == ""){
             validateCheck = false;
         }
 
+        //set class time
+        String time = classtime.getText().toString();
+        if(time ==""){
+            validateCheck = false;
+        }
+
+        // set day of the class
+        String day = days.get(dayID);
+        if(!InputValidator.isValidLetters(day) || day == ""){
+            validateCheck = false;
+        }
+
+        // set start date of the class
         String StartDate = startingDate.getText().toString();
-        if(!InputValidator.isValidDate(StartDate)){
+        if(!InputValidator.isValidDate(StartDate) || StartDate ==""){
             startingDate.setError("INVALID INPUT"+StartDate);
             validateCheck = false;
         }
 
-
+        // set end date of the class
         String EndDate = endDate.getText().toString();
-        if(!InputValidator.isValidDate(EndDate)){
+        if(!InputValidator.isValidDate(EndDate)|| EndDate == ""){
             endDate.setError("INVALID INPUT");
             validateCheck = false;
         }
@@ -288,6 +302,7 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
             validateCheck = false;
         }
 
+        // set class fee
         double classfee=0;
         if(!InputValidator.ClassFeeValidator(fee.getText().toString())){
             fee.setError("Not Valied Input");
@@ -296,18 +311,26 @@ public class AddClass extends AppCompatActivity implements AdapterView.OnItemSel
         else {
              classfee = Double.parseDouble(fee.getText().toString());
         }
+        if(classfee == 0){
+            validateCheck = false;
+        }
 
+        // check whether there are any invalid input
         if (validateCheck) {
             // pass class values for add to database and get student id
-            if(cldc.AddClass(ClassName,time,day,StartDate,EndDate,classfee) != 0 );
+            if(cldc.AddClass(ClassName,time,day,StartDate,EndDate,classfee) != 0 ){
                 return true;
+            }
+            else return false;
 
         } else {
-                return false;
+            Toast.makeText(AddClass.this, "There are some invalid inputs.Please correct them and try again.", Toast.LENGTH_LONG).show();
+            return false;
         }
 
 
     }
+
 
     @Override
     protected Dialog onCreateDialog(int id) {

@@ -41,7 +41,6 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
     private EditText lesson;
     private Button Add;
 
-
     List<TutionClass> tutionClasses;
     List<String> examType;
 
@@ -84,7 +83,6 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
 
 
     public AddExamRecordsActivity(){
-
         // initialize variable to current date and time
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
@@ -93,6 +91,7 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
         mHour = c.get(Calendar.HOUR_OF_DAY);
         mMinute = c.get(Calendar.MINUTE);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
@@ -100,19 +99,22 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // set home button
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        // initialice widgets in form
         spinnerClass = (Spinner)findViewById(R.id.spinnerClass);
         spinnerEType = (Spinner)findViewById(R.id.spinnerExamType);
         Buttondate= (ImageButton)findViewById(R.id.imageButtondate);
         dateText = (TextView) findViewById(R.id.textViewDate);
         lesson = (EditText) findViewById(R.id.editTextLesson);
 
-
+        // initialize controllers
         classController = new ClassController(this);
 
+        // get class list for the spinner class
         List<String> categoriesClasses = classController.getClassListForSpinner();
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesClasses);
@@ -121,17 +123,18 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
         // attaching data adapter to spinner
         spinnerClass.setAdapter(dataAdapter1);
 
+        // create list which contains exam types for spinner exam type
         examType = new ArrayList<>();
         examType.add("");
         examType.add("Written");
         examType.add("verbal");
+
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, examType);
         // Drop down layout style - list view with radio button
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         spinnerEType.setAdapter(dataAdapter2);
-
 
         // Spinner click listener
         spinnerClass.setOnItemSelectedListener(this);
@@ -146,7 +149,6 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
             }
         });
 
-
         // listner for add Button
         onAddExamDetails();
     }
@@ -155,21 +157,19 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
        Spinner s = (Spinner)parent;
-
+        // set action if item in class spinner is selected
         if (s.getId() == R.id.spinnerClass){
             ClassID = classController.getClassIDBySpinnerItemSelected(position);
 
         }
+        // set action if item in exam spinner is selected
         else if(s.getId() == R.id.spinnerExamType){
             ExamType  = s.getSelectedItem().toString();
         }
-
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 
     @Override
     protected Dialog onCreateDialog(int id) {
@@ -191,16 +191,17 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        // set action on home button
         Intent myIntent = new Intent(getApplicationContext(), StudentProgressActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
     }
 
-
+    /*
+    method that initialize click listner on add button
+     */
     public void onAddExamDetails(){
-
         Add = (Button)findViewById(R.id.buttonAdd);
-
         Add.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -218,6 +219,9 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
         );
     }
 
+    /*
+    method that clear all the inputs in the form
+     */
     public void ClearText(){
 
         spinnerClass.setSelection(0);
@@ -226,16 +230,21 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
         lesson.setText("");
     }
 
+    /*
+    method that pass values to controller for store them in db
+     */
     public Boolean addExams(){
 
         boolean validateCheck = true;
         String  date = dateText.getText().toString();
 
-        if(!InputValidator.isValidDate(date)){
+        if(!InputValidator.isValidDate(date) || date==""){
             dateText.setError("Input is Not Valid");
             validateCheck=false;
         }
+
         Lesson = lesson.getText().toString();
+
         if(validateCheck){
             if(classController.addExams(ClassID, dateText.getText().toString(), ExamType, Lesson)==1){
                 return true;
@@ -245,6 +254,7 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
             }
         }
         else {
+            Toast.makeText(AddExamRecordsActivity.this, "There are some invalid inputs.Correct them and try again", Toast.LENGTH_LONG).show();
             return false;
         }
     }

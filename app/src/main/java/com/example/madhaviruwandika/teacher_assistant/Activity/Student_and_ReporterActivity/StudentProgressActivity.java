@@ -15,6 +15,7 @@ public class StudentProgressActivity extends BaseActivity {
     Button SeePerformanceStudent;
     Button AddPerformance;
     Button AddExam;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -31,9 +32,7 @@ public class StudentProgressActivity extends BaseActivity {
     }
 
     public void OnSeePerfomanceOFClassButtonClickListner(){
-
         SeePerformanceClass = (Button) findViewById(R.id.btnSeePerfomanceClass);
-
         SeePerformanceClass.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -42,15 +41,11 @@ public class StudentProgressActivity extends BaseActivity {
                         startActivity(intent);
                     }
                 }
-
         );
-
     }
 
     public void OnSeePerfomanceOfStudentButtonClickListner(){
-
         SeePerformanceStudent = (Button) findViewById(R.id.btnSeeStudentPerfomance);
-
         SeePerformanceStudent.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -61,13 +56,10 @@ public class StudentProgressActivity extends BaseActivity {
                 }
 
         );
-
     }
 
     public void OnaddPerfomanceButtonClickListner(){
-
         AddPerformance = (Button) findViewById(R.id.btnAddPerfomance);
-
         AddPerformance.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -76,15 +68,11 @@ public class StudentProgressActivity extends BaseActivity {
                         startActivity(intent);
                     }
                 }
-
         );
-
     }
 
     public void OnAddExamButtonClickListner(){
-
         AddExam = (Button) findViewById(R.id.btnAddExam);
-
         AddExam.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -93,9 +81,7 @@ public class StudentProgressActivity extends BaseActivity {
                         startActivity(intent);
                     }
                 }
-
         );
-
     }
 
 

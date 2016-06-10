@@ -255,7 +255,10 @@ public class ClassController {
             AppConstant.getInstance().setMarkedAttendence(true);
             return 1;
         }
-        else return 0;
+        else {
+            AppConstant.getInstance().setMarkedAttendence(false);
+            return 0;
+        }
     }
 
     public int MarkStartingOfTheClass(int ClasID){
@@ -278,7 +281,7 @@ public class ClassController {
             String[] classTime = tutionClass.getTime().split("-");
             int myclassTime = getTimePeriod(classTime[0],classTime[1]);
             // start timer that update app constant data regarding to class starting
-            new ClassTimer(myclassTime,context);
+            new ClassTimer(myclassTime,ClasID,context);
 
             return 1;
         }
@@ -435,4 +438,16 @@ public class ClassController {
             return 0;
         }
     }
+
+    public int DeleteClass(int classID){
+
+        if(classDAO.DeleteClass(classID)!= -1){
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
 }

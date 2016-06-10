@@ -38,15 +38,18 @@ public class PerfomanceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_perfomance, container, false);
         barChart = (BarChart) view.findViewById(R.id.perfomance_chart);
         std = (TextView) view.findViewById(R.id.stdName);
+
+        // initialize bundle to get data from previous activity
         mybundle = this.getArguments();
+        // initialize controller
         studentController = new StudentController(getActivity());
 
+        // collect data to create chart
         List<List<Integer>> groupList = studentController.getDataToStudentPerfomanceReport(mybundle.getInt("ClassID"),mybundle.getInt("StudentID"));
-
+        // assign data according to the chart format
         List<Integer> groupmin = groupList.get(0);
         List<Integer> groupStdMark = groupList.get(1);
         List<Integer> groupMax = groupList.get(2);
-
 
         // create BarEntry for group 1
         ArrayList<BarEntry> group1 = new ArrayList<BarEntry>();
@@ -85,7 +88,8 @@ public class PerfomanceFragment extends Fragment {
         dataSets.add(barDataSet3);
         ArrayList<String> labels = studentController.getExamNameListByClassID(mybundle.getInt("ClassID"));
 
-        BarData data = new BarData(labels,dataSets); // initialize the Bardata with argument labels and dataSet
+        // initialize the Bardata with argument labels and dataSet
+        BarData data = new BarData(labels,dataSets);
         barChart.setData(data);
         std.setText(mybundle.getString("name"));
 

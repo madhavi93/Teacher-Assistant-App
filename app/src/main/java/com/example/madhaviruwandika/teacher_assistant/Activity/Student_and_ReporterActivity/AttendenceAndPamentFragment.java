@@ -21,23 +21,29 @@ import java.util.Map;
 public class AttendenceAndPamentFragment extends Fragment {
 
     TextView atendenceState;
-    Bundle myBundle;
     private TableLayout logsTableLayout;
+
+    Bundle myBundle;
     StudentController studentController;
     List<Map<String,String>> payments;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_attendence_and_pament, container, false);
 
+        //initialize widgets in the form
         atendenceState = (TextView)v.findViewById(R.id.attendence_State);
         logsTableLayout = (TableLayout)v.findViewById(R.id.dateList);
+        // initialize bundele to get data which passed from the previous activity
         myBundle = this.getArguments();
 
+        // initialize controllers
         studentController = new StudentController(getActivity());
         atendenceState.setText(studentController.getAttendenceState(myBundle.getInt("StudentID"),myBundle.getInt("ClassID")));
 
+        // add pament data to view in table
         payments = studentController.getPayments(myBundle.getInt("StudentID"),myBundle.getInt("ClassID"));
         for (Map<String,String> payment : payments){
 
@@ -57,7 +63,6 @@ public class AttendenceAndPamentFragment extends Fragment {
 
             logsTableLayout.addView(tr);
         }
-
         return v;
     }
 

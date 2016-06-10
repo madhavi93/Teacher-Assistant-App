@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
@@ -124,16 +125,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.TodaysClassActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Activity.classActivity.manegeClassActivity"
-            android:label="@string/title_activity_manege_class"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.manegeClassActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -307,6 +298,26 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.ViewExtraClassActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.classActivity.DeleteClassActivity"
+            android:label="@string/title_activity_delete_class"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.DeleteClassActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.classActivity.DeleteStudentActivity"
+            android:label="@string/title_activity_delete_student"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.StudentActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>

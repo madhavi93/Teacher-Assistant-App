@@ -63,14 +63,11 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
 
     public void OnPerfomanceButtonClickListner(){
 
-
             SeePerformance = (Button) findViewById(R.id.buttonSeeP);
-
             SeePerformance.setOnClickListener(
                     new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
                             if( StudentID != 0 ) {
                                 Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.PerformanceReportActivity");
                                 // bind values with new activity
@@ -90,7 +87,6 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         Intent myIntent = new Intent(getApplicationContext(), StudentProgressActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
@@ -100,8 +96,7 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         Spinner spinner = (Spinner)parent;
-
-
+        // set action if selected spinner item is from class spinner
         if(spinner.getId() == R.id.spinnerClass) {
             studentClssIDPos = stcr.getClassIDBySpinnerItemSelected(position);
             // load student list when class is selected from spinner
@@ -123,8 +118,8 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
             // attaching data adapter to spinner
             spinnerStudent.setAdapter(dataAdapter);
         }
+        // set action if selected item is from student spinner
         else if(spinner.getId() == R.id.spinnerStudent){
-
             if(position != 0) {
                 StudentID = Integer.parseInt(studentList.get(position-1)[0][0]);
                 name = studentList.get(position-1)[0][1];
@@ -133,7 +128,5 @@ public class SeePerfomanceActivity extends AppCompatActivity implements AdapterV
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 }

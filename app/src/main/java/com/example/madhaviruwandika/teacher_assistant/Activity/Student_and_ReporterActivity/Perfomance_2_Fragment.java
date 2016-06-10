@@ -31,22 +31,27 @@ public class Perfomance_2_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_perfomance_2_, container, false);
         lineChart = (LineChart) view.findViewById(R.id.perfomance_chart);
         std = (TextView) view.findViewById(R.id.stdName);
+
+        // initialize bundle to aed data which passed from the previous activity
         mybundle = this.getArguments();
+        // initialize controller
         studentController = new StudentController(getActivity());
 
 
-        // creating list of entry
+        // initialize the chart of performance with the values
+
+        // creating list of entry of the chart
         ArrayList<Entry> entries = new ArrayList<>();
         ArrayList<Integer> markList = studentController.getExamMarkListOfStudent(mybundle.getInt("StudentID"));
         entries.add(new Entry(0f,0));
         for(int i=1;i<=markList.size();i++){
             entries.add(new Entry(markList.get(i - 1), i));
         }
-
         ArrayList<String> labels = new ArrayList<>();
         for (int i=0;i<entries.size();i++)
         {
@@ -57,12 +62,12 @@ public class Perfomance_2_Fragment extends Fragment {
                 labels.add("Exam_"+(i));
             }
         }
-
+        // set data to the chart and modify chart appearance
         LineDataSet dataset = new LineDataSet(entries, "Marks");
         dataset.setColor(Color.RED);
         LineData data = new LineData(labels, dataset);
         lineChart.setData(data);
-        lineChart.setDescription("Exams");  // set the description
+        lineChart.setDescription("Exams"); // set the description
 
         return view;
 

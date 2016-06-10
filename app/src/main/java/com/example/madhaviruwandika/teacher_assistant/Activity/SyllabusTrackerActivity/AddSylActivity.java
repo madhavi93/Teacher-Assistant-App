@@ -61,11 +61,13 @@ public class AddSylActivity extends AppCompatActivity implements AdapterView.OnI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         super.onCreate(savedInstanceState);
+
         //set home button and back arrow to toolbar
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        // initialize widgets in the form
         spinnerClass = (Spinner)findViewById(R.id.spinnerClass);
         spinnerLesson = (Spinner)findViewById(R.id.spinnerLessonNo);
         spinnerUnit = (Spinner)findViewById(R.id.spinnerUnit);
@@ -74,14 +76,16 @@ public class AddSylActivity extends AppCompatActivity implements AdapterView.OnI
         timeperiod = (EditText)findViewById(R.id.editTextTimePeriod);
         className = (TextView)findViewById(R.id.ClassName);
 
+        // initialize controllers
         classController = new ClassController(this);
         intelligenceSyllabusController = new IntelligenceSyllabusController(this);
 
+        // initialize bundle and get data which passed fronm the previous activity
         myBundle = getIntent().getExtras();
         ClassID = myBundle.getInt("ClassID");
         className.setText(myBundle.getString("ClassName") );
 
-
+        // create list of numbers for the use of sinner lesson and spinner unit
         List<String> numbers = new ArrayList<>();
         numbers.add("");
         for(int i=1;i<50;i++){
@@ -106,8 +110,8 @@ public class AddSylActivity extends AppCompatActivity implements AdapterView.OnI
         // attaching data adapter to spinner
         spinnerLesson.setAdapter(dataAdapter2);
 
-        List<String> categories = classController.getClassListForSpinner();
 
+        List<String> categories = classController.getClassListForSpinner();
         // Spinner click listener for class
         spinnerClass.setOnItemSelectedListener(this);
         // Creating adapter for spinner
@@ -189,12 +193,14 @@ public class AddSylActivity extends AppCompatActivity implements AdapterView.OnI
 
                 specialNote = specialAct.getText().toString();
 
-                if (!InputValidator.isValidDigits(timeperiod.getText().toString())) {
+                if (!InputValidator.isValidDigits(timeperiod.getText().toString()) || (timeperiod.getText().toString()=="") ){
                     validChect = false;
                     timeperiod.setError("Invalied input");
                 }
                 else
+                {
                     timePeriod = Integer.parseInt(timeperiod.getText().toString());
+                }
 
 
 
@@ -206,6 +212,9 @@ public class AddSylActivity extends AppCompatActivity implements AdapterView.OnI
                     else {
                         Toast.makeText(AddSylActivity.this, "Lesson Details are not added.Try again", Toast.LENGTH_LONG).show();
                     }
+                }
+                else {
+                    Toast.makeText(AddSylActivity.this, "There are some invalid inputs.correct them and try again", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -219,7 +228,6 @@ public class AddSylActivity extends AppCompatActivity implements AdapterView.OnI
         veiwD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(".Activity.SyllabusTrackerActivity.ViewSylActivity");
                 intent.putExtra("ClassID", ClassID);
                 intent.putExtra("ClassName",myBundle.getString("ClassName") );
@@ -229,6 +237,9 @@ public class AddSylActivity extends AppCompatActivity implements AdapterView.OnI
         });
     }
 
+    /*
+    method for clear inputs
+     */
     public void ClearText(){
         spinnerUnit.setSelection(0);
         spinnerLesson.setSelection(0);

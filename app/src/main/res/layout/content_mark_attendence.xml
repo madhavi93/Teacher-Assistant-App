@@ -10,10 +10,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.MarkAttendenceActivity"
-    tools:showIn="@layout/activity_mark_attendence"
-    android:background="#d4f7fe">
+    tools:showIn="@layout/activity_mark_attendence">
 
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e6fafc"
+        >
 
     <TextView
         android:layout_width="wrap_content"
@@ -61,4 +64,5 @@
         android:layout_marginTop="47dp"
         android:background="#0690c2" />
 
+        </RelativeLayout>
 </RelativeLayout>

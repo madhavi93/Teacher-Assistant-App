@@ -5,6 +5,10 @@
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Util.ChangeMyProfileFragment">
 
     <ScrollView
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:layout_marginLeft="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
@@ -81,7 +85,8 @@
                 android:id="@+id/editTextcurrentPassword"
                 android:layout_alignBottom="@+id/textView23"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/textView23" />
+                android:layout_toEndOf="@+id/textView23"
+                android:inputType="textPassword" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -89,7 +94,8 @@
                 android:id="@+id/editTextNewPassword"
                 android:layout_alignBottom="@+id/textView24"
                 android:layout_alignParentEnd="true"
-                android:layout_toEndOf="@+id/textView24" />
+                android:layout_toEndOf="@+id/textView24"
+                android:inputType="textPassword" />
 
             <EditText
                 android:layout_width="wrap_content"
@@ -97,7 +103,8 @@
                 android:id="@+id/editTextReEnter"
                 android:layout_alignBottom="@+id/textView48"
                 android:layout_alignStart="@+id/editTextNewPassword"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:inputType="textPassword" />
 
             <EditText
                 android:layout_width="wrap_content"

@@ -65,10 +65,12 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
         markoutof = 100;
         logsTableLayout = (TableLayout) findViewById(R.id.markList);
         TableRow tableRowHeader = (TableRow) findViewById(R.id.logs_table_header);
+        markOutOF = (Spinner)findViewById(R.id.spinnerMarkOutOF);
+        spinner = (Spinner) findViewById(R.id.spinner);
 
+        // get class list
         List<String> categories = stcr.getClassListForSpinner();
 
-        spinner = (Spinner) findViewById(R.id.spinner);
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
         // Creating adapter for spinner
@@ -78,14 +80,14 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
-
+        // create array list of mark range for use of spinner mark range
         ArrayList<String> markRange = new ArrayList<>();
         markRange.add("100");
         markRange.add("50");
         markRange.add("20");
         markRange.add("10");
 
-        markOutOF = (Spinner)findViewById(R.id.spinnerMarkOutOF);
+
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
         // Creating adapter for spinner
@@ -94,7 +96,6 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
         dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         markOutOF.setAdapter(dataAdapter2);
-
 
         onAddButtonClickListner();
 
@@ -106,7 +107,6 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
         Spinner spinner = (Spinner)parent;
 
         if(spinner.getId() == R.id.spinner) {
-
             if(position !=0) {
                 studentClssIDPos = position;
                 if(studentList != null){
@@ -200,7 +200,7 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
                             if (validCheck) {
 
                                 for (int i=0;i<markList.size();i++){
-                                    Log.d("MarkActivity", ">>>>>>>>>>>>>>>>>>>>" + markList.get(i)[1] + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                                  //  Log.d("MarkActivity", ">>>>>>>>>>>>>>>>>>>>" + markList.get(i)[1] + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                                 }
                                 if (cldc.addInclassMarks(markList, ExamId, markoutof) == 1) {
                                     Toast.makeText(AddPerformanceActivity.this, "Marks are added succesfully.", Toast.LENGTH_LONG).show();

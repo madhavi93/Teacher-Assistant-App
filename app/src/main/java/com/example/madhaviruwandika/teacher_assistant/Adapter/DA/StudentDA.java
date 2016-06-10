@@ -561,6 +561,11 @@ public class StudentDA implements StudentDAO {
             }
         }
         return ExamID;
+    }
 
+    @Override
+    public long DeleteStudent(int s_id) {
+        long i = db.delete("Student", DBConstant.stdTable_col1 + " = " + s_id, null);
+        return i;
     }
  }

@@ -54,12 +54,14 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        // initialise widgets in the form
         spinnerClass = (Spinner) findViewById(R.id.spinnerClass);
         recipient =(Spinner)findViewById(R.id.spinnerRecipient);
         sendSMS =(Button)findViewById(R.id.btnSend);
         groupMessage = (CheckBox)findViewById(R.id.checkBoxGroupSMS);
         message = (EditText)findViewById(R.id.editTextssms);
 
+        // initialize controller
         communicationController = new CommunicationController(this);
 
         List<String> categories = communicationController.getClassListForSpinner();
@@ -74,6 +76,9 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
+    /*
+    method for claer inputs
+     */
     public void clearText(){
         recipient.setSelection(0);
         spinnerClass.setSelection(0);
@@ -86,7 +91,7 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
         String smsText = message.getText().toString();
         if(!groupMessage.isChecked()) {
             String pnNo = communicationController.parentTPNo(StudentID);
-            Log.d("Send SMS", "SENT SUCCESSFULLY........................................................................." +StudentID+"....."+ pnNo);
+            //Log.d("Send SMS", "SENT SUCCESSFULLY........................................................................." +StudentID+"....."+ pnNo);
             int sendStatus = communicationController.sendSMSMessage(pnNo, smsText) ;
             if ( sendStatus== 1) {
                 Toast.makeText(SendSMSActivity.this, "Message Sent succesfully.", Toast.LENGTH_LONG).show();
@@ -127,16 +132,18 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         Spinner spinner = (Spinner)parent;
+        // set action if selected spinner item is from class spinner
         if(spinner.getId() == R.id.spinnerClass){
             // check if message is group or not
             if(!groupMessage.isChecked()){
 
+                // get selected class id
                 ClassID = communicationController.getClassIDBySpinnerItemSelected(position);
+                // get student list of the selected class
                 studentList = communicationController.getStudentListByClassID(ClassID);
 
                 ArrayList<String> students = new ArrayList<>();
                 students.add("");
-
                 for (int i=0;i< studentList.size();i++) {
                     students.add(studentList.get(i)[0][1]);
                 }
@@ -152,14 +159,12 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
                 recipient.setAdapter(dataAdapter);
 
             }
-
             else
             {
                 ClassID = communicationController.getClassIDBySpinnerItemSelected(position);
             }
-
-
         }
+        // set action if selected spinner item is from recipient spinner
         else if(spinner.getId() == R.id.spinnerRecipient){
             if(position!=0) {
                 StudentID = Integer.parseInt(studentList.get(position-1)[0][0]);
@@ -168,7 +173,5 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+    public void onNothingSelected(AdapterView<?> parent) {}
 }

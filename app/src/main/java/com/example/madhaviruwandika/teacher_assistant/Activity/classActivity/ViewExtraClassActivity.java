@@ -36,6 +36,7 @@ public class ViewExtraClassActivity extends AppCompatActivity implements Adapter
     int ExamID = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_extra_class);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

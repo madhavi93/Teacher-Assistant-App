@@ -35,9 +35,7 @@ public class IntelligenceSyllabusController {
     }
 
     public int addToSyllabus(int classID,int UnitID,int lessonNo, String lesson, int timePeriod,String specialAct){
-        Log.d("My","=============================adding.........=============================================");
         LessonUnit lessonUnit = new LessonUnit(UnitID,classID);
-
         int UnitTID = syllabusDAO.addtoSylUnit(lessonUnit);
         if (UnitTID != 0){
             Lesson lesson1 = new Lesson(UnitTID,lessonNo,lesson,0.0,timePeriod,0,specialAct);
@@ -189,20 +187,34 @@ public class IntelligenceSyllabusController {
         List<LessonUnit> unitList = syllabusDAO.getUnitByClassID(ClassID);
         int extraClassTime = extraClassTimeReleventToOneClass(ClassID);
 
-        return syllabus_maneger.getComment(unitList,lessons,lesson,tutionClass,extraClassTime);
+        if(lessons.size()!= 0 && unitList.size()!=0 ){
+            return syllabus_maneger.getComment(unitList,lessons,lesson,tutionClass,extraClassTime);
+        }
+        else {
+            String[] s = new String[2];
+            s[0] = "";
+            s[1] = "";
+            return s;
+        }
     }
 
     public String[] getCommentOnWorkAndSyllabus(int ClassID ){
-
         Lesson lesson = null;
         TutionClass tutionClass = syllabusDAO.getClassByClassID(ClassID);
         List<Lesson> lessons = syllabusDAO.getLessonD(ClassID);
         List<LessonUnit> unitList = syllabusDAO.getUnitByClassID(ClassID);
         int extraClassTime = extraClassTimeReleventToOneClass(ClassID);
 
-        return syllabus_maneger.getComment(unitList,lessons,lesson,tutionClass,extraClassTime);
+        if(lessons.size()!= 0 && unitList.size()!=0 ){
+            return syllabus_maneger.getComment(unitList,lessons,lesson,tutionClass,extraClassTime);
+        }
+        else {
+            String[] s = new String[2];
+            s[0] = "";
+            s[1] = "";
+            return s;
+        }
     }
-
 
     public int extraClassTimeReleventToOneClass(int ClassID) {
 

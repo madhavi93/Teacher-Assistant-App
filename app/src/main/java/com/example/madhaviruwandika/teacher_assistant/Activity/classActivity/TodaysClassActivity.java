@@ -40,15 +40,18 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         super.onCreate(savedInstanceState);
-        // initialize Class controller
+
+        // initialize controllers
         cldc = new ClassController(this);
         communicationController = new CommunicationController(this);
         // get list of class
         List<String> categories = cldc.getClassListForSpinner();
 
+        // initialize widgets in the form
         spinner = (Spinner) findViewById(R.id.spinner);
         finishClass = (Button) findViewById(R.id.buttonFinishClass);
 
+        // check  whether class is started
         if(AppConstant.getInstance().iscontinuing_class()){
             finishClass.setEnabled(true);
         }
@@ -95,7 +98,6 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         // is no any class is continuing then allow next class to start
                         if((studentClssIDPos != 0) && (!AppConstant.getInstance().iscontinuing_class()) ) {
                             if(cldc.MarkStartingOfTheClass(studentClssIDPos)==1){
@@ -118,7 +120,6 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
                         /*
                         if class is started and attendence of the students are not marked then mark the attendence.
                          */
@@ -156,7 +157,6 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                         }
                     }
                 }
-
         );
 
 
@@ -169,22 +169,15 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                     public void onClick(View v) {
                         if(AppConstant.getInstance().iscontinuing_class() && !AppConstant.getInstance().isMarkedAttendence()){
                             Toast.makeText(TodaysClassActivity.this, "Please Mark Attendence before Confirm ending of the class.", Toast.LENGTH_LONG).show();
-                            try {
-
-                                Thread.sleep(1000);
-                                Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.MarkAttendenceActivity");
-                                Bundle bundle = new Bundle();
-                                intent.putExtra("ClassID",studentClssIDPos);
-                                startActivity(intent);
-
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
+                            Intent intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.MarkAttendenceActivity");
+                            intent.putExtra("ClassID",studentClssIDPos);
+                            startActivity(intent);
 
                         }
                         else {
 
                             if(cldc.markFinishingOftheClass()==1){
+
                                 communicationController.SendSmsToNoifyFinishingtheClass(studentClssIDPos);
                                 AppConstant.getInstance().setClassContinuing(null);
                                 AppConstant.getInstance().setcontinuing_class(false);
@@ -192,6 +185,7 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                                 finishClass.setEnabled(false);
                                 spinner.setEnabled(true);
                                 Toast.makeText(TodaysClassActivity.this, "Sent messages to parents", Toast.LENGTH_LONG).show();
+
                             }
 
 

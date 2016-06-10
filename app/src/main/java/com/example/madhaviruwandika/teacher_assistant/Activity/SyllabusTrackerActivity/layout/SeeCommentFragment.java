@@ -67,9 +67,7 @@ public class SeeCommentFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String[] commentl = intelligenceSyllabusController.getCommentOnWorkAndSyllabus(classID);
-
                 if(commentl[0] == ""){
                     comment.setText(" "+commentl[1]);
                 }

@@ -2,24 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/drawer_Layout"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.AddPerformanceActivity"
-    tools:showIn="@layout/activity_add_performance">
-
+    tools:showIn="@layout/activity_add_performance"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="600dp"
         android:fillViewport="false"
-        android:id="@+id/scrollView">
+        android:id="@+id/scrollView"
+        android:background="#e6fafc">
 
-    </ScrollView>
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -109,9 +109,6 @@
             </TableLayout>
         </RelativeLayout>
 
-
-
-
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -158,4 +155,5 @@
             android:layout_toEndOf="@+id/textView31" />
 
     </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

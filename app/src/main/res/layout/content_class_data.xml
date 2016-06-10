@@ -7,15 +7,16 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_vertical_margin"
     android:id="@+id/drawer_Layout"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity"
-    tools:showIn="@layout/activity_class_data"
-    android:background="#eefcfb">
+    tools:showIn="@layout/activity_class_data">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#e6fafc">
 
         <Button
             android:layout_width="wrap_content"

@@ -22,6 +22,7 @@ import com.example.madhaviruwandika.teacher_assistant.Adapter.Util.StudentRegist
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
 import com.example.madhaviruwandika.teacher_assistant.Controller.CommunicationController;
 import com.example.madhaviruwandika.teacher_assistant.Controller.StudentController;
+import com.example.madhaviruwandika.teacher_assistant.Model.AppConstant;
 import com.example.madhaviruwandika.teacher_assistant.Model.Util.ItemRegisterName;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
@@ -38,13 +39,11 @@ public class MarkAttendenceActivity extends AppCompatActivity {
     private StudentRegisterAdapter adapter;
     private Button finishMarking;
 
-
     private List<String[][]> studentList ;
     private int classID = 0;
     private ClassController classController;
     private CommunicationController communicationController;
     private Bundle myBundle;
-    private List<String[][]> atteendance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +53,34 @@ public class MarkAttendenceActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        // initialize home and back button
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
+        // initialize widgets in the form
         className = (TextView) findViewById(R.id.textViewClass);
         v = (ListView) findViewById(R.id.register);
         finishMarking = (Button)findViewById(R.id.buttonFinishMarking);
 
+        // initialize conrollers
         classController = new ClassController(this);
         communicationController = new CommunicationController(this);
 
-        atteendance = new ArrayList<>();
-
+        // initialize bundle for get passed data from the previous activity
         myBundle = getIntent().getExtras();
         classID = myBundle.getInt("ClassID");
 
+        // get tutino class details
         Map<String,String> today_Class = new HashMap<>();
         if(classID != 0) {
             today_Class = classController.getTutionClassByID(classID);
         }
 
-        className.setText(today_Class.get("ClassName"));
 
+        className.setText(today_Class.get("ClassName"));
         studentList = classController.getStudentListByClassID(classID);
+
 
         register = new ArrayList<>();
         for(int i=0;i<studentList.size();i++){
@@ -87,13 +90,10 @@ public class MarkAttendenceActivity extends AppCompatActivity {
         adapter = new StudentRegisterAdapter(this,register);
         v.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         v.setAdapter(adapter);
-
         v.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-
-
                 if (view != null) {
 
                     CheckBox checkBox = (CheckBox)view.findViewById(R.id.attendence);
@@ -106,9 +106,7 @@ public class MarkAttendenceActivity extends AppCompatActivity {
                         register.get(position).setAttendence(true);
                         checkBox.setChecked(true);
                     }
-
                 }
-
             }
 
         });
@@ -117,18 +115,21 @@ public class MarkAttendenceActivity extends AppCompatActivity {
     }
 
     private void finishAttendenceMarking() {
-
         finishMarking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                    if(classController.addAttendence(register,classID)== 1){
+                if(studentList.size() != 0) {
+                    if (classController.addAttendence(register, classID) == 1) {
                         Toast.makeText(MarkAttendenceActivity.this, "Attendence are added successfully", Toast.LENGTH_LONG).show();
-                        communicationController.sendSMSAfterFinishingAttendence(classID,register);
-                    }
-                    else {
+                        communicationController.sendSMSAfterFinishingAttendence(classID, register);
+                    } else {
                         Toast.makeText(MarkAttendenceActivity.this, "Adding attendence failed", Toast.LENGTH_LONG).show();
                     }
+                }
+                else {
+                    Toast.makeText(MarkAttendenceActivity.this, "No student has been registerd yet.", Toast.LENGTH_LONG).show();
+                    AppConstant.getInstance().setMarkedAttendence(true);
+                }
 
             }
         });

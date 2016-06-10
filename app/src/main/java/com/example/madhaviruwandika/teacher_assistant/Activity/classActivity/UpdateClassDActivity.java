@@ -5,8 +5,6 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,10 +23,8 @@ import android.widget.Toast;
 
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
-import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -88,10 +84,10 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
                         String day = String.valueOf(dayOfMonth);
 
                         if (month.length()==1){
-                            month = "0"+month;
+                            month = '0'+month;
                         }
                         if(day.length()== 1){
-                            day = "0"+day;
+                            day = '0'+day;
                         }
                         // Set the Selected Date in Select date Button
                         startingDate.setText(day + "-" + month + "-" + year);
@@ -137,9 +133,9 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
                         String hour = String.valueOf(hourOfDay);
                         String minut = String.valueOf(min);
                         if (minut.length() == 1){
-                            minut = "0"+minut;
+                            minut = '0'+minut;
                         }
-                        From.setText(hour+"."+min+""+timeString);
+                        From.setText(hour+"."+minut+""+timeString);
                         classtime.setText(From.getText());
 
                     }
@@ -148,9 +144,9 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
                         String hour = String.valueOf(hourOfDay);
                         String minut = String.valueOf(min);
                         if (minut.length() == 1){
-                            minut = "0"+minut;
+                            minut = '0'+minut;
                         }
-                        To.setText(hour+"."+min+""+timeString);
+                        To.setText(hour+"."+minut+""+timeString);
                         classtime.setText(From.getText()+"-"+To.getText());
                     }
                 }
@@ -174,7 +170,6 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
 
         // get values at the form
         className = (Spinner) findViewById(R.id.editTextname);
-
         classday = (EditText) findViewById(R.id.editTextDay);
         fee = (EditText) findViewById(R.id.editTextfee);
         startingDate = (TextView) findViewById(R.id.StartDate);
@@ -186,7 +181,7 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
         IstartDate = (ImageButton)findViewById(R.id.imageButtonSdate);
         Ifrom = (ImageButton)findViewById(R.id.imageButtonFrom);
         ITo = (ImageButton)findViewById(R.id.imageButtonTo);
-        Update = (Button)findViewById(R.id.btnUpdate);
+        Update = (Button)findViewById(R.id.btnDelete);
 
 
         List<String> categories = cldc.getClassListForSpinner();
@@ -271,7 +266,6 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         SpinnerClassid = cldc.getClassIDBySpinnerItemSelected(position);
-
         tutionClass = cldc.getTutionClassByID(SpinnerClassid);
         if(tutionClass != null) {
             classtime.setText(tutionClass.get("Time"));
@@ -284,7 +278,6 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 
 
@@ -299,7 +292,6 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
                         tutionClass.put("EndDate", endDate.getText().toString());
                         tutionClass.put("Time", classtime.getText().toString());
                         tutionClass.put("fee",fee.getText().toString());
-
                         if (cldc.UpdateClass(tutionClass) == 1) {
                             Toast.makeText(UpdateClassDActivity.this, "Class Details are updated succesfully", Toast.LENGTH_LONG).show();
                             ClearInput();
@@ -311,6 +303,9 @@ public class UpdateClassDActivity extends AppCompatActivity implements AdapterVi
         }
 
 
+    /*
+    method for clear inputs
+     */
     public void ClearInput(){
         classday.setText("");
         startingDate.setText("");

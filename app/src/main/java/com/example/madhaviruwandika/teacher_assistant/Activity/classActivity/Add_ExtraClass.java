@@ -97,7 +97,7 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
                 public void onTimeSet(TimePicker view, int hourOfDay, int min) {
 
                     String timeString;
-
+                    // change selected value of time picker to 12 hours time format
                     if(hourOfDay >12){
                         hourOfDay = hourOfDay - 12;
                         timeString = "pm";
@@ -109,27 +109,27 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
                     else {
                         timeString = "am";
                     }
-
-
+                    // set selected time to 'From' text view
                     if (booleaFrom == 1){
                         booleaFrom = 0;
                         String hour = String.valueOf(hourOfDay);
                         String minut = String.valueOf(min);
                         if (minut.length() == 1){
-                            minut = "0"+minut;
+                            minut = '0'+minut;
                         }
-                        From.setText(hour+"."+min+""+timeString);
+                        From.setText(hour+"."+minut+""+timeString);
                         Time.setText(From.getText());
 
                     }
+                    // set selected time to 'To' text view
                     else  if(booleanTo == 1){
                         booleanTo = 0;
                         String hour = String.valueOf(hourOfDay);
                         String minut = String.valueOf(min);
                         if (minut.length() == 1){
-                            minut = "0"+minut;
+                            minut = '0'+minut;
                         }
-                        To.setText(hour+"."+min+""+timeString);
+                        To.setText(hour+"."+minut+""+timeString);
                         Time.setText(From.getText() + "-" + To.getText());
                     }
                 }
@@ -150,7 +150,7 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
 
         // initialize view items
         radio_g = (RadioGroup)findViewById(R.id.ClassType);
-        btnAdd = (Button)findViewById(R.id.btnUpdate);
+        btnAdd = (Button)findViewById(R.id.btnDelete);
         Time = (TextView)findViewById(R.id.textViewTime);
         date = (TextView)findViewById(R.id.textViewDate);
         datePcker = (ImageButton)findViewById(R.id.imageButtonDate);
@@ -163,7 +163,6 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
 
         // initialize student controller
         cldc = new ClassController(this);
-
         List<String> categories = cldc.getClassListForSpinner();
 
         // Spinner click listener
@@ -217,8 +216,18 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
                         int selected_id = radio_g.getCheckedRadioButtonId();
                         radio_b = (RadioButton) findViewById(selected_id);
 
+                        // set class type according to selected redio button
+                        String classType = "";
+                        if(radio_b != null){
+                            classType = radio_b.getText().toString();
+                        }
+                        else {
+                            inputValidation = false;
+                        }
+
+                        // set date of the class
                         String dateOfClass = date.getText().toString();
-                        if(!InputValidator.isValidDate(dateOfClass)){
+                        if(!InputValidator.isValidDate(dateOfClass) || dateOfClass==""){
                             inputValidation = false;
                             date.setError("Not a valid Date");
                         }
@@ -227,22 +236,24 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
                             date.setError("Not a valid Date");
                         }
 
+                        //set time of the class
                         String time = Time.getText().toString();
-                        /*if(!InputValidator.isTimeperiodValid(time)){
-                            inputValidation = false;
-                            Time.setError("Not valid input");
-                        }*/
 
-                        String classType = radio_b.getText().toString();
-
-                        if(SpinnerClassid != 0 && inputValidation == true) {
-                            if (cldc.ExtraAddClass(SpinnerClassid, dateOfClass, time, classType) == 1) {
-                                // call add class method
-                                Toast.makeText(Add_ExtraClass.this, "Class Details are succesfully added.", Toast.LENGTH_LONG).show();
-                                clearView();
-                            } else {
-                                Toast.makeText(Add_ExtraClass.this, "Class Details are not added succesfully.Try Again", Toast.LENGTH_LONG).show();
-                                clearView();
+                        // check whether the class is selected
+                        if(SpinnerClassid != 0 ) {
+                            // check whether there are any invalid input
+                            if(inputValidation == true) {
+                                if (cldc.ExtraAddClass(SpinnerClassid, dateOfClass, time, classType) == 1) {
+                                    // call add class method
+                                    Toast.makeText(Add_ExtraClass.this, "Class Details are succesfully added.", Toast.LENGTH_LONG).show();
+                                    clearView();
+                                } else {
+                                    Toast.makeText(Add_ExtraClass.this, "Class Details are not added succesfully.Try Again", Toast.LENGTH_LONG).show();
+                                    clearView();
+                                }
+                            }
+                            else {
+                                Toast.makeText(Add_ExtraClass.this, "You have entered some invalid inputs.Please correct them and retry", Toast.LENGTH_LONG).show();
                             }
                         }
                         else{
@@ -286,12 +297,13 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
+        // set action when home button is clicked
         Intent myIntent = new Intent(getApplicationContext(), ClassDataActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
 
     }
+
     /*
     *method for clear data co the view
      */

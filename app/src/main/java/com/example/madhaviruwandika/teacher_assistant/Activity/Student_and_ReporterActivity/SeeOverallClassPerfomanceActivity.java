@@ -36,11 +36,11 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
     Spinner spinnerClass;
     Spinner spinnerExam;
     BarChart chart;
+
     int studentClssIDPos;
     int ExamID;
     List<TutionClass> classList;
     List<Map<String,String>> ExamList;
-
 
     StudentController studentController;
 
@@ -51,19 +51,18 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        chart = (BarChart)findViewById(R.id.chart);
-        chart.setNoDataText("Select class and Exam. \n \n CLICK HERE TO SHOW DATA");
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-       // initialize Student controller
+
+        chart = (BarChart)findViewById(R.id.chart);
+        chart.setNoDataText("Select class and Exam. \n \n CLICK HERE TO SHOW DATA");
+
+        // initialize Student controller
         studentController = new StudentController(this);
 
-
         List<String> categories = studentController.getClassListForSpinner();
-
 
         spinnerClass = (Spinner) findViewById(R.id.spinnerClass);
         // Spinner click listener
@@ -79,7 +78,6 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         Intent myIntent = new Intent(getApplicationContext(), StudentProgressActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
@@ -89,7 +87,7 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         Spinner spinner = (Spinner)parent;
-
+        // set action if selected spinner item is from spinner class
         if(spinner.getId() == R.id.spinnerClass) {
             studentClssIDPos = studentController.getClassIDBySpinnerItemSelected(position);
 
@@ -112,18 +110,9 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
             // attaching data adapter to spinner
             spinnerExam.setAdapter(dataAdapter);
         }
+        // set action if selected spinner item is from spinner inclass
         else if(spinner.getId() == R.id.spinnerInclass){
-
             if(position != 0) {
-
-                try {
-                    Thread.sleep(5000);                 //2000 milliseconds is one second.
-                } catch(InterruptedException ex) {
-                    Thread.currentThread().interrupt();
-                }
-
-
-
                 ExamID = Integer.parseInt(ExamList.get(position-1).get("ExamID"));
                 List<Integer> chartData = studentController.getDataForGraphOverallPerfomanceOfClass(ExamID);
                 ArrayList<BarEntry> entries = new ArrayList<>();
@@ -132,8 +121,6 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
                     entries.add(new BarEntry( chartData.get(i), i));
 
                 }
-
-
 
                 BarDataSet dataset = new BarDataSet(entries, "NO. of student");
                 ArrayList<String> labels = new ArrayList<String>();

@@ -37,5 +37,6 @@ public interface ClassDAO {
     public long markFinishingOfTheClass(StartOfClass startOfClass);
     public List<ExtraClass> getExtraClassByID(int classID);
     public long CancelExtraClass(int id);
+    public long DeleteClass(int classID);
 
 }

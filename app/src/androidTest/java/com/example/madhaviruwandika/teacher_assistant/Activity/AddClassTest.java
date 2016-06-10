@@ -4,7 +4,6 @@ import com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.Add
 import com.example.madhaviruwandika.teacher_assistant.R;
 import com.robotium.solo.Solo;
 
-import android.test.ActivityInstrumentationTestCase;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
@@ -46,7 +45,7 @@ public class AddClassTest extends ActivityInstrumentationTestCase2<AddClass> {
         this.To = (ImageButton) solo.getView(R.id.imageButtonTo);
         this.stsrtD = (ImageButton) solo.getView(R.id.imageButtonSdate);
         this.endD = (ImageButton) solo.getView(R.id.imageButtonEndDate);
-        this.add = (Button)solo.getView(R.id.btnUpdate);
+        this.add = (Button)solo.getView(R.id.btnDelete);
     }
 
 

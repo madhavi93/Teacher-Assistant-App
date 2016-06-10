@@ -54,11 +54,11 @@ public class PerformanceReportActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         Intent myIntent = new Intent(getApplicationContext(), SeePerfomanceActivity.class);
         startActivityForResult(myIntent, 0);
         return true;
     }
+
     /**
      * A placeholder fragment containing a simple view.
      */
