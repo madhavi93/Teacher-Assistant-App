@@ -11,7 +11,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.madhaviruwandika.teacher_assistant.Activity.HomeActivity;
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.BaseActivity;
+import com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
 import com.example.madhaviruwandika.teacher_assistant.Controller.CommunicationController;
 import com.example.madhaviruwandika.teacher_assistant.Model.AppConstant;
@@ -98,14 +100,24 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        // is no any class is continuing then allow next class to start
-                        if((studentClssIDPos != 0) && (!AppConstant.getInstance().iscontinuing_class()) ) {
-                            if(cldc.MarkStartingOfTheClass(studentClssIDPos)==1){
-                                spinner.setEnabled(false);
-                                finishClass.setEnabled(true);
-                                Toast.makeText(TodaysClassActivity.this, "Class Starting Details are successfully added.", Toast.LENGTH_LONG).show();
+
+                        if(cldc.isClassStartedWithinTheDay(studentClssIDPos)) {
+                            // is no any class is continuing then allow next class to start
+                            if ((studentClssIDPos != 0) && (!AppConstant.getInstance().iscontinuing_class())) {
+                                if (cldc.MarkStartingOfTheClass(studentClssIDPos) == 1) {
+                                    spinner.setEnabled(false);
+                                    finishClass.setEnabled(true);
+                                    Toast.makeText(TodaysClassActivity.this, "Class Starting Details are successfully added.", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(TodaysClassActivity.this, "Class Starting Details are not added.Try Again.", Toast.LENGTH_LONG).show();
+
+                                }
+                            } else {
+                                Toast.makeText(TodaysClassActivity.this, "Please select class.", Toast.LENGTH_LONG).show();
                             }
-                            else   Toast.makeText(TodaysClassActivity.this, "Class Starting Details are not added.Try Again.", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            Toast.makeText(TodaysClassActivity.this,"selected class is started whith in the day.Please make sure you are trying to start correct class.", Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -184,7 +196,7 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
                                 AppConstant.getInstance().setMarkedAttendence(false);
                                 finishClass.setEnabled(false);
                                 spinner.setEnabled(true);
-                                Toast.makeText(TodaysClassActivity.this, "Sent messages to parents", Toast.LENGTH_LONG).show();
+                                Toast.makeText(TodaysClassActivity.this, "Messages are sent to parents", Toast.LENGTH_LONG).show();
 
                             }
 
@@ -196,5 +208,6 @@ public class TodaysClassActivity extends BaseActivity implements AdapterView.OnI
 
         );
     }
+
 
 }

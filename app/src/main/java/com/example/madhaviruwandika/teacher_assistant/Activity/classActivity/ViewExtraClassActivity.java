@@ -129,4 +129,5 @@ public class ViewExtraClassActivity extends AppCompatActivity implements Adapter
         return true;
 
     }
+
 }

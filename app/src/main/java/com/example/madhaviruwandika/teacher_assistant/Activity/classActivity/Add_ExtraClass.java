@@ -314,5 +314,7 @@ public class Add_ExtraClass extends AppCompatActivity implements AdapterView.OnI
         From.setText("");
         spinner_class.setSelection(0);
     }
+
+
 }
 

@@ -1,6 +1,7 @@
 package com.example.madhaviruwandika.teacher_assistant.Activity.classActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
@@ -80,6 +82,8 @@ public class ViewExtra_ClassDetails extends Fragment {
         });
 
     }
+
+
 
 
 }

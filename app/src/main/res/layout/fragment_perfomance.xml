@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.PerfomanceFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -10,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:background="#ffffff">
+        android:background="@color/backgroundColour">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,15 +33,21 @@
             android:text=" * perfomance compared with other student"
             android:textSize="15dp"
             android:id="@+id/textView18"
-            android:textColor="#000000" />
+            android:textColor="#fa62ca" />
 
-        <com.github.mikephil.charting.charts.BarChart
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:id="@+id/perfomance_chart"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView18">
-        </com.github.mikephil.charting.charts.BarChart>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/textView18"
+            android:id="@+id/container">
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:id="@+id/perfomance_chart"
+                android:layout_alignParentStart="true"
+                >
+            </com.github.mikephil.charting.charts.BarChart>
+        </RelativeLayout>
 
     </RelativeLayout>
 </FrameLayout>

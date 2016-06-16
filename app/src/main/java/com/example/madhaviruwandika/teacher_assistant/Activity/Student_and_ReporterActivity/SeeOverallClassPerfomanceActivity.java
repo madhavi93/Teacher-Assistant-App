@@ -1,7 +1,9 @@
 package com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -11,7 +13,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
@@ -24,15 +28,32 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.itextpdf.text.Anchor;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.CMYKColor;
+import com.itextpdf.text.pdf.PdfWriter;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
 public class SeeOverallClassPerfomanceActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
-    Button SeePerformance;
+    Button pdf;
     Spinner spinnerClass;
     Spinner spinnerExam;
     BarChart chart;
@@ -57,7 +78,7 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
 
 
         chart = (BarChart)findViewById(R.id.chart);
-        chart.setNoDataText("Select class and Exam. \n \n CLICK HERE TO SHOW DATA");
+        chart.setNoDataText("Select class and Exam.\nCLICK HERE TO SHOW DATA");
 
         // initialize Student controller
         studentController = new StudentController(this);
@@ -73,6 +94,7 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         spinnerClass.setAdapter(dataAdapter);
+
 
     }
 
@@ -138,15 +160,19 @@ public class SeeOverallClassPerfomanceActivity extends AppCompatActivity impleme
                 BarData data = new BarData(labels, dataset);
                 chart.setData(data);
                 chart.setDescription("MARK RANGE");
+
                 dataset.setColors(ColorTemplate.COLORFUL_COLORS);
             }
         }
 
     }
 
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 
 }

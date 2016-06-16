@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.github.mikephil.charting.charts.LineChart;
 
@@ -23,7 +24,8 @@ import java.util.ArrayList;
 
 public class Perfomance_2_Fragment extends Fragment {
 
-    private LineChart lineChart;
+    LineChart lineChart;
+    RelativeLayout chartContainer;
     private TextView std;
     Bundle mybundle;
     StudentController studentController;
@@ -35,6 +37,7 @@ public class Perfomance_2_Fragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_perfomance_2_, container, false);
         lineChart = (LineChart) view.findViewById(R.id.perfomance_chart);
+        chartContainer = (RelativeLayout)view.findViewById(R.id.container);
         std = (TextView) view.findViewById(R.id.stdName);
 
         // initialize bundle to aed data which passed from the previous activity

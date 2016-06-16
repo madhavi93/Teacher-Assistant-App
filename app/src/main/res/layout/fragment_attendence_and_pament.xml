@@ -2,6 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.AttendenceAndPamentFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -10,7 +14,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_horizontal|top">
+        android:layout_gravity="left|center_vertical"
+        android:background="@color/backgroundColour">
 
         <TextView
             android:layout_width="wrap_content"
@@ -20,7 +25,9 @@
             android:id="@+id/textView20"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="46dp" />
+            android:layout_marginTop="46dp"
+            android:autoText="false"
+            android:textColor="#fa62ca" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,7 +51,8 @@
             android:id="@+id/textView22"
             android:layout_marginTop="46dp"
             android:layout_below="@+id/attendence_State"
-            android:layout_alignStart="@+id/textView20" />
+            android:layout_alignStart="@+id/textView20"
+            android:textColor="#fa62ca" />
 
 
         <RelativeLayout
@@ -52,6 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textView22"
             android:layout_alignStart="@+id/textView31"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:id="@+id/markListLayout"
             android:background="#c4d6f7"
             >
@@ -69,7 +79,7 @@
                     android:id="@+id/logs_table_header"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#447be0"
+                    android:background="#dddfe0"
                     >
 
                     <TextView
@@ -77,8 +87,9 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/No"
-                        android:text="No.         "
-                        android:layout_column="0"/>
+                        android:text="No.    "
+                        android:layout_column="0"
+                        android:background="#c4d6f7" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -86,16 +97,18 @@
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/Date"
                         android:textAlignment="center"
-                        android:text="Date              "
-                        android:layout_column="1"/>
+                        android:text="Date       "
+                        android:layout_column="1"
+                        android:background="#c4d6f7" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:id="@+id/Month_OF_payment"
                         android:textAlignment="center"
-                        android:text="Month_OF_payment"
-                        android:layout_column="2"/>
+                        android:text="Month(for)                     "
+                        android:layout_column="2"
+                        android:background="#c4d6f7" />
 
                 </TableRow>
             </TableLayout>

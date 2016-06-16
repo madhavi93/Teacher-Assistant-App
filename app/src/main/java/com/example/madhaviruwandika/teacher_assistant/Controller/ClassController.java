@@ -261,6 +261,29 @@ public class ClassController {
         }
     }
 
+    public boolean isClassStartedWithinTheDay(int classID){
+
+        Log.d("Starting Class",">>>>>>>>>>>>>>>>>>>>>>.Claaing ClassController to SAtisfy.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+        // get date
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        Calendar cal = Calendar.getInstance();
+        String date = dateFormat.format(cal.getTime()).toString();
+
+        // get tution class details if class was started before.else null will be get
+        int state = classDAO.getStartedClassWithinTheDay(date,classID);
+
+        // if tution class is started with in the day before return true
+        if(state != 1){
+            // class is not started
+            return true;
+        }
+        else {
+            // class is started
+            return false;
+        }
+    }
+
     public int MarkStartingOfTheClass(int ClasID){
 
         Calendar calendar = Calendar.getInstance();
@@ -274,15 +297,19 @@ public class ClassController {
         if(classDAO.markStartingOfClass(ClasID, Date, Stime, "")!= -1){
 
             TutionClass tutionClass = classDAO.getClassByID(ClasID);
+
+            Log.d("Timer","................Timer Started........"+tutionClass.getTime()+"......................................................");
             AppConstant.getInstance().setClassContinuing(tutionClass);
             AppConstant.getInstance().setcontinuing_class(true);
             AppConstant.getInstance().setMarkedAttendence(false);
             // get class time
+            Log.d("Timer","................Timer Started..............."+AppConstant.getInstance().getClassContinuing().getTime()+"..............................................................");
+
+
             String[] classTime = tutionClass.getTime().split("-");
             int myclassTime = getTimePeriod(classTime[0],classTime[1]);
             // start timer that update app constant data regarding to class starting
             new ClassTimer(myclassTime,ClasID,context);
-
             return 1;
         }
         else return 0;
@@ -340,7 +367,7 @@ public class ClassController {
 
             diff = d2.getTime() - d1.getTime();
             if(diff>0) {
-                diffMinutes = diff / (60 * 1000) % 60;
+                diffMinutes = diff / (60 * 1000) % 120;
                 diffHours = diff / (60 * 60 * 1000) % 24;
 
                 diffMinutes += diffMinutes+ (diffHours*60);
@@ -379,6 +406,7 @@ public class ClassController {
 
     public int markFinishingOftheClass(){
 
+        Log.d("Timer","................Timer Finished..............................................................");
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String Date = sdf.format(calendar.getTime());

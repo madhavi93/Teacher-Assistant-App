@@ -21,7 +21,7 @@ import java.util.Map;
 public class AttendenceAndPamentFragment extends Fragment {
 
     TextView atendenceState;
-    private TableLayout logsTableLayout;
+    TableLayout logsTableLayout;
 
     Bundle myBundle;
     StudentController studentController;
@@ -41,27 +41,34 @@ public class AttendenceAndPamentFragment extends Fragment {
 
         // initialize controllers
         studentController = new StudentController(getActivity());
-        atendenceState.setText(studentController.getAttendenceState(myBundle.getInt("StudentID"),myBundle.getInt("ClassID")));
+        String AState = studentController.getAttendenceState(myBundle.getInt("StudentID"),myBundle.getInt("ClassID"));
+
+        if(AState != null) {
+            atendenceState.setText(AState);
+        }
 
         // add pament data to view in table
         payments = studentController.getPayments(myBundle.getInt("StudentID"),myBundle.getInt("ClassID"));
-        for (Map<String,String> payment : payments){
 
-            TableRow tr = new TableRow(getActivity());
+        if(payments != null){
+            for (Map<String,String> payment : payments) {
 
-            TextView number = new TextView(getActivity());
-            number.setText(payment.get("No"));
-            tr.addView(number);
+                TableRow tr = new TableRow(getActivity());
 
-            TextView date = new TextView(getActivity());
-            date.setText(String.valueOf(" " + payment.get("date")));
-            tr.addView(date);
+                TextView number = new TextView(getActivity());
+                number.setText(payment.get("No"));
+                tr.addView(number);
 
-            TextView month = new TextView(getActivity());
-            month.setText(payment.get("month"));
-            tr.addView(month);
+                TextView date = new TextView(getActivity());
+                date.setText(String.valueOf(" " + payment.get("date")));
+                tr.addView(date);
 
-            logsTableLayout.addView(tr);
+                TextView month = new TextView(getActivity());
+                month.setText(payment.get("month"));
+                tr.addView(month);
+
+                logsTableLayout.addView(tr);
+            }
         }
         return v;
     }

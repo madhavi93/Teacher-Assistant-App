@@ -91,7 +91,7 @@ public class SyllabusDA implements SyllabusDAO{
 
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.Unit_col1 + " from Unit", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.Unit_col1 + " from Unit ORDER BY "+DBConstant.Unit_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -100,10 +100,12 @@ public class SyllabusDA implements SyllabusDAO{
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+            else {
+                idnext = 0;
+            }
         }
         return idnext;
     }
@@ -259,7 +261,7 @@ public class SyllabusDA implements SyllabusDAO{
     public int getLastDailyWorkID() {
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.DailyWork_col1 + " from DailyWork", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.DailyWork_col1 + " from DailyWork ORDER BY "+DBConstant.DailyWork_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -268,10 +270,12 @@ public class SyllabusDA implements SyllabusDAO{
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+            else {
+                idnext = 0;
+            }
         }
         return idnext;
     }

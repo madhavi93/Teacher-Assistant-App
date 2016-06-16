@@ -60,6 +60,8 @@ public class CommunicatorDA implements CommunicationDAO{
                     parent.setTp_no(cursor.getString(3));
                     parent.setEmail(cursor.getString(4));
 
+                    Log.d("SENDEMAIL",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+cursor.getString(4)+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+
                 } while (cursor.moveToNext());
             }
 
@@ -113,11 +115,12 @@ public class CommunicatorDA implements CommunicationDAO{
             Log.d("MYACTIVITY", "No Value");
         }
         else {
+            Log.d("Student1",">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>."+cursor.getCount()+".>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.");
+
             //iterate through result set
             if (cursor.moveToFirst()) {
                 do {
                     Student student = new Student();
-
                     student.setS_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(DBConstant.stdTable_col1))));
                     student.setName(cursor.getString(cursor.getColumnIndex(DBConstant.stdTable_col2)));
                     student.setAddress(cursor.getString(cursor.getColumnIndex(DBConstant.stdTable_col4)));
@@ -159,41 +162,13 @@ public class CommunicatorDA implements CommunicationDAO{
         return ClassList;
     }
 
-    @Override
-    public List<Student> getStudentListByClasssID(int id) {
-
-        List<Student> NameList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from Student inner join Attend on Student.ID = Attend.S_id where Class_Id = "+String.valueOf(id), null);
-
-        if(cursor.getCount()==0){
-            Log.d("MYACTIVITY", "No Value");
-        }
-        else {
-            //iterate through result set
-            if (cursor.moveToFirst()) {
-                do {
-                    Student student = new Student();
-
-                    student.setS_id(Integer.parseInt(cursor.getString(cursor.getColumnIndex(DBConstant.stdTable_col1))));
-                    student.setName(cursor.getString(cursor.getColumnIndex(DBConstant.stdTable_col2)));
-                    student.setAddress(cursor.getString(cursor.getColumnIndex(DBConstant.stdTable_col4)));
-                    student.setDoB(cursor.getString(cursor.getColumnIndex(DBConstant.stdTable_col3)));
-
-                    NameList.add(student);
-                } while (cursor.moveToNext());
-            }
-        }
-        return NameList;
-
-    }
-
     public int getMessageID(String mType){
 
         List<Integer> idList = new ArrayList<>();
         int idnext;
 
         if(mType == "S"){
-            Cursor cursor = db.rawQuery("select " + DBConstant.SingleMsg_col1 + " from SingleMessage", null);
+            Cursor cursor = db.rawQuery("select " + DBConstant.SingleMsg_col1 + " from SingleMessage +ORDER BY "+DBConstant.SingleMsg_col1+" DESC LIMIT 1", null);
             if (cursor.getCount() == 0) {
                 Log.d("MYACTIVITY", "No Value");
                 idnext = 0;
@@ -202,15 +177,17 @@ public class CommunicatorDA implements CommunicationDAO{
                 if (cursor.moveToFirst()) {
                     do {
                         int id = Integer.parseInt(cursor.getString(0));
-                        idList.add(id);
+                        idnext = id;
                     } while (cursor.moveToNext());
                 }
-                idnext = idList.size();
+                else {
+                    idnext = 0;
+                }
             }
             return idnext;
         }
         else if(mType == "G"){
-            Cursor cursor = db.rawQuery("select " + DBConstant.SingleMsg_col1 + " from GroupMessage", null);
+            Cursor cursor = db.rawQuery("select " + DBConstant.GroupMsg_col1 + " from GroupMessage ORDER BY "+DBConstant.GroupMsg_col1+" DESC LIMIT 1", null);
             if (cursor.getCount() == 0) {
                 Log.d("MYACTIVITY", "No Value");
                 idnext = 0;
@@ -219,10 +196,12 @@ public class CommunicatorDA implements CommunicationDAO{
                 if (cursor.moveToFirst()) {
                     do {
                         int id = Integer.parseInt(cursor.getString(0));
-                        idList.add(id);
+                        idnext = id;
                     } while (cursor.moveToNext());
                 }
-                idnext = idList.size();
+                else {
+                    idnext = 0;
+                }
             }
             return idnext;
         }
@@ -252,7 +231,6 @@ public class CommunicatorDA implements CommunicationDAO{
             return result;
         }
     }
-
 
     @Override
     public long RecordOfSendingGroupMessage(GroupMessage m) {

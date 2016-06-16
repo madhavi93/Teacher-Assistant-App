@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Group"
-            android:id="@+id/checkBoxGroupSMS"
+            android:id="@+id/checkBoxGroupEmail"
             android:checked="false"
             android:layout_below="@+id/textView16"
             android:layout_toEndOf="@+id/textView16" />
@@ -27,7 +27,7 @@
             android:text="Recipient :"
             android:id="@+id/textView15"
             android:layout_marginStart="50dp"
-            android:layout_below="@+id/checkBoxGroupSMS"
+            android:layout_below="@+id/checkBoxGroupEmail"
             android:layout_alignParentStart="true"
             android:layout_marginTop="46dp" />
 

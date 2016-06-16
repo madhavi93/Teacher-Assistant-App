@@ -1,5 +1,9 @@
 package com.example.madhaviruwandika.teacher_assistant.Activity.classActivity;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,8 +11,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +27,7 @@ import android.widget.Toast;
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity;
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.SettingsActivity;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
+import com.example.madhaviruwandika.teacher_assistant.Controller.MyProfileController;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
 import java.util.List;
@@ -37,6 +44,8 @@ public class DeleteClassActivity extends AppCompatActivity implements AdapterVie
     private TextView fee;
     private Button Delete;
     private int SpinnerClassid;
+
+    private static final int MY_PASSWORD_DIALOG_ID = 1;
 
     Map<String,String> tutionClass;
 
@@ -63,7 +72,15 @@ public class DeleteClassActivity extends AppCompatActivity implements AdapterVie
         classtime = (TextView) findViewById(R.id.editTextTime);
         Delete = (Button) findViewById(R.id.btnDelete);
 
+        // load values to class spinner
+        setAdopterOnSpinnerClass();
 
+        onDeleteButtonClick();
+
+    }
+
+
+    public void setAdopterOnSpinnerClass(){
         List<String> categories = cldc.getClassListForSpinner();
         // Spinner click listener
         className.setOnItemSelectedListener(this);
@@ -73,11 +90,7 @@ public class DeleteClassActivity extends AppCompatActivity implements AdapterVie
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // attaching data adapter to spinner
         className.setAdapter(dataAdapter);
-
-        onDeleteButtonClick();
-
     }
-
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         SpinnerClassid = cldc.getClassIDBySpinnerItemSelected(position);
@@ -101,13 +114,7 @@ public class DeleteClassActivity extends AppCompatActivity implements AdapterVie
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        if (cldc.DeleteClass(SpinnerClassid) == 1) {
-                            Toast.makeText(DeleteClassActivity.this, "Class Details are Deleted succesfully", Toast.LENGTH_LONG).show();
-                            ClearInput();
-                        } else {
-                            Toast.makeText(DeleteClassActivity.this, "Class Details are not Deleted succesfully.Try Again", Toast.LENGTH_LONG).show();
-                        }
+                        showDialog(1);
                     }
                 });
     }
@@ -134,4 +141,62 @@ public class DeleteClassActivity extends AppCompatActivity implements AdapterVie
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(DeleteClassActivity.this, SettingsActivity.class));
+        finish();
+    }
+
+
+    @Override
+    protected Dialog onCreateDialog(int id) {
+        // Method automatically gets Called when you call showDialog()  method
+        switch (id) {
+            // create a new DatePickerDialog with values you want to show
+            case MY_PASSWORD_DIALOG_ID:
+                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                final View layout = inflater.inflate(R.layout.password_confirmation_dialog, (ViewGroup) findViewById(R.id.root));
+                final EditText password = (EditText) layout.findViewById(R.id.EditText_Pwd1);
+
+                //henerate builder and return it
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("Confirmation");
+                builder.setView(layout);
+
+                builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        removeDialog(MY_PASSWORD_DIALOG_ID);
+                    }
+                });
+
+                builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        String strPassword1 = password.getText().toString();
+                        removeDialog(MY_PASSWORD_DIALOG_ID);
+                        MyProfileController myProfileController = new MyProfileController(getWindow().getContext());
+                        //check password is correct
+                        if(myProfileController.ValidatePassward(strPassword1)) {
+                            if (cldc.DeleteClass(SpinnerClassid) == 1) {
+                                Toast.makeText(DeleteClassActivity.this, "Class Details are Deleted succesfully", Toast.LENGTH_LONG).show();
+                                ClearInput();
+                                setAdopterOnSpinnerClass();
+                            } else {
+                                Toast.makeText(DeleteClassActivity.this, "Class Details are not Deleted succesfully.Try Again", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(DeleteClassActivity.this,"Password is incorrect",Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+
+
+                AlertDialog passwordDialog = builder.create();
+                return passwordDialog;
+        }
+        return null;
+    }
 }

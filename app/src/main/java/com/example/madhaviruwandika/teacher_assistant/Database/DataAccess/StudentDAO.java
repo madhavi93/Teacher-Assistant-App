@@ -7,6 +7,7 @@ import com.example.madhaviruwandika.teacher_assistant.Model.Student;
 import com.example.madhaviruwandika.teacher_assistant.Model.Student_perfomance;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public interface StudentDAO {
         public int[] getAttendenceOfStudent(int s_id,int ClassID);
         public List<Payment> getPayments(int s_id,int class_id);
         public List<Exam> getExamListWithOutMarkSheetByClassID(int classID );
+        public List<Exam> getExamsThatMArksAreEntered(int classID);
         public long DeleteStudent(int s_id);
 
 

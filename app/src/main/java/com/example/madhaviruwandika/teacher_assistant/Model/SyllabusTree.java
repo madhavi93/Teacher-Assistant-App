@@ -15,7 +15,7 @@ public class SyllabusTree {
     public SyllabusTree(){
     }
 
-
+    // add lessons to the map
     public void fillTree(List<LessonUnit> units,List<Lesson> lessons){
         syllabus = new HashMap<>();
 
@@ -23,12 +23,12 @@ public class SyllabusTree {
             syllabus.put(units.get(i).getUnit(),new ArrayList<TreeNode>());
         }
         for (int j=0;j<lessons.size();j++){
-            String state = "Red";
+            String state = "Red";// lesson is not finished
             if(lessons.get(j).getAmountCovered() != 1 && lessons.get(j).getAmountCovered() != 0 ){
-                state = "blue";
+                state = "blue"; // lesson is partitially covered
             }
             else if(lessons.get(j).getAmountCovered()==1){
-                state = "White";
+                state = "White"; //lesson is fully covered
             }
 
             TreeNode treeNode = new TreeNode(state,lessons.get(j));
@@ -70,7 +70,12 @@ public class SyllabusTree {
 
                 if( SortedLessonListAccordingToTime.get(i).getAmountCovered()== 1){
                     SortedLessonListAccordingToTime.remove(i);
-                    i=i-1;
+                    if(i==0){
+                        i = 0;
+                    }
+                    else {
+                        i =-1;
+                    }
                     n=n-1;
                 }
                 if ((i != 0) && (((1-SortedLessonListAccordingToTime.get(i).getAmountCovered())*SortedLessonListAccordingToTime.get(i).getTotaltimeSupposedToSpend()) < ((1-SortedLessonListAccordingToTime.get(i-1).getAmountCovered())*SortedLessonListAccordingToTime.get(i-1).getTotaltimeSupposedToSpend()) ) ){

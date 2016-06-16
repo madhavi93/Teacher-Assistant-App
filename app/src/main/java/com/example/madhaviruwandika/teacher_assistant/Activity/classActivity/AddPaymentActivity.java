@@ -110,6 +110,7 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
             spinnercls.setEnabled(false);
         }
         spinnercls.setOnItemSelectedListener(this);
+        month.setOnItemSelectedListener(this);
         // set click listner on the add button
         onAddPaymentClickListner();
     }
@@ -141,16 +142,15 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
         }
         // set action if selected item is from the student name spinner
         else  if(spinner.getId() == R.id.spinnerSName){
-
             if(position != 0) {
                 StudentIDPos = Integer.parseInt(studentList.get(position-1)[0][0]);
             }
         }
 
         // set action if selected item is from the month spinner
-        else if(spinner.getId() == R.id.spinnerFor_month){
+        else {
            if(position != 0){
-            monthP = monthList.get(position);
+                monthP = monthList.get(position);
            }
         }
 
@@ -210,8 +210,8 @@ public class AddPaymentActivity extends AppCompatActivity implements AdapterView
     method that clear all the inputs
      */
     public void clearInterface(){
-        spinnercls.setSelection(0);
         spinnerstd.setSelection(0);
         month.setSelection(0);
     }
+
 }

@@ -32,6 +32,7 @@ public interface ClassDAO {
     public List<Exam> getExamListByClassID(int class_id);
     public Long addDailyAttendence(ArrayList<Attendence> attendence_sheets);
     public int getAttendenceID();
+    public int getStartedClassWithinTheDay(String day,int classID);
     public long markStartingOfClass(int classID, String date,String Starttime,String endTime);
     public List<StartOfClass> getTodaysClassList(String date);
     public long markFinishingOfTheClass(StartOfClass startOfClass);

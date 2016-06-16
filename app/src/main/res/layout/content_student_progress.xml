@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_Layout"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.StudentProgressActivity"
     tools:showIn="@layout/activity_student_progress">
@@ -25,7 +25,7 @@
             android:text="SEE OVERALL CLASS PERFOMANCE"
             android:id="@+id/btnSeePerfomanceClass"
             android:layout_gravity="center_horizontal|top"
-            android:textSize="25dp"
+            android:textSize="23dp"
             android:layout_below="@+id/btnAddPerfomance"
             android:layout_alignStart="@+id/btnAddPerfomance"
             android:layout_marginTop="50dp"
@@ -54,10 +54,10 @@
             android:textSize="25dp"
             android:id="@+id/btnAddPerfomance"
             android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="49dp"
             android:background="#c9cdf8"
             android:layout_below="@+id/btnAddExam"
-            android:layout_alignParentEnd="true" />
+            android:layout_centerHorizontal="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             android:id="@+id/btnSeeStudentPerfomance"
             android:layout_marginTop="47dp"
             android:background="#c2a1b2"
-            android:textSize="25dp"
+            android:textSize="20dp"
             android:layout_below="@+id/btnSeePerfomanceClass"
             android:layout_alignStart="@+id/btnSeePerfomanceClass"
             android:layout_alignEnd="@+id/btnSeePerfomanceClass" />
@@ -81,6 +81,6 @@
         android:background="@color/colorDraver"
         android:choiceMode="singleChoice"
         android:textAlignment="center"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
 
 </android.support.v4.widget.DrawerLayout>

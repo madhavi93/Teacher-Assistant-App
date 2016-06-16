@@ -24,7 +24,6 @@ import java.util.List;
  */
 public class StudentDA implements StudentDAO {
 
-
     SQLiteDatabase db;
 
     public StudentDA(Context context){
@@ -164,7 +163,7 @@ public class StudentDA implements StudentDAO {
     public int getnextSID() {
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.stdTable_col1 + " from Student", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.stdTable_col1 + " from Student ORDER BY "+DBConstant.stdTable_col1 +" DESC LIMIT 1", null);
 
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
@@ -174,11 +173,11 @@ public class StudentDA implements StudentDAO {
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(DBConstant.stdTable_col1)));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
+            }else {
+                idnext = 0;
             }
-
-            idnext = idList.size();
         }
 
 
@@ -214,7 +213,7 @@ public class StudentDA implements StudentDAO {
 
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.parent_col1 + " from Parent", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.parent_col1 + " from Parent ORDER BY "+DBConstant.parent_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -223,11 +222,12 @@ public class StudentDA implements StudentDAO {
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-
-            idnext = idList.size();
+            else {
+                idnext = 0;
+            }
         }
         return idnext;
     }
@@ -258,7 +258,7 @@ public class StudentDA implements StudentDAO {
     public List<Student> getStudentListByClasssID(int id) {
 
         List<Student> NameList = new ArrayList<>();
-        Cursor cursor = db.rawQuery("select * from Student inner join Attend on Student.ID = Attend.S_id where Class_Id = " + String.valueOf(id), null);
+        Cursor cursor = db.rawQuery("select * from Student left outer join Attend on Student.ID = Attend.S_id where Class_Id = " + String.valueOf(id), null);
 
         if(cursor.getCount()==0){
             Log.d("MYACTIVITY", "No Value");
@@ -286,7 +286,7 @@ public class StudentDA implements StudentDAO {
 
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.exam_col1 + " from Exam", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.exam_col1 + " from Exam ORDER BY "+DBConstant.exam_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -295,10 +295,12 @@ public class StudentDA implements StudentDAO {
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+           else {
+                idnext = 0;
+            }
         }
         return idnext;
     }
@@ -500,6 +502,7 @@ public class StudentDA implements StudentDAO {
                 do {
                     Payment payment = new Payment();
                     payment.setDoP(cursor.getString(3));
+                    Log.d("Payment", ">>>>>>>>>>>>>>>>>>>>>>>>." + cursor.getString(4) + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
                     payment.setMonthOfPayment(cursor.getString(4));
                     paymentList.add(payment);
                 } while (cursor.moveToNext());
@@ -561,6 +564,44 @@ public class StudentDA implements StudentDAO {
             }
         }
         return ExamID;
+    }
+
+    public List<Exam> getExamsThatMArksAreEntered(int classID){
+
+        ArrayList<Integer> examIDList = getExamsThatMArksAreEntered();
+        String arrayString = "";
+        for (int i=0;i<examIDList.size();i++){
+            arrayString = arrayString+examIDList.get(i);
+            if(i != (examIDList.size()-1)){
+                arrayString = arrayString+",";
+            }
+
+        }
+        List<Exam> examList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from Exam where "+ DBConstant.exam_col2 +" = "+ classID+" and "+DBConstant.exam_col1+" IN ("+arrayString+")" , null);
+
+        if(cursor.getCount()==0){
+            Log.d("MYACTIVITY", "No Value");
+        }
+        else {
+            //iterate through result set
+            if (cursor.moveToFirst()) {
+                do {
+                    Exam exam = new Exam();
+
+                    exam.setExamID(Integer.parseInt(cursor.getString(0)));
+                    exam.setClassID(Integer.parseInt(cursor.getString(1)));
+                    exam.setEtype(cursor.getString(2));
+                    exam.setDate(cursor.getString(3));
+                    exam.setLesson(cursor.getString(4));
+
+                    examList.add(exam);
+
+
+                } while (cursor.moveToNext());
+            }
+        }
+        return examList;
     }
 
     @Override

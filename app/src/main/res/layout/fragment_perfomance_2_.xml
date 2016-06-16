@@ -2,13 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.Perfomance_2_Fragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
-        android:background="#ffffff">
+        android:background="@color/backgroundColour">
 
         <TextView
             android:layout_width="wrap_content"
@@ -28,15 +32,22 @@
             android:layout_marginTop="5dp"
             android:text="  * perfomance compared with history"
             android:id="@+id/textView19"
-            android:textColor="#000000" />
+            android:textColor="#fa62ca" />
 
-        <com.github.mikephil.charting.charts.LineChart
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="500dp"
-            android:id="@+id/perfomance_chart"
-            android:layout_alignParentStart="true"
+            android:layout_height="match_parent"
+            android:id="@+id/container"
             android:layout_below="@+id/textView19">
-        </com.github.mikephil.charting.charts.LineChart>
+            <com.github.mikephil.charting.charts.LineChart
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:id="@+id/perfomance_chart"
+                android:layout_alignParentStart="true"
+                >
+            </com.github.mikephil.charting.charts.LineChart>
+        </RelativeLayout>
 
     </RelativeLayout>
 

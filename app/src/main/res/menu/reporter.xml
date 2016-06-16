@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activity.classActivity.ClassManegeActivity">
+
+    <item
+        android:id="@+id/sendReport"
+        android:orderInCategory="100"
+        android:title="Send Report via Email"
+        app:showAsAction="never" />
+
+</menu>

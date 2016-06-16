@@ -20,6 +20,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.AddPaymentActivity;
 import com.example.madhaviruwandika.teacher_assistant.Controller.StudentController;
 import com.example.madhaviruwandika.teacher_assistant.R;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
@@ -37,6 +38,7 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
     private Spinner spinnerExam;
     private Spinner markOutOF;
     private TableLayout logsTableLayout;
+    private RelativeLayout relativeLayout ;
 
     int studentClssIDPos;
     List<String[][]> studentList;
@@ -67,6 +69,8 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
         TableRow tableRowHeader = (TableRow) findViewById(R.id.logs_table_header);
         markOutOF = (Spinner)findViewById(R.id.spinnerMarkOutOF);
         spinner = (Spinner) findViewById(R.id.spinner);
+        relativeLayout = (RelativeLayout) findViewById(R.id.markListLayout);
+
 
         // get class list
         List<String> categories = stcr.getClassListForSpinner();
@@ -89,7 +93,7 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
 
 
         // Spinner click listener
-        spinner.setOnItemSelectedListener(this);
+        markOutOF.setOnItemSelectedListener(this);
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,markRange );
         // Drop down layout style - list view with radio button
@@ -105,15 +109,16 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
         Spinner spinner = (Spinner)parent;
-
+        // get selected item from spinner class and assign values to parameters
         if(spinner.getId() == R.id.spinner) {
             if(position !=0) {
-                studentClssIDPos = position;
+                studentClssIDPos = stcr.getClassIDBySpinnerItemSelected(position);
+                relativeLayout.setEnabled(true);
                 if(studentList != null){
                     logsTableLayout.removeViews(1,studentList.size());
                 }
                 studentList = stcr.getStudentListByClassID(studentClssIDPos);
-                // set student list
+                // load student list
                 for (String[][] s : studentList) {
 
                     TableRow tr = new TableRow(this);
@@ -131,24 +136,11 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
                     tr.addView(mark);
                     logsTableLayout.addView(tr);
                 }
-
-                exams = stcr.getExamListWithOutMarkSheetByClassID(studentClssIDPos);
-                ArrayList<String> examNames = new ArrayList<>();
-                examNames.add("");
-
-                for (int i = 0; i < exams.size(); i++) {
-                    String ename = exams.get(i).get("ClassID") + "_" + exams.get(i).get("date");
-                    examNames.add(ename);
-                }
-
-                spinnerExam = (Spinner) findViewById(R.id.spinnerExam);
-                spinnerExam.setOnItemSelectedListener(this);
-                ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, examNames);
-                dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                spinnerExam.setAdapter(dataAdapter2);
+                SetItemForSpinnerExam();
             }
 
         }
+        // get selected items of the spinner exam and assign values to parameters
         else  if(spinner.getId() == R.id.spinnerExam){
 
             if(position != 0){
@@ -156,6 +148,7 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
             }
         }
 
+        // get selected item of the spinner mark range and add them to variables
         else if(spinner.getId() == R.id.spinnerMarkOutOF){
             if(position == 0){
                 markoutof = 100;
@@ -185,27 +178,43 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
 
                             TableRow row = (TableRow)logsTableLayout.getChildAt(i);
 
-                                String[] studentMark = new String[2];
+                            String[] studentMark = new String[2];
 
-                                TextView id = (TextView)row.getChildAt(0);
-                                studentMark[0] =  id.getText().toString();
+                            TextView id = (TextView)row.getChildAt(0);
+                            studentMark[0] =  id.getText().toString();
 
-                                EditText mark = (EditText)row.getChildAt(2);
-                                studentMark[1] = mark.getText().toString();
-                                markList.add(studentMark);
+                            EditText mark = (EditText)row.getChildAt(2);
+                            studentMark[1] = mark.getText().toString();
 
+                            // check all marks are in correct format
+                            try {
+                                int markS = Integer.parseInt(studentMark[1]);
+                                if(markS <= markoutof ){
+                                    markList.add(studentMark);
+                                }
+                                else {
+                                    validCheck =false;
+                                    Toast.makeText(AddPerformanceActivity.this,"There is some invalid Marks.Try again",Toast.LENGTH_LONG).show();
+                                    break;
+                                }
+                            }
+                            catch (NumberFormatException e){
+                                validCheck = false;
+                                Toast.makeText(AddPerformanceActivity.this,"There is some invalid Marks.Try again",Toast.LENGTH_LONG).show();
+                                break;
+                            }
                         }
 
+                        // check whether the exam is selected or not
                         if(ExamId != 0) {
                             if (validCheck) {
-
-                                for (int i=0;i<markList.size();i++){
-                                  //  Log.d("MarkActivity", ">>>>>>>>>>>>>>>>>>>>" + markList.get(i)[1] + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                                }
                                 if (cldc.addInclassMarks(markList, ExamId, markoutof) == 1) {
                                     Toast.makeText(AddPerformanceActivity.this, "Marks are added succesfully.", Toast.LENGTH_LONG).show();
-                                    RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.markListLayout);
                                     relativeLayout.setEnabled(false);
+                                    // load new exam list
+                                    SetItemForSpinnerExam();
+                                    // clear added inputs in the interface
+                                    clearTnterface();
                                 } else {
                                     Toast.makeText(AddPerformanceActivity.this, "Marks are not added succesfully.Select Class and Try Again", Toast.LENGTH_LONG).show();
                                 }
@@ -230,4 +239,38 @@ public class AddPerformanceActivity extends AppCompatActivity implements Adapter
         return true;
 
     }
+
+    /*
+    this is method for load items to the spinner exam
+     */
+    public void SetItemForSpinnerExam(){
+
+        exams = stcr.getExamListWithOutMarkSheetByClassID(studentClssIDPos);
+        ArrayList<String> examNames = new ArrayList<>();
+        examNames.add("");
+
+        for (int i = 0; i < exams.size(); i++) {
+            String ename = exams.get(i).get("ClassID") + "_" + exams.get(i).get("date")+exams.get(i).get("Etype")+"_"+exams.get(i).get("lesson");
+            examNames.add(ename);
+        }
+
+        spinnerExam = (Spinner) findViewById(R.id.spinnerExam);
+        spinnerExam.setOnItemSelectedListener(this);
+        ArrayAdapter<String> dataAdapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, examNames);
+        dataAdapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerExam.setAdapter(dataAdapter2);
+
+    }
+
+    /*
+    this is a method for clearing interface after adding data to interface
+     */
+    public void clearTnterface(){
+        spinner.setSelection(0);
+        spinnerExam.setSelection(0);
+        markOutOF.setSelection(0);
+
+    }
+
+
 }

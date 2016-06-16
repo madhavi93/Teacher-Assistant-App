@@ -4,12 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.UpdateStudentActivity"
     tools:showIn="@layout/activity_update_student"
     android:layout_alignParentTop="true"
     android:layout_alignParentStart="true">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColour">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -17,7 +25,8 @@
             android:id="@+id/textView"
             android:textColor="#030f94"
             android:textSize="10pt"
-            android:layout_alignTop="@+id/spinnerStudent"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/cname"
             android:layout_alignParentStart="true" />
 
         <TextView
@@ -120,8 +129,8 @@
             android:text="Update"
             android:id="@+id/btnDelete"
             android:onClick="onClick"
-            android:textColor="#ffffff"
-            android:background="#033aa8"
+            android:textColor="#020202"
+            android:background="@color/btnColour"
             android:layout_marginTop="10dp"
             android:layout_below="@+id/cEmail"
             android:layout_toEndOf="@+id/textView26" />
@@ -131,8 +140,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/cname"
             android:layout_alignTop="@+id/textView40"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@+id/textView40" />
+            android:layout_toEndOf="@+id/textView27" />
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -157,7 +165,7 @@
             android:text="   Class :"
             android:id="@+id/textView40"
             android:textSize="10pt"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             android:textColor="#030f94"
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true" />
@@ -166,7 +174,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/spinnerStudent"
-            android:layout_below="@+id/cname"
-            android:layout_toEndOf="@+id/textView27" />
+            android:layout_alignTop="@+id/textView"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@+id/textView" />
 
+        </RelativeLayout>
 </RelativeLayout>

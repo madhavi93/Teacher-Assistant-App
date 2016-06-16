@@ -161,14 +161,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.parentCommunicatorActivity.SetEmailAccountActivity"
-            android:label="@string/title_activity_set_email_account"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".Activity.parentCommunicatorActivity.SetSMSConnectionActivity"
-            android:label="@string/title_activity_set_smsconnection"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".Activity.Util.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar">
@@ -178,10 +170,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activity.SyllabusTrackerActivity.SyllabusActivity"
-            android:label="@string/title_activity_syllabus"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activity.SyllabusTrackerActivity.ViewSylActivity"
             android:label="@string/title_activity_view_syl"
@@ -283,16 +271,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity.pdfActivity"
-            android:label="@string/title_activity_pdf"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="com.example.madhaviruwandika.teacher_assistant.Activity.pdfActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-        <activity
             android:name=".Activity.classActivity.ViewExtraClassActivity"
             android:label="@string/title_activity_view_extra_class"
             android:theme="@style/AppTheme.NoActionBar">
@@ -322,6 +300,10 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Activity.Util.HelpActivity"
+            android:label="@string/title_activity_help"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -32,19 +32,21 @@ public class ChangeMyProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_change_my_profile, container, false);
 
+        // initiate widgetViews
         name = (EditText)v.findViewById(R.id.editTextMyName);
         currentPassward = (EditText)v.findViewById(R.id.editTextcurrentPassword);
         newPassward = (EditText) v.findViewById(R.id.editTextNewPassword);
         reEnteredpassward = (EditText) v.findViewById(R.id.editTextReEnter);
         saveChange = (Button) v.findViewById(R.id.buttonSave);
 
+        // intialize profile controller
         myProfileController = new MyProfileController(getActivity());
         Map<String,String> myProfile = myProfileController.getProfileData();
 
+        // check whether the profile is adding firstTime
         if(myProfile == null){
             appFirstTime = true;
         }
-
         else{
             name.setText(myProfile.get("name"));
         }
@@ -52,8 +54,10 @@ public class ChangeMyProfileFragment extends Fragment {
         return v;
     }
 
+    /*
+    this is method which implement click listner on save button
+     */
     public void OnSaveButtonClickListner(){
-
         saveChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,9 +66,11 @@ public class ChangeMyProfileFragment extends Fragment {
                 String newPasswardString = newPassward.getText().toString();
                 String reEnteredpasswardString = reEnteredpassward.getText().toString();
 
+                // check whether the app is running in first time
                 if(!appFirstTime){
-
+                    // check whether the current password is valid
                     if(myProfileController.ValidatePassward(currentPasswardString)){
+                        //check whether the newly entered and re entered password is correct
                         if(newPasswardString.equals(reEnteredpasswardString)){
                             if(myProfileController.UpdateMyprofile(name.getText().toString(),newPasswardString)==1){
                                 Toast.makeText(getActivity(), "Passward is changed", Toast.LENGTH_LONG).show();
@@ -82,6 +88,7 @@ public class ChangeMyProfileFragment extends Fragment {
                     }
                 }
                 else {
+                    // save data in to database if it is the first time
                     if(myProfileController.SaveProfileDataFirstTime(name.getText().toString(),newPasswardString)==1){
                         Toast.makeText(getActivity(), "Profile details are saved.", Toast.LENGTH_LONG).show();
                         clearText();
@@ -94,6 +101,9 @@ public class ChangeMyProfileFragment extends Fragment {
         });
     }
 
+    /*
+    clear interface
+     */
     public void clearText(){
         name.setText("");
         currentPassward.setText("");

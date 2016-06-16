@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConnection;
 import com.example.madhaviruwandika.teacher_assistant.Database.DBConstant;
+import com.example.madhaviruwandika.teacher_assistant.Database.DBCreator;
 import com.example.madhaviruwandika.teacher_assistant.Database.DataAccess.MyProfileDAO;
 import com.example.madhaviruwandika.teacher_assistant.Model.Exam;
 import com.example.madhaviruwandika.teacher_assistant.Model.MyProfile;
@@ -22,8 +23,10 @@ import java.util.List;
 public class MyProfileDA implements MyProfileDAO {
 
     SQLiteDatabase db;
+    DBCreator dbCreator;
     public MyProfileDA(Context context){
         db = DBConnection.getInstance(context).getWritableDatabase();
+        dbCreator = new DBCreator(context);
     }
 
 
@@ -56,7 +59,7 @@ public class MyProfileDA implements MyProfileDAO {
 
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.myProfileTable_col1 + " from MyAccount", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.myProfileTable_col1 + " from MyAccount ORDER BY "+DBConstant.myProfileTable_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -65,10 +68,13 @@ public class MyProfileDA implements MyProfileDAO {
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+            else {
+                idnext = 0;
+            }
+
         }
         return idnext;
 
@@ -150,5 +156,10 @@ public class MyProfileDA implements MyProfileDAO {
             }
         }
         return ClassList;
+    }
+
+    @Override
+    public long resetApp() {
+        return dbCreator.ClearAllTheTable();
     }
 }

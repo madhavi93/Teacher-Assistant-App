@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:id="@+id/drawer_Layout"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Util.SettingsActivity"
@@ -16,20 +17,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#e6fafc"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp">
+        >
 
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="     Delete Class     "
+            android:text="          Delete Class          "
             android:id="@+id/buttonDeleteClass"
-            android:layout_marginTop="66dp"
-            android:background="#7daf99"
-            android:layout_alignParentTop="true"
+            android:layout_marginTop="45dp"
+            android:background="#aaa0bd"
+            android:layout_below="@+id/textView12"
             android:layout_centerHorizontal="true" />
 
         <Button
@@ -41,7 +39,70 @@
             android:layout_below="@+id/buttonDeleteClass"
             android:layout_alignEnd="@+id/buttonDeleteClass"
             android:layout_alignStart="@+id/buttonDeleteClass"
-            android:background="#66eacf" />
+            android:background="#d9c9dd" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Reset "
+            android:id="@+id/btnReset"
+            android:background="#89bcce"
+            android:layout_marginTop="45dp"
+            android:layout_below="@+id/textView17"
+            android:layout_alignStart="@+id/buttonDeleteStudent"
+            android:layout_alignEnd="@+id/buttonDeleteStudent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Class Settings"
+            android:id="@+id/textView12"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="53dp"
+            android:textColor="#625aa2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="App Settings"
+            android:id="@+id/textView17"
+            android:textColor="#625aa2"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/textView12" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:layout_alignTop="@+id/btnReset"
+            android:background="@drawable/reset2"
+            android:layout_alignBottom="@+id/btnReset"
+            android:layout_alignStart="@+id/textView17"
+            android:layout_toStartOf="@+id/btnReset" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView4"
+            android:background="@drawable/delete_r_1"
+            android:layout_alignTop="@+id/buttonDeleteClass"
+            android:layout_above="@+id/buttonDeleteStudent"
+            android:layout_alignStart="@+id/textView12"
+            android:layout_toStartOf="@+id/buttonDeleteClass" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView5"
+            android:layout_alignTop="@+id/buttonDeleteStudent"
+            android:layout_alignStart="@+id/imageView4"
+            android:background="@drawable/delete_r_2"
+            android:layout_alignBottom="@+id/buttonDeleteStudent"
+            android:layout_toStartOf="@+id/buttonDeleteStudent" />
     </RelativeLayout>
     <ListView
         android:layout_width="250dp"
@@ -51,6 +112,6 @@
         android:background="@color/colorDraver"
         android:choiceMode="singleChoice"
         android:textAlignment="center"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="10dp"/>
 
 </android.support.v4.widget.DrawerLayout>

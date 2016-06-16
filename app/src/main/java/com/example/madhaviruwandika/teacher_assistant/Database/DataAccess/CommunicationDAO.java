@@ -20,7 +20,6 @@ public interface CommunicationDAO {
     public List<Parent> getParentList(List<Student> studentList);
     public List<Student> getStudentListByClassID(int Class_id);
     public List<TutionClass> getClassDetails();
-    public List<Student> getStudentListByClasssID(int id);
     public long RecordOfSendingSingleMessage(SingleMessage m);
     public long RecordOfSendingGroupMessage(GroupMessage m);
     public int getMessageID(String mType);

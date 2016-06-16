@@ -4,27 +4,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:id="@+id/drawer_Layout"
     tools:context=".Activity.HomeActivity"
     tools:showIn="@layout/activity_home">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/frame_layout"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/home">
 
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pdf"
-            android:id="@+id/buttonpdf"
-            android:layout_centerVertical="true"
+            android:text="TEACHER ASSISTANT"
+            android:id="@+id/textView62"
+            android:textSize="33dp"
+            android:textColor="#238637"
+            android:layout_marginTop="20dp"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="#f9fbfc"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/btnStart"
+                android:layout_marginLeft="15dp"
+                android:background="@drawable/start_class"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/btnMyProgress"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/s_class"
+                android:layout_alignTop="@+id/btnStart"
+                android:layout_toEndOf="@+id/btnSperfomance" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/btnSperfomance"
+                android:background="@drawable/student_per"
+                android:layout_marginLeft="12dp"
+                android:layout_alignTop="@+id/btnStart"
+                android:layout_toEndOf="@+id/btnStart" />
+
+            <Button
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:id="@+id/btnmessage"
+                android:layout_marginLeft="12dp"
+                android:background="@drawable/messages"
+                android:layout_alignTop="@+id/btnMyProgress"
+                android:layout_toEndOf="@+id/btnMyProgress" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
     <ListView
@@ -35,7 +85,7 @@
         android:background="@color/colorDraver"
         android:choiceMode="singleChoice"
         android:textAlignment="center"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="10dp">
     </ListView>
 
 </android.support.v4.widget.DrawerLayout>

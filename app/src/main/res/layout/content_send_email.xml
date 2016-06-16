@@ -4,68 +4,68 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendEmailActivity"
-    tools:showIn="@layout/activity_send_email">
+    tools:showIn="@layout/activity_send_email"
+   >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#e6fafc">
 
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Group"
-            android:id="@+id/checkBoxGroupSMS"
+            android:id="@+id/checkBoxGroupEmail"
             android:checked="false"
-            android:layout_below="@+id/textView16"
-            android:layout_toEndOf="@+id/textView16" />
+            android:textColor="#fd3994"
+            android:layout_below="@+id/textView63"
+            android:layout_alignStart="@+id/btnSend" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Recipient :"
+            android:text=" Recipient :"
             android:id="@+id/textView15"
-            android:layout_marginTop="47dp"
-            android:layout_below="@+id/checkBoxGroupSMS"
+            android:layout_marginTop="40dp"
+            android:layout_below="@+id/textView16"
             android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Class"
+            android:text=" Class : "
             android:id="@+id/textView16"
-            android:layout_marginTop="45dp"
-            android:layout_alignParentTop="true"
+            android:layout_marginTop="60dp"
+            android:layout_below="@+id/checkBoxGroupEmail"
             android:layout_alignParentStart="true" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Message :"
+            android:text=" Message :"
             android:id="@+id/textView14"
-            android:layout_centerVertical="true"
-            android:layout_alignStart="@+id/textView15" />
+            android:layout_marginTop="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView15" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Send"
             android:id="@+id/btnSend"
-            android:layout_alignTop="@+id/btnAddReport"
-            android:layout_alignParentEnd="true" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Perfomance Report"
-            android:id="@+id/btnAddReport"
-            android:layout_marginTop="53dp"
-            android:layout_below="@+id/editTextEmail"
-            android:layout_alignParentStart="true" />
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="45dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/editTextEmail" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -75,14 +75,34 @@
             android:id="@+id/editTextEmail"
             android:layout_below="@+id/textView14"
             android:layout_alignStart="@+id/textView14"
-            android:layout_alignEnd="@+id/btnSend" />
+            android:layout_alignParentEnd="true" />
 
-    <EditText
+        <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editTextrecipient"
-        android:layout_below="@+id/textView15"
-        android:layout_alignParentStart="true"
+        android:text="Select if is this a group message"
+        android:id="@+id/textView63"
+        android:textColor="#fd3994"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="43dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerClass"
+        android:layout_above="@+id/textView15"
+        android:layout_toEndOf="@+id/textView16"
         android:layout_alignEnd="@+id/editTextEmail" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerStudent"
+        android:layout_above="@+id/textView14"
+        android:layout_alignEnd="@+id/spinnerClass"
+        android:layout_toEndOf="@+id/textView15" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

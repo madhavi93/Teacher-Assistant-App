@@ -29,56 +29,66 @@ public class MyProfileController {
     PasswardEncryptor passwardEncryptor ;
     public MyProfileController(Context context){
         myProfileDAO = new MyProfileDA(context);
-        passwardEncryptor = new PasswardEncryptor(context);
+
     }
 
+    /*
+    *this method is called when account details are going to added in first time
+    * just after installing the app and after reseting the data
+     */
     public int SaveProfileDataFirstTime(String name,String passward){
-        Calendar calendar = Calendar.getInstance();
 
+        // get date of password changed
+        Calendar calendar = Calendar.getInstance();
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String Date = sdf.format(calendar.getTime());
 
-        String passwardEncrypt = passwardEncryptor.encryptString(passward);
-        MyProfile myProfile = new MyProfile(name,passwardEncrypt,Date);
+        String passwardEncrypt = null;
+        try {
+            // encrypt password before saving
+            passwardEncrypt = PasswardEncryptor.encrypt(passward);
+            MyProfile myProfile = new MyProfile(name,passwardEncrypt,Date);
+            if(myProfileDAO.saveProfileData(myProfile)!= -1){
+                return 1;
+            }
+            else{
+                return 0;
+            }
 
-        if(myProfileDAO.saveProfileData(myProfile)!= -1){
-
-            Log.d("PAssword",">>>>>>>>>>>>>>"+name+">>>>>>>>>>"+passward+">>>>>>>>>>>>>>>>>>>>>>>");
-            return 1;
-        }
-        else{
-            return 0;
-        }
-    }
-
-    public int UpdateMyprofile(String name){
-        MyProfile myProfile = myProfileDAO.getProfileData();
-        myProfile.setName(name);
-
-        if(myProfileDAO.updateProfileData(myProfile) != -1){
-            return -1;
-        }
-        else {
+        } catch (Exception e) {
+            e.printStackTrace();
             return 0;
         }
 
+
     }
+
 
     public int UpdateMyprofile(String name,String passward){
 
+        // get profile details from the database to match the current password
         MyProfile myProfile = new MyProfile();
         myProfile = myProfileDAO.getProfileData();
         myProfile.setName(name);
 
-        String passwardEncrypted = passwardEncryptor.encryptString(passward);
-        myProfile.setPassword(passwardEncrypted);
+        String passwardEncrypted = null;
+        try {
+            // encrypt passward
+            passwardEncrypted = PasswardEncryptor.encrypt(passward);
+            myProfile.setPassword(passwardEncrypted);
 
-        if(myProfileDAO.updateProfileData(myProfile) != -1){
-            return -1;
-        }
-        else {
+            if(myProfileDAO.updateProfileData(myProfile) != -1){
+                return 1;
+            }
+            else {
+                return 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
             return 0;
         }
+
+
     }
 
     public Map<String,String> getProfileData(){
@@ -105,16 +115,35 @@ public class MyProfileController {
         return names;
     }
 
-    public boolean ValidatePassward(String passward){
+    public boolean ValidatePassward(String passward) {
 
         MyProfile myProfile = myProfileDAO.getProfileData();
-        String passwardDecrypted = passwardEncryptor.encryptString(passward);
-        if(passwardDecrypted.equals(myProfile.getPassword())){
-            return true;
+        String passwardDecrypted = null;
+        try {
+            // decrypt stored passward in the database
+            passwardDecrypted = PasswardEncryptor.decrypt(myProfile.getPassword());
+            // check equility of passwords
+            if (passwardDecrypted.equals(passward)) {
+                return true;
+            } else {
+                // Should be corrected.
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
         }
-        else {
-            // Should be corrected.
-            return true;
+
+    }
+
+    /*
+    *this method is to reset application
+    *will empty all the tables
+     */
+    public int ResetApplication(){
+        if(myProfileDAO.resetApp()!= -1){
+            return 1;
         }
+        else return 0;
     }
 }

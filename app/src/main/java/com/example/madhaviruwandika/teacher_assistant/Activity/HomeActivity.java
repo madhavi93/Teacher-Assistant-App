@@ -25,6 +25,12 @@ public class HomeActivity extends BaseActivity {
 
     Bundle bundle;
     int fragmentID = 0;
+    Button statrClass;
+    Button myProgress;
+    Button stdPrefm;
+    Button message;
+    Intent intent;
+
 
 
     @Override
@@ -36,11 +42,18 @@ public class HomeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         //create database
         DBCreator dbCreator= new DBCreator(this);
-        //initalise and store key in keysrtoe
-        PasswardEncryptor passwardEncryptor = new PasswardEncryptor(this);
-        passwardEncryptor.createNewKeys();
+
+        statrClass = (Button)findViewById(R.id.btnStart);
+        message = (Button)findViewById(R.id.btnmessage);
+        stdPrefm = (Button)findViewById(R.id.btnSperfomance);
+        myProgress = (Button)findViewById(R.id.btnMyProgress);
+
         LoadSelection(0);
 
+        OnstartClassClickListner();
+        OnMessageClickListner();
+        OnMyProgressClickListner();
+        OnStdPClickListner();
 
     }
 
@@ -57,6 +70,65 @@ public class HomeActivity extends BaseActivity {
         super.onPostCreate(savedInstanceState);
 
     }
+
+
+    public void OnstartClassClickListner(){
+
+        statrClass.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.TodaysClassActivity");
+                        startActivity(intent);
+                    }
+                }
+
+        );
+    }
+
+    public void OnStdPClickListner(){
+
+        stdPrefm.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.StudentActivity.StudentProgressActivity");
+                        startActivity(intent);
+                    }
+                }
+
+        );
+    }
+
+    public void OnMessageClickListner(){
+
+        message.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicatorActivity.SendMessageActivity");
+                        startActivity(intent);
+                    }
+                }
+
+        );
+    }
+
+    public void OnMyProgressClickListner(){
+
+        myProgress.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity.MyProgressActivity");
+                        startActivity(intent);
+
+                    }
+                }
+
+        );
+    }
+
 
 
 

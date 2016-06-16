@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.madhaviruwandika.teacher_assistant.Controller.StudentController;
@@ -25,8 +26,9 @@ import java.util.List;
 
 public class PerfomanceFragment extends Fragment {
 
-    private BarChart barChart;
-    private TextView std;
+    BarChart barChart;
+    RelativeLayout chartContainer;
+    TextView std;
 
     Bundle mybundle;
     StudentController studentController;
@@ -38,6 +40,7 @@ public class PerfomanceFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_perfomance, container, false);
         barChart = (BarChart) view.findViewById(R.id.perfomance_chart);
         std = (TextView) view.findViewById(R.id.stdName);
+        chartContainer = (RelativeLayout)view.findViewById(R.id.container);
 
         // initialize bundle to get data from previous activity
         mybundle = this.getArguments();
@@ -86,11 +89,18 @@ public class PerfomanceFragment extends Fragment {
         dataSets.add(barDataSet1);
         dataSets.add(barDataSet2);
         dataSets.add(barDataSet3);
-        ArrayList<String> labels = studentController.getExamNameListByClassID(mybundle.getInt("ClassID"));
 
         // initialize the Bardata with argument labels and dataSet
+        ArrayList<String> labels = new ArrayList<>();
+        for (int i=0;i<group1.size();i++)
+        {
+            labels.add("Exam_"+(i+1));
+
+        }
+
         BarData data = new BarData(labels,dataSets);
         barChart.setData(data);
+        barChart.setDescription("Exams");
         std.setText(mybundle.getString("name"));
 
         return view;

@@ -58,6 +58,7 @@ public class BaseActivity extends AppCompatActivity  {
         list.add(new ItemSlideMenu("  Send message"));
         list.add(new ItemSlideMenu("  Manage class"));
         list.add(new ItemSlideMenu("  Settings"));
+        list.add(new ItemSlideMenu("  Help"));
 
         adapter = new SlidingMenuAdapter(this,list);
 
@@ -100,6 +101,11 @@ public class BaseActivity extends AppCompatActivity  {
                         break;
                     case 6:
                         intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.SettingsActivity");
+                        startActivity(intent);
+                        break;
+
+                    case 7:
+                        intent = new Intent("com.example.madhaviruwandika.teacher_assistant.Activity.Util.HelpActivity");
                         startActivity(intent);
                         break;
 

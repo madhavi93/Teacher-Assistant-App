@@ -10,13 +10,22 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
+import com.example.madhaviruwandika.teacher_assistant.Controller.CommunicationController;
 import com.example.madhaviruwandika.teacher_assistant.R;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.LineChart;
 
 public class PerformanceReportActivity extends AppCompatActivity {
 
@@ -51,13 +60,6 @@ public class PerformanceReportActivity extends AppCompatActivity {
 
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent myIntent = new Intent(getApplicationContext(), SeePerfomanceActivity.class);
-        startActivityForResult(myIntent, 0);
-        return true;
-    }
 
     /**
      * A placeholder fragment containing a simple view.
@@ -151,11 +153,51 @@ public class PerformanceReportActivity extends AppCompatActivity {
                     return "Inclass Performance 2" ;
                 case 2:
                     return "Payment and Attendence";
-
                 default:
                     return "Inclass Performance";
             }
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.reporter, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch(item.getItemId()) {
+            case R.id.sendReport:
+
+                CommunicationController communicationController = new CommunicationController(this);
+                ClassController classController = new ClassController(this);
+                PerfomanceFragment perfomanceFragment = (PerfomanceFragment)mSectionsPagerAdapter.instantiateItem(mViewPager,0);
+                RelativeLayout barChart = perfomanceFragment.chartContainer;
+                Perfomance_2_Fragment perfomance_2_fragment = (Perfomance_2_Fragment)mSectionsPagerAdapter.instantiateItem(mViewPager,1);
+                RelativeLayout lineChart = perfomance_2_fragment.chartContainer;
+                AttendenceAndPamentFragment attendenceAndPamentFragment = (AttendenceAndPamentFragment)mSectionsPagerAdapter.instantiateItem(mViewPager,2);
+                TableLayout tableLayout = attendenceAndPamentFragment.logsTableLayout;
+                Intent emailIntent = communicationController.sendEmailWithAttacthment(classController.getTutionClassByID(myBundle.getInt("ClassID")).get("ClassName"), myBundle.getInt("ClassID"),myBundle.getInt("StudentID"), "", PerformanceReportActivity.this,barChart,lineChart);
+                Intent choser = Intent.createChooser(emailIntent, "......Sending Email.....");
+                PerformanceReportActivity.this.startActivity(choser);
+                break;
+            case android.R.id.home:
+                Intent myIntent = new Intent(getApplicationContext(), SeePerfomanceActivity.class);
+                startActivityForResult(myIntent, 0);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+
+        return true;
+
+
+    }
+
+
 
 }

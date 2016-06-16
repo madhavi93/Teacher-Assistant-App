@@ -2,16 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Util.ChangeMyProfileFragment">
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Util.ChangeMyProfileFragment"
+    >
 
     <ScrollView
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginRight="2dp"
-        android:layout_marginLeft="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fillViewport="true"
+        android:background="#e6fafc"
         android:id="@+id/scrollView3">
 
         <RelativeLayout
@@ -20,8 +22,8 @@
             android:id="@+id/relativeLayout">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/imageView"
                 android:src="@drawable/myprofile"
                 android:background="@drawable/myprofile"
@@ -33,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="My name : "
+                android:text=" My name : "
                 android:id="@+id/textViewName"
                 android:layout_marginTop="30dp"
                 android:layout_below="@+id/imageView"
@@ -43,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Current Password :"
+                android:text=" Current Password :"
                 android:id="@+id/textView23"
                 android:layout_below="@+id/textViewName"
                 android:layout_alignParentStart="true"
@@ -53,7 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="New Password :"
+                android:text=" New Password :"
                 android:id="@+id/textView24"
                 android:layout_below="@+id/textView23"
                 android:layout_alignParentStart="true"
@@ -63,7 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Re-enter             :"
+                android:text=" Re-enter             :"
                 android:id="@+id/textView48"
                 android:layout_below="@+id/textView24"
                 android:layout_alignParentStart="true"

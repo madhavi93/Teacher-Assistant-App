@@ -39,7 +39,7 @@ public class ClassDA implements ClassDAO{
 
         // set values to contentValues
         ContentValues contentValues = new ContentValues();
-
+        Log.d("CLASSID","UUUUUUUUUUUUUUUUUUUU>>>>>>>>>>>>>>"+(getClassID()+1)+"<<<<<<<<<<<<<<<<<<UUUUUUUUUUUUUUUUUUU");
         contentValues.put(DBConstant.tutionClass_col1,getClassID()+1);
         contentValues.put(DBConstant.tutionClass_col2,tutionClass.getClassName());
         contentValues.put(DBConstant.tutionClass_col3,tutionClass.getStartDate().toString());
@@ -66,7 +66,7 @@ public class ClassDA implements ClassDAO{
 
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.tutionClass_col1 + " from TutionClass", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.tutionClass_col1 + " from TutionClass ORDER BY "+DBConstant.tutionClass_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -75,11 +75,17 @@ public class ClassDA implements ClassDAO{
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
+                    Log.d("CLASSID","UUUUUUUUUUUUUUUUUUUUTTTTTTTTTTTTTTTTTTTT>>>>>>>>>>>>>>"+idnext+"<<<<<<<<<<<<<<<<<<UUUUUUUUUUUUUUUUUUU");
+
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+            else {
+                idnext = 0;
+            }
         }
+
+        Log.d("CLASSID","UUUUUUUUUUUUUUUUUUUU>>>>>>>>>>>>>>"+idnext+"<<<<<<<<<<<<<<<<<<UUUUUUUUUUUUUUUUUUU");
         return idnext;
     }
 
@@ -117,7 +123,7 @@ public class ClassDA implements ClassDAO{
 
         // set values to contentValues
         ContentValues contentValues = new ContentValues();
-
+        Log.d("Payment", ">>>>>>>>>>>>>>>>>>>>>>>>." + payment.getMonthOfPayment() + ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
         contentValues.put(DBConstant.payment_col1, getPaymentID()+1);
         contentValues.put(DBConstant.payment_col2, payment.getSID());
         contentValues.put(DBConstant.payment_col3, payment.getCID());
@@ -140,7 +146,7 @@ public class ClassDA implements ClassDAO{
     public int getPaymentID() {
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.payment_col1 + " from Payment", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.payment_col1 + " from Payment ORDER BY "+DBConstant.payment_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -149,10 +155,12 @@ public class ClassDA implements ClassDAO{
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+            else {
+                idnext=0;
+            }
         }
         return idnext;
     }
@@ -187,9 +195,8 @@ public class ClassDA implements ClassDAO{
 
     public int getExClassID() {
 
-        List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.ExtraClass_col1 + " from Extra_Class", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.ExtraClass_col1 + " from Extra_Class ORDER BY "+DBConstant.ExtraClass_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -198,10 +205,12 @@ public class ClassDA implements ClassDAO{
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+            else {
+                idnext=0;
+            }
         }
         return idnext;
     }
@@ -218,7 +227,6 @@ public class ClassDA implements ClassDAO{
             //iterate through result set
             if (cursor.moveToFirst()) {
                 do {
-
                     tutionClass.setClassID(Integer.parseInt(cursor.getString(0)));
                     tutionClass.setClassName(cursor.getString(1));
                     tutionClass.setStartDate(cursor.getString(2));
@@ -284,7 +292,7 @@ public class ClassDA implements ClassDAO{
 
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.exam_col1 + " from Exam", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.exam_col1 + " from Exam ORDER BY "+DBConstant.exam_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -293,10 +301,12 @@ public class ClassDA implements ClassDAO{
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+            else {
+                idnext = 0;
+            }
         }
         return idnext;
     }
@@ -391,11 +401,9 @@ public class ClassDA implements ClassDAO{
             contentValues.put(DBConstant.attendenceSheet_col3, attendence_sheets.get(i).getClass_Id());
             contentValues.put(DBConstant.attendenceSheet_col4, attendence_sheets.get(i).getDateOPA());
             contentValues.put(DBConstant.attendenceSheet_col5, attendence_sheets.get(i).isAttendenceState());
-            Log.d(">>>>>>>>>>>>>>>>", ">>>>>>>>>>>>>>>>>>>>>>" + attendence_sheets.get(i).getS_id()+">>>>>>>>>>>>>>>>>>"+attendence_sheets.get(i).getClass_Id()+">>>>>>>>>>>>>"+attendence_sheets.get(i).getDateOPA().length());
             result = db.insert("Attendance_Sheet",null,contentValues);
         }
 
-        Log.d("MY","....................................Attendence Are Added.........................."+getAttendenceID()+".................................");
         return result;
 
     }
@@ -403,7 +411,7 @@ public class ClassDA implements ClassDAO{
     public int getAttendenceID() {
         List<Integer> idList = new ArrayList<>();
         int idnext;
-        Cursor cursor = db.rawQuery("select " + DBConstant.attendenceSheet_col1 + " from  Attendance_Sheet", null);
+        Cursor cursor = db.rawQuery("select " + DBConstant.attendenceSheet_col1 + " from  Attendance_Sheet ORDER BY "+DBConstant.attendenceSheet_col1+" DESC LIMIT 1", null);
         if (cursor.getCount() == 0) {
             Log.d("MYACTIVITY", "No Value");
             idnext = 0;
@@ -412,12 +420,31 @@ public class ClassDA implements ClassDAO{
             if (cursor.moveToFirst()) {
                 do {
                     int id = Integer.parseInt(cursor.getString(0));
-                    idList.add(id);
+                    idnext = id;
                 } while (cursor.moveToNext());
             }
-            idnext = idList.size();
+            else {
+                idnext = 0;
+            }
         }
         return idnext;
+    }
+
+    @Override
+    public int getStartedClassWithinTheDay(String date, int classID) {
+
+        int state = 0;
+
+        Log.d("Starting Class",">>>>>>>>>>>>>>>>>>>>>>.Claaing Class DA.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+
+        Cursor cursor = db.rawQuery("select * from StartOfClass where " + DBConstant.StartOfClass_col1 + " = ? and " + DBConstant.StartOfClass_col2 + " =?",new String[]{String.valueOf(classID),date});
+        if (cursor.getCount() == 0) {
+            Log.d("MYACTIVITY", "No Value");
+            state = 0;
+            return state;
+        } else {
+            return 1;
+        }
     }
 
     @Override
@@ -428,7 +455,7 @@ public class ClassDA implements ClassDAO{
         contentValues.put(DBConstant.StartOfClass_col1,classID);
         contentValues.put(DBConstant.StartOfClass_col2,date);
         contentValues.put(DBConstant.StartOfClass_col3,Starttime);
-        contentValues.put(DBConstant.StartOfClass_col4,endTime);
+        contentValues.put(DBConstant.StartOfClass_col4, endTime);
         long result = db.insert("StartOfClass", null, contentValues);
 
         return result;

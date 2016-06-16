@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Activity.SyllabusTrackerActivity.ViewSylActivity"
     tools:showIn="@layout/activity_view_syl">
@@ -11,15 +15,15 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_marginLeft="0dp">
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Class :"
+            android:layout_marginTop="5dp"
             android:id="@+id/textViewClass"
-            android:layout_marginTop="25dp"
             android:layout_marginLeft="15dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
@@ -30,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/textViewClass"
             android:layout_alignStart="@+id/textView31"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="15dp"
             android:fillViewport="false"
             android:id="@+id/scrollView"
             android:background="#e4fbfb">
@@ -104,14 +108,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/TimeTaken"
-                            android:text="time\ntaken(min)"
+                            android:text="time\ntaken\n(min)"
                             android:textSize="15dp"
                             android:textAppearance="?android:attr/textAppearanceLarge"
                             android:layout_column="5"/>
-
-
-
                     </TableRow>
+
+                    <View android:layout_width="match_parent"
+                        android:background="#bdc0c2"
+                        android:layout_height="2dp" />
+
                 </TableLayout>
 
             </RelativeLayout>
@@ -123,10 +129,11 @@
             android:layout_height="wrap_content"
             android:text="&lt;&lt;Back"
             android:id="@+id/buttonBack"
-            android:layout_marginBottom="72dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginBottom="51dp"
+            android:background="@color/btnColour"
             android:layout_alignParentBottom="true"
-            android:layout_toStartOf="@+id/textViewClass"
-            android:background="#337bb6" />
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 </RelativeLayout>

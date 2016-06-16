@@ -3,22 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_Layout"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_vertical_margin"
+    android:paddingBottom="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:paddingLeft="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.AddPerformanceActivity"
     tools:showIn="@layout/activity_add_performance"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColour"
+    >
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="600dp"
+        android:layout_height="500dp"
         android:fillViewport="false"
         android:id="@+id/scrollView"
-        android:background="#e6fafc">
+        android:background="@color/backgroundColour">
 
 
     <RelativeLayout
@@ -52,10 +54,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Student List :"
             android:id="@+id/textView31"
-            android:layout_marginLeft="15dp"
-            android:layout_below="@+id/textView59"
-            android:layout_marginTop="30dp"
-            android:layout_alignStart="@+id/textView36" />
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/spinnerMarkOutOF"
+            android:layout_alignStart="@+id/textView59" />
 
 
             <RelativeLayout
@@ -77,7 +79,7 @@
                     android:id="@+id/logs_table_header"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FFE7FBFB"
+                    android:background="#d3e0e5"
                     >
 
                     <TextView
@@ -108,16 +110,6 @@
                 </TableRow>
             </TableLayout>
         </RelativeLayout>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add"
-            android:id="@+id/buttonAdd"
-            android:background="#a7ecf9"
-            android:layout_below="@+id/markListLayout"
-            android:layout_marginTop="20dp"
-            android:layout_toEndOf="@+id/textView31" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -156,4 +148,13 @@
 
     </RelativeLayout>
     </ScrollView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:id="@+id/buttonAdd"
+        android:background="@color/btnColour"
+        android:layout_below="@+id/scrollView"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

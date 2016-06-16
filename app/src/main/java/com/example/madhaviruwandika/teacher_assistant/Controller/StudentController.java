@@ -198,7 +198,7 @@ public class StudentController {
     public List<List<Integer>> getDataToStudentPerfomanceReport(int classID,int s_id){
 
         List<List<Integer>> data = new ArrayList<>();
-        List<Exam> examList = sDAO.getExamList(classID);
+        List<Exam> examList = sDAO.getExamsThatMArksAreEntered(classID);
 
         ArrayList<Integer> min = new ArrayList<>();
         ArrayList<Integer> max = new ArrayList<>();
@@ -244,20 +244,22 @@ public class StudentController {
     public String getAttendenceState(int s_id,int class_id){
 
         int[] attendence = sDAO.getAttendenceOfStudent(s_id,class_id);
-        String comment = perfomance_analyser.AttendenceState(attendence[0], attendence[1]);
-        return "Student has "+((attendence[1]/attendence[0])*100)+"%. "+comment;
+        if(attendence!=null) {
+            String comment = perfomance_analyser.AttendenceState(attendence[0], attendence[1]);
+            return "Student has " + ((attendence[1] / attendence[0]) * 100) + "%. " + comment;
+        }
+        else return null;
 
     }
 
     public List<Map<String,String>> getPayments(int s_id,int class_id){
 
         List<Payment> paymentList = sDAO.getPayments(s_id, class_id);
-        Log.d("MYACTIVITY", ">>>>>>>>>>>>>>>>>>>>>>>>."+s_id+">>>"+class_id+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
         List<Map<String,String>> list = new ArrayList<>();
         for (int i=0;i<paymentList.size();i++){
             Map<String,String> map = new HashMap<>();
-
+            Log.d("Payment", ">>>>>>>>>>>>>>>>>>>>>>>>."+paymentList.get(i).getMonthOfPayment()+">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
             map.put("No",String.valueOf(i+1));
             map.put("date",paymentList.get(i).getDoP());
             map.put("month",paymentList.get(i).getMonthOfPayment());

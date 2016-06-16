@@ -14,5 +14,6 @@ public interface MyProfileDAO {
     public MyProfile getProfileData();
     public long updateProfileData(MyProfile myProfile);
     public List<TutionClass> getClassList();
+    public long resetApp();
 
 }

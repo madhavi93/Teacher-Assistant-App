@@ -1,4 +1,4 @@
-package com.example.madhaviruwandika.teacher_assistant.Activity;
+package com.example.madhaviruwandika.teacher_assistant.Activity.classActivity;
 
 import com.example.madhaviruwandika.teacher_assistant.Activity.classActivity.AddClass;
 import com.example.madhaviruwandika.teacher_assistant.R;
@@ -64,9 +64,30 @@ public class AddClassTest extends ActivityInstrumentationTestCase2<AddClass> {
     }
     public void testaddValuesTestCase(){
 
-        this.solo.enterText(className, "Maths-8");
+        //class with correct values
+        this.solo.enterText(className, "Maths-11");
         this.solo.clickOnView(stsrtD);
-        this.solo.setDatePicker(0, 2016, 11, 10);
+        this.solo.setDatePicker(0, 2017, 01, 15);
+        this.solo.clickOnText("OK");
+        this.solo.clickOnView(endD);
+        this.solo.setDatePicker(0, 2017, 10, 10);
+        this.solo.clickOnText("OK");
+        this.solo.clickOnView(From);
+        this.solo.setTimePicker(0, 13, 30);
+        this.solo.clickOnText("OK");
+        this.solo.clickOnView(To);
+        this.solo.setTimePicker(0, 15, 30);
+        this.solo.clickOnText("OK");
+        this.solo.clickOnView(day);
+        this.solo.clickOnView(solo.getView(TextView.class, 4));
+        this.solo.enterText(fee, String.valueOf(800));
+        this.solo.clickOnView(add);
+        assertTrue(solo.waitForText("Class Details are succesfully added"));
+
+        // class with incorrect datatype
+        this.solo.enterText(className, "Maths-10");
+        this.solo.clickOnView(stsrtD);
+        this.solo.setDatePicker(0, 2017, 01, 10);
         this.solo.clickOnText("OK");
         this.solo.clickOnView(endD);
         this.solo.setDatePicker(0, 2017, 11, 10);
@@ -78,11 +99,10 @@ public class AddClassTest extends ActivityInstrumentationTestCase2<AddClass> {
         this.solo.setTimePicker(0, 15, 30);
         this.solo.clickOnText("OK");
         this.solo.clickOnView(day);
-        this.solo.clickOnView(solo.getView(TextView.class, 2));
-        this.solo.enterText(fee, String.valueOf(500));
-
+        this.solo.clickOnView(solo.getView(TextView.class, 3));
+        this.solo.enterText(fee,"w300");
         this.solo.clickOnView(add);
-        assertTrue(solo.waitForText("Class Details are succesfully added"));
+        assertTrue(solo.waitForText("Class Details are not added succesfully.Try Again"));
 
 
     }

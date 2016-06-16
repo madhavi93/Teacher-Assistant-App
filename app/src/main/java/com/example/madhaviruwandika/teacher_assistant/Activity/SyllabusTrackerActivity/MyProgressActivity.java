@@ -11,7 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.madhaviruwandika.teacher_assistant.Activity.HomeActivity;
 import com.example.madhaviruwandika.teacher_assistant.Activity.Util.BaseActivity;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
@@ -86,6 +88,9 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
                             intent.putExtra("ClassName", ClassName);
                             startActivity(intent);
                         }
+                        else {
+                            Toast.makeText(MyProgressActivity.this," Please select class .",Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
 
@@ -108,6 +113,9 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
                             intent.putExtra("LoadFrom",1);
                             startActivity(intent);
                         }
+                        else {
+                            Toast.makeText(MyProgressActivity.this," Please select class .",Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
 
@@ -129,6 +137,9 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
                             intent.putExtra("ClassName",ClassName);
                             startActivity(intent);
                         }
+                        else {
+                            Toast.makeText(MyProgressActivity.this," Please select class .",Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
         );
@@ -146,6 +157,8 @@ public class MyProgressActivity extends BaseActivity implements AdapterView.OnIt
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+
 
 
 }

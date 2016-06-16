@@ -41,7 +41,6 @@ public class Perfomance_analyser {
         return markInRange;
     }
 
-
     public List<Student_perfomance> sortTheMarkList(List<Student_perfomance> list){
 
         studentPerfomances = list;
@@ -83,7 +82,6 @@ public class Perfomance_analyser {
     }
 
     public String AttendenceState(int classDays,int NoOfDatesAttended){
-
 
         if(classDays!= 0) {
             int percentage = ((NoOfDatesAttended / classDays) * 100);

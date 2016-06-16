@@ -6,7 +6,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:background="@color/backgroundColour">
 
         <TextView
             android:layout_width="wrap_content"
@@ -141,7 +146,7 @@
             android:layout_marginRight="30dp"
             android:layout_below="@+id/editTextProcedure"
             android:layout_alignEnd="@+id/editTextProcedure"
-            android:background="#6396f6" />
+            android:background= "@color/btnColour" />
 
         <Button
             android:layout_width="wrap_content"
@@ -151,7 +156,7 @@
             android:layout_marginTop="20dp"
             android:layout_below="@+id/editTextProcedure"
             android:layout_toStartOf="@+id/editTextTimePeriod"
-            android:background="#6396f6" />
+            android:background="@color/btnColour" />
     </RelativeLayout>
 
 </FrameLayout>

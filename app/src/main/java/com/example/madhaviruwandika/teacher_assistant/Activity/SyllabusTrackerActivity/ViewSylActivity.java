@@ -1,6 +1,7 @@
 package com.example.madhaviruwandika.teacher_assistant.Activity.SyllabusTrackerActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -66,8 +67,12 @@ public class ViewSylActivity extends AppCompatActivity {
             tr.addView(lesson_no);
 
             TextView lessonN = new TextView(this);
-            lessonN.setText(l.get("Lesson").substring(0,15));
-            Log.d("MY", "%%%%%%%%%%%%%%%%%%%%%%%%%" + l.get("Lesson") + "%%%%%%%%%%%%%%%%%%%%%%%%");
+            if(l.get("Lesson").length() < 15){
+                lessonN.setText(l.get("Lesson"));
+            }
+            else {
+                lessonN.setText(l.get("Lesson").substring(0, 15));
+            }
             tr.addView(lessonN);
 
             TextView time = new TextView(this);
@@ -82,6 +87,7 @@ public class ViewSylActivity extends AppCompatActivity {
             timeTaken.setText(l.get("AmountTimeSpent"));
             tr.addView(timeTaken);
 
+            // add line after each row
             logsTableLayout.addView(tr);
         }
         backButtonClick();
@@ -100,15 +106,13 @@ public class ViewSylActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int backViewID = myBundle.getInt("LoadFrom");
-                if(backViewID == 1) {
-
+                if (backViewID == 1) {
                     Intent myIntent = new Intent(getApplicationContext(), MyProgressActivity.class);
                     startActivityForResult(myIntent, 0);
-                }
-                else if(backViewID ==2){
+                } else if (backViewID == 2) {
 
                     Intent intent = new Intent(".Activity.SyllabusTrackerActivity.AddSylActivity");
-                    intent.putExtra("ClassID",classID );
+                    intent.putExtra("ClassID", classID);
                     intent.putExtra("ClassName", myBundle.getString("ClassName"));
                     startActivity(intent);
                 }
@@ -116,4 +120,7 @@ public class ViewSylActivity extends AppCompatActivity {
         });
 
     }
+
+
+
 }

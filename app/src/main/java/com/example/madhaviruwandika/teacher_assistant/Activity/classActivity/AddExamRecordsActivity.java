@@ -21,6 +21,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.madhaviruwandika.teacher_assistant.Activity.Student_and_ReporterActivity.StudentProgressActivity;
+import com.example.madhaviruwandika.teacher_assistant.Activity.Util.ClassDataActivity;
 import com.example.madhaviruwandika.teacher_assistant.Validator.InputValidator;
 import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
 import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
@@ -207,7 +208,7 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
                     @Override
                     public void onClick(View v) {
 
-                        if ( addExams()) {
+                        if (addExams()) {
                             Toast.makeText(AddExamRecordsActivity.this, "Exam Details are added succesfully.", Toast.LENGTH_LONG).show();
                             ClearText();
                         } else {
@@ -258,4 +259,6 @@ public class AddExamRecordsActivity extends AppCompatActivity implements Adapter
             return false;
         }
     }
+
+
 }

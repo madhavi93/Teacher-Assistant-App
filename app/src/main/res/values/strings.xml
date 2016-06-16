@@ -51,9 +51,10 @@
     <string name="title_activity_pdf">pdfActivity</string>
     <string name="title_activity_view_update_extra_class">ViewUpdateExtraClassActivity</string>
     <string name="title_activity_view_extra_class">View Extra Class Details</string>
-    <string name="title_activity_delete_class">DeleteClassActivity</string>
+    <string name="title_activity_delete_class">Delete Class</string>
     <string name="title_activity_lancher">LancherActivity</string>
-    <string name="title_activity_delete_student">DeleteStudentActivity</string>
+    <string name="title_activity_delete_student">Delete Student</string>
+    <string name="title_activity_help">Help </string>
 
 
 </resources>

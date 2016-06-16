@@ -2,8 +2,6 @@ package com.example.madhaviruwandika.teacher_assistant.Activity.parentCommunicat
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -19,11 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.madhaviruwandika.teacher_assistant.Activity.HomeActivity;
-import com.example.madhaviruwandika.teacher_assistant.Controller.ClassController;
 import com.example.madhaviruwandika.teacher_assistant.Controller.CommunicationController;
-import com.example.madhaviruwandika.teacher_assistant.Controller.StudentController;
-import com.example.madhaviruwandika.teacher_assistant.Model.Student;
-import com.example.madhaviruwandika.teacher_assistant.Model.TutionClass;
 import com.example.madhaviruwandika.teacher_assistant.R;
 
 import java.util.ArrayList;
@@ -58,7 +52,7 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
         spinnerClass = (Spinner) findViewById(R.id.spinnerClass);
         recipient =(Spinner)findViewById(R.id.spinnerRecipient);
         sendSMS =(Button)findViewById(R.id.btnSend);
-        groupMessage = (CheckBox)findViewById(R.id.checkBoxGroupSMS);
+        groupMessage = (CheckBox)findViewById(R.id.checkBoxGroupEmail);
         message = (EditText)findViewById(R.id.editTextssms);
 
         // initialize controller
@@ -74,18 +68,15 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
         // attaching data adapter to spinner
         spinnerClass.setAdapter(dataAdapter);
 
+
+        OnCheckBoxItemClick();
+
     }
 
     /*
     method for claer inputs
      */
-    public void clearText(){
-        recipient.setSelection(0);
-        spinnerClass.setSelection(0);
-        message.setText("");
-        groupMessage.setChecked(false);
 
-    }
 
     public void onClick(View v){
         String smsText = message.getText().toString();
@@ -95,13 +86,13 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
             int sendStatus = communicationController.sendSMSMessage(pnNo, smsText) ;
             if ( sendStatus== 1) {
                 Toast.makeText(SendSMSActivity.this, "Message Sent succesfully.", Toast.LENGTH_LONG).show();
-                clearText();
+                clearInterface();
             } else if(sendStatus == 0) {
                 Toast.makeText(SendSMSActivity.this, "Message Sending failed.", Toast.LENGTH_LONG).show();
             }
             else if(sendStatus == 2) {
                 Toast.makeText(SendSMSActivity.this, "Message Sent succesfully. But failed to add to your records", Toast.LENGTH_LONG).show();
-                clearText();
+                clearInterface();
             }
         }
 
@@ -109,9 +100,11 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
             int FailureCount = communicationController.sendSMSForGroup(ClassID,smsText);
 
             if(FailureCount== 0){
+                clearInterface();
                 Toast.makeText(SendSMSActivity.this, "Messages are sent succesfully.", Toast.LENGTH_LONG).show();
             }
             else{
+                clearInterface();
                 Toast.makeText(SendSMSActivity.this, FailureCount+" Messages are not sent succesfully.", Toast.LENGTH_LONG).show();
             }
 
@@ -172,6 +165,27 @@ public class SendSMSActivity extends AppCompatActivity implements AdapterView.On
         }
     }
 
+
+    public void OnCheckBoxItemClick(){
+
+        groupMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                recipient.setSelection(0);
+                recipient.setEnabled(!recipient.isEnabled());
+            }
+        });
+    }
+
     @Override
     public void onNothingSelected(AdapterView<?> parent) {}
+
+    public void clearInterface(){
+        recipient.setSelection(0);
+        spinnerClass.setSelection(0);
+        groupMessage.setChecked(false);
+        message.setText("");
+
+    }
+
 }
